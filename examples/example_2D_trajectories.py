@@ -145,17 +145,17 @@ show_argument(function, arguments, one_shot=one_shot, subfigure_size=subfigure_s
 # ``in_out (bool)``
 # ~~~~~~~~~~~~~~~~~
 #
-# It allows to switch between different ways to define how the shot should
+# It allows us to switch between different ways to define how the shot should
 # travel through the k-space:
 #
-# - in-out: starting from the outer regions, then passing through the center
-#   then going back to outer regions, often on the opposite side (radial, cones)
+# - in-out: starting from a border of k-space, then passing through the center
+#   then going back to the border, often on the opposite side (radial, cones)
 # - center-out or center-center: when ``in_out=False`` the trajectory will start
 #   at the center, but depending on the specific trajectory formula the path might
 #   end up in the outer regions (radial, spiral, cones, etc) or back to the center (rosette,
 #   lissajous).
 #
-# Note that the behavior of ``tilt`` is automatically adapted to the changes to avoid having
+# Note that the behavior of ``tilt`` is automatically adapted to the changes of ``in_out``, thereby avoiding
 # to update it too when switching ``in_out``.
 #
 
@@ -171,7 +171,7 @@ show_argument(function, arguments, one_shot=one_shot, subfigure_size=subfigure_s
 # A generalized function that generates algebraic spirals defined
 # through the :math:`r = a \theta^n` equation, with :math:`r` the radius,
 # :math:`\theta` the polar angle and :math:`n` the spiral power.
-# Common algebraic spirals include Archimedes, Fermat and Galilean spirals.
+# Common algebraic spirals include Archimedes, Fermat and Galilean ones.
 #
 # Arguments:
 #
