@@ -1,0 +1,11 @@
+initialize\_2D\_cones
+=====================
+
+.. currentmodule:: mrinufft.trajectories.trajectory2D
+
+.. autofunction:: initialize_2D_cones
+
+..  _sphx_glr_backref_mrinufft.trajectories.trajectory2D.initialize_2D_cones:
+
+.. minigallery:: mrinufft.trajectories.trajectory2D.initialize_2D_cones
+   :add-heading:
