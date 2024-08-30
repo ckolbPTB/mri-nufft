@@ -18,6 +18,7 @@ MRICufiNUFFT
    
       ~MRICufiNUFFT.__init__
       ~MRICufiNUFFT.adj_op
+      ~MRICufiNUFFT.check_shape
       ~MRICufiNUFFT.compute_density
       ~MRICufiNUFFT.compute_smaps
       ~MRICufiNUFFT.data_consistency

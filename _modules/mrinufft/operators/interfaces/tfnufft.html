@@ -618,6 +618,7 @@ document.write(`
 <span></span><span class="sd">&quot;&quot;&quot;Tensorflow MRI Nufft Operators.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">FourierOperatorBase</span><span class="p">,</span> <span class="n">with_tensorflow</span>
 <span class="kn">from</span> <span class="nn">mrinufft._utils</span> <span class="kn">import</span> <span class="n">proper_trajectory</span>
 
@@ -700,6 +701,7 @@ document.write(`
 <span class="sd">        -------</span>
 <span class="sd">        Tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_shape</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_sense</span><span class="p">:</span>
             <span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">smaps</span>
         <span class="k">else</span><span class="p">:</span>
@@ -719,24 +721,25 @@ document.write(`
 <div class="viewcode-block" id="MRITensorflowNUFFT.adj_op">
 <a class="viewcode-back" href="../../../../generated/_autosummary/mrinufft.operators.interfaces.tfnufft.MRITensorflowNUFFT.html#mrinufft.operators.interfaces.tfnufft.MRITensorflowNUFFT.adj_op">[docs]</a>
     <span class="nd">@with_tensorflow</span>
-    <span class="k">def</span> <span class="nf">adj_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">adj_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Backward Operation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        data: Tensor</span>
+<span class="sd">        coeffs: Tensor</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_shape</span><span class="p">(</span><span class="n">ksp</span><span class="o">=</span><span class="n">coeffs</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_density</span><span class="p">:</span>
-            <span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">density</span>
+            <span class="n">coeffs_d</span> <span class="o">=</span> <span class="n">coeffs</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">density</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">data_d</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">coeffs_d</span> <span class="o">=</span> <span class="n">coeffs</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">tfnufft</span><span class="o">.</span><span class="n">nufft</span><span class="p">(</span>
-            <span class="n">data_d</span><span class="p">,</span>
+            <span class="n">coeffs_d</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
             <span class="n">transform_type</span><span class="o">=</span><span class="s2">&quot;type_1&quot;</span><span class="p">,</span>

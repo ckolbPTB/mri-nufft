@@ -18,6 +18,7 @@ MRInfft
    
       ~MRInfft.__init__
       ~MRInfft.adj_op
+      ~MRInfft.check_shape
       ~MRInfft.compute_density
       ~MRInfft.compute_smaps
       ~MRInfft.data_consistency

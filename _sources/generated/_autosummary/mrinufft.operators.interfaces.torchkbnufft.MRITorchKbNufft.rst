@@ -18,6 +18,7 @@ MRITorchKbNufft
    
       ~MRITorchKbNufft.__init__
       ~MRITorchKbNufft.adj_op
+      ~MRITorchKbNufft.check_shape
       ~MRITorchKbNufft.compute_density
       ~MRITorchKbNufft.compute_smaps
       ~MRITorchKbNufft.data_consistency

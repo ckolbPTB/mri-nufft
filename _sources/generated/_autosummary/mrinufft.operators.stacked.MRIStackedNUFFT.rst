@@ -18,6 +18,7 @@ MRIStackedNUFFT
    
       ~MRIStackedNUFFT.__init__
       ~MRIStackedNUFFT.adj_op
+      ~MRIStackedNUFFT.check_shape
       ~MRIStackedNUFFT.compute_density
       ~MRIStackedNUFFT.compute_smaps
       ~MRIStackedNUFFT.data_consistency

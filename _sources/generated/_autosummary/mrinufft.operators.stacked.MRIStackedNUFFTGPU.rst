@@ -18,6 +18,7 @@ MRIStackedNUFFTGPU
    
       ~MRIStackedNUFFTGPU.__init__
       ~MRIStackedNUFFTGPU.adj_op
+      ~MRIStackedNUFFTGPU.check_shape
       ~MRIStackedNUFFTGPU.compute_density
       ~MRIStackedNUFFTGPU.compute_smaps
       ~MRIStackedNUFFTGPU.data_consistency

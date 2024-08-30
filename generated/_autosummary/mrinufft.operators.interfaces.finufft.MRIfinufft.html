@@ -735,31 +735,34 @@ and batch dimension will be squeezed.</p></li>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adj_op</span></code></p></td>
 <td><p>Non Cartesian MRI adjoint operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_density</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_shape</span></code></p></td>
+<td><p>Validate the shapes of the image or k-space data against operator shapes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_density</span></code></p></td>
 <td><p>Compute the density compensation weights and set it.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_smaps</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_smaps</span></code></p></td>
 <td><p>Compute the sensitivity maps and set it.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data_consistency</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data_consistency</span></code></p></td>
 <td><p>Compute the gradient data consistency.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lipschitz_cst</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lipschitz_cst</span></code></p></td>
 <td><p>Return the Lipschitz constant of the operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_autograd</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_autograd</span></code></p></td>
 <td><p>Make a new Operator with autodiff support.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">op</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">op</span></code></p></td>
 <td><p>Non Cartesian MRI forward operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.interfaces.finufft.MRIfinufft.toggle_grad_traj" title="mrinufft.operators.interfaces.finufft.MRIfinufft.toggle_grad_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toggle_grad_traj</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#mrinufft.operators.interfaces.finufft.MRIfinufft.toggle_grad_traj" title="mrinufft.operators.interfaces.finufft.MRIfinufft.toggle_grad_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toggle_grad_traj</span></code></a></p></td>
 <td><p>Toggle between the gradient trajectory and the plan for type 1 transform.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_autograd</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_autograd</span></code></p></td>
 <td><p>Return a Fourier operator with autograd capabilities.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_off_resonnance_correction</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_off_resonnance_correction</span></code></p></td>
 <td><p>Return a new operator with Off Resonnance Correction.</p></td>
 </tr>
 </tbody>

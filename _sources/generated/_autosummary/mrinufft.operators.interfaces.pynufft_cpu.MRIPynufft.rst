@@ -18,6 +18,7 @@ MRIPynufft
    
       ~MRIPynufft.__init__
       ~MRIPynufft.adj_op
+      ~MRIPynufft.check_shape
       ~MRIPynufft.compute_density
       ~MRIPynufft.compute_smaps
       ~MRIPynufft.data_consistency

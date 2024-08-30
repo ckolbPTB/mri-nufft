@@ -1143,6 +1143,7 @@ document.write(`
     <span class="nd">@with_numpy_cupy</span>
     <span class="k">def</span> <span class="nf">op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ksp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward operator.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_shape</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">ksp</span><span class="o">=</span><span class="n">ksp</span><span class="p">)</span>
         <span class="c1"># Dispatch to special case.</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">auto_cast</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpx_dtype</span><span class="p">)</span>
 
@@ -1300,6 +1301,8 @@ document.write(`
     <span class="nd">@with_numpy_cupy</span>
     <span class="k">def</span> <span class="nf">adj_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">img</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjoint operator.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_shape</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">ksp</span><span class="o">=</span><span class="n">coeffs</span><span class="p">)</span>
         <span class="c1"># Dispatch to special case.</span>
         <span class="n">coeffs</span> <span class="o">=</span> <span class="n">auto_cast</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpx_dtype</span><span class="p">)</span>
 

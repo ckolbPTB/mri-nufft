@@ -773,6 +773,7 @@ document.write(`
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;extra_adj_op_args&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-i&quot;</span><span class="p">]</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_op</span> <span class="o">=</span> <span class="n">RawBartNUFFT</span><span class="p">(</span><span class="n">samples_</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">samples_</span><span class="p">,</span>
             <span class="n">shape</span><span class="p">,</span>
@@ -781,10 +782,9 @@ document.write(`
             <span class="n">n_batchs</span><span class="o">=</span><span class="n">n_batchs</span><span class="p">,</span>
             <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">smaps</span><span class="o">=</span><span class="n">smaps</span><span class="p">,</span>
+            <span class="n">raw_op</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_op</span><span class="p">,</span>
             <span class="n">squeeze_dims</span><span class="o">=</span><span class="n">squeeze_dims</span><span class="p">,</span>
         <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">raw_op</span> <span class="o">=</span> <span class="n">RawBartNUFFT</span><span class="p">(</span><span class="n">samples_</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">norm_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

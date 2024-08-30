@@ -18,6 +18,7 @@ FourierOperatorCPU
    
       ~FourierOperatorCPU.__init__
       ~FourierOperatorCPU.adj_op
+      ~FourierOperatorCPU.check_shape
       ~FourierOperatorCPU.compute_density
       ~FourierOperatorCPU.compute_smaps
       ~FourierOperatorCPU.data_consistency

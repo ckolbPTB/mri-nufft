@@ -16,7 +16,6 @@
       :nosignatures:
    
       check_error
-      check_size
       sizeof_fmt
    
    

@@ -18,6 +18,7 @@ MRIBartNUFFT
    
       ~MRIBartNUFFT.__init__
       ~MRIBartNUFFT.adj_op
+      ~MRIBartNUFFT.check_shape
       ~MRIBartNUFFT.compute_density
       ~MRIBartNUFFT.compute_smaps
       ~MRIBartNUFFT.data_consistency
