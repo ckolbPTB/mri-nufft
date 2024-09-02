@@ -341,7 +341,7 @@ Gradients profiles
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 10.276 seconds)
+   **Total running time of the script:** (0 minutes 9.609 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_display_config.py:

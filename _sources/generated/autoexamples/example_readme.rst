@@ -135,7 +135,7 @@ This script shows how to use the package to perform a simple NUFFT.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.040 seconds)
+   **Total running time of the script:** (0 minutes 6.105 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_readme.py:

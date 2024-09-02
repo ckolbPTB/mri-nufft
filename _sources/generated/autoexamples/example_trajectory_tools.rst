@@ -1175,10 +1175,10 @@ Arguments:
 
 - ``trajectory (array_like)``: trajectory to change by prolonging
   and merging the shots together.
-- ``Nc_trains (int)``: number of resulting multi-readout shots,
-  or trains.
 - ``Ns_transitions (int)``: number of samples/steps between the
   merged readouts.
+- ``nb_trains (int)``: number of resulting multi-readout shots,
+  or trains.
 - ``reverse_odd_shots (bool)``: Whether to reverse every odd shots
   such that, as in most trajectories, even shots end up closer to
   the start of odd shots.
@@ -1191,8 +1191,8 @@ Arguments:
 
     trajectory = tools.epify(
         planar_trajectories["Radial"],
-        Nc_trains=Nc_planes // 2,
         Ns_transitions=Ns // 10,
+        nb_trains=Nc_planes // 2,
         reverse_odd_shots=True,
     )
     show_trajectory(trajectory, figure_size=figure_size, one_shot=one_shot)
@@ -1226,8 +1226,8 @@ Hereafter the shots are merged by pairs with short transitions.
     arguments = ["Radial", "Spiral", "2D Cones", "3D Cones"]
     function = lambda x: tools.epify(
         planar_trajectories[x],
-        Nc_trains=Nc_planes // 2,
         Ns_transitions=Ns // 10,
+        nb_trains=Nc_planes // 2,
         reverse_odd_shots=True,
     )
     show_argument(function, arguments, one_shot=one_shot, subfig_size=subfigure_size)
@@ -1266,24 +1266,26 @@ Hereafter the shots are merged by pairs with short transitions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 706-711
+.. GENERATED FROM PYTHON SOURCE LINES 706-713
 
-``Nc_trains (int)``
-~~~~~~~~~~~~~~~~~~~
+``Ns_transitions (int)``
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Number of resulting multi-readout shots, or trains.
+Number of samples/steps between the merged readouts.
+Smoother transitions are achieved with more points, but it means longer
+waiting times between readouts if they are split during acquisition.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 711-724
+.. GENERATED FROM PYTHON SOURCE LINES 713-726
 
 .. code-block:: Python
 
 
-    arguments = [Nc_planes, Nc_planes // 2, Nc_planes // 4, 1]
+    arguments = [25, 50, 75, 100]
     function = lambda x: tools.epify(
-        planar_trajectories["Radial"],
-        Nc_trains=x,
-        Ns_transitions=50,
+        planar_trajectories["2D Cones"],
+        Ns_transitions=x,
+        nb_trains=Nc_planes // 2,
         reverse_odd_shots=True,
     )
     show_argument(
@@ -1295,7 +1297,7 @@ Number of resulting multi-readout shots, or trains.
 
 
 .. image-sg:: /generated/autoexamples/images/sphx_glr_example_trajectory_tools_030.png
-   :alt: 10, 5, 2, 1
+   :alt: 25, 50, 75, 100
    :srcset: /generated/autoexamples/images/sphx_glr_example_trajectory_tools_030.png
    :class: sphx-glr-single-img
 
@@ -1303,14 +1305,12 @@ Number of resulting multi-readout shots, or trains.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 725-732
+.. GENERATED FROM PYTHON SOURCE LINES 727-732
 
-``Ns_transitions (int)``
-~~~~~~~~~~~~~~~~~~~~~~~~
+``nb_trains (int)``
+~~~~~~~~~~~~~~~~~~~
 
-Number of samples/steps between the merged readouts.
-Smoother transitions are achieved with more points, but it means longer
-waiting times between readouts if they are split during acquisition.
+Number of resulting multi-readout shots, or trains.
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 732-745
@@ -1318,11 +1318,11 @@ waiting times between readouts if they are split during acquisition.
 .. code-block:: Python
 
 
-    arguments = [25, 50, 75, 100]
+    arguments = [Nc_planes, Nc_planes // 2, Nc_planes // 4, 1]
     function = lambda x: tools.epify(
-        planar_trajectories["2D Cones"],
-        Nc_trains=Nc_planes // 2,
-        Ns_transitions=x,
+        planar_trajectories["Radial"],
+        Ns_transitions=50,
+        nb_trains=x,
         reverse_odd_shots=True,
     )
     show_argument(
@@ -1334,7 +1334,7 @@ waiting times between readouts if they are split during acquisition.
 
 
 .. image-sg:: /generated/autoexamples/images/sphx_glr_example_trajectory_tools_031.png
-   :alt: 25, 50, 75, 100
+   :alt: 10, 5, 2, 1
    :srcset: /generated/autoexamples/images/sphx_glr_example_trajectory_tools_031.png
    :class: sphx-glr-single-img
 
@@ -1359,8 +1359,8 @@ even shots end up closer to the start of odd shots.
     arguments = [True, False]
     function = lambda x: tools.epify(
         planar_trajectories["Radial"],
-        Nc_trains=Nc_planes // 2,
         Ns_transitions=100,
+        nb_trains=Nc_planes // 2,
         reverse_odd_shots=x,
     )
     show_argument(
@@ -1854,7 +1854,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 41.978 seconds)
+   **Total running time of the script:** (0 minutes 40.441 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_trajectory_tools.py:

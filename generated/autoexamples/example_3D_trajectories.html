@@ -355,8 +355,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.html"><code class="docutils literal notranslate"><span class="pre">trajectories.trajectory3D</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_REPI.html">initialize_3D_REPI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_TURBINE.html">initialize_3D_TURBINE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells.html">initialize_3D_annular_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_cones.html">initialize_3D_cones</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_floret.html">initialize_3D_floret</a></li>
@@ -364,8 +362,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_helical_shells.html">initialize_3D_helical_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_park_radial.html">initialize_3D_park_radial</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_phyllotaxis_radial.html">initialize_3D_phyllotaxis_radial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_repi.html">initialize_3D_repi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells.html">initialize_3D_seiffert_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral.html">initialize_3D_seiffert_spiral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_turbine.html">initialize_3D_turbine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_wave_caipi.html">initialize_3D_wave_caipi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.trajectories.trajectory3D.initialize_3D_wong_radial.html">initialize_3D_wong_radial</a></li>
 </ul>
@@ -734,6 +734,21 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seiffert-shells">Seiffert shells</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fmri-trajectories">fMRI trajectories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#turbine">TURBINE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ns-transitions-int"><code class="docutils literal notranslate"><span class="pre">Ns_transitions</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-blades-int"><code class="docutils literal notranslate"><span class="pre">nb_blades</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blade-tilt-str-float"><code class="docutils literal notranslate"><span class="pre">blade_tilt</span> <span class="pre">(str,</span> <span class="pre">float)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-trains-int"><code class="docutils literal notranslate"><span class="pre">nb_trains</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-factor-int"><code class="docutils literal notranslate"><span class="pre">skip_factor</span> <span class="pre">(int)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repi">REPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-blade-revolutions-float"><code class="docutils literal notranslate"><span class="pre">nb_blade_revolutions</span> <span class="pre">(float)</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
@@ -1438,6 +1453,230 @@ over a sphere (in radians). <code class="docutils literal notranslate"><span cla
 </div>
 <img src="../../_images/sphx_glr_example_3D_trajectories_037.png" srcset="../../_images/sphx_glr_example_3D_trajectories_037.png" alt="example 3D trajectories" class = "sphx-glr-single-img"/></section>
 </section>
+<section id="fmri-trajectories">
+<h2>fMRI trajectories<a class="headerlink" href="#fmri-trajectories" title="Link to this heading">#</a></h2>
+<p>In this section are presented long trajectories designed for
+functional MRI to cover the k-space in a few shots, often composed
+of multiple readouts.</p>
+<section id="turbine">
+<h3>TURBINE<a class="headerlink" href="#turbine" title="Link to this heading">#</a></h3>
+<p>The TURBINE (Trajectory Using Radially Batched Internal Navigator Echoes)
+trajectory as proposed in <a class="reference internal" href="#mgm10" id="id26"><span>[MGM10]</span></a>. It consists of EPI-like multi-echo
+planes rotated around any axis (here <span class="math notranslate nohighlight">\(k_z\)</span>-axis) in a radial fashion.</p>
+<p>Note that our implementation also proposes to segment the planes
+into several shots instead of just one, and includes the proposition
+from <a class="reference internal" href="#gmc22" id="id27"><span>[GMC22]</span></a> to also accelerate within the blades by skipping lines
+but while alternating them between blades.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Nc</span> <span class="pre">(int)</span></code>: number of individual shots. See 3D radial</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ns_readouts</span> <span class="pre">(int)</span></code>: number of samples per readout. See 3D radial</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ns_transitions</span> <span class="pre">(int)</span></code>: number of samples per transition between
+two readouts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_blades</span> <span class="pre">(int)</span></code>: number of blades used to group readouts into
+and partition the k-space. It should be lower than <code class="docutils literal notranslate"><span class="pre">Nc</span></code> and divide it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blade_tilt</span> <span class="pre">(str,</span> <span class="pre">float)</span></code>: angle between each consecutive blades
+over the <span class="math notranslate nohighlight">\(k_z\)</span>-axis (in radians). <code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">&quot;uniform&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_trains</span> <span class="pre">(int)</span></code>: number of resulting shots, or readout trains,
+such that each of them will be composed of <span class="math notranslate nohighlight">\(n\)</span> readouts with
+<code class="docutils literal notranslate"><span class="pre">Nc</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">nb_trains</span></code>. If <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> then <code class="docutils literal notranslate"><span class="pre">nb_trains</span></code> is set
+to <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skip_factor</span> <span class="pre">(int)</span></code>: factor defining the way different blades alternate
+to skip lines, forming groups of <code class="docutils literal notranslate"><span class="pre">skip_factor</span></code> non-redundant blades.
+<code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">1)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_out</span> <span class="pre">(bool)</span></code>: define whether the shots should travel toward the center
+then outside (in-out) or not (center-out). <code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">True)</span></code>. See 3D radial</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">15</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">trajectory</span></a> <span class="o">=</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span> <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span> <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a>
+<span class="p">)</span>
+<span class="n">show_trajectory</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">trajectory</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">figure_size</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">figure_size</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_038.png" srcset="../../_images/sphx_glr_example_3D_trajectories_038.png" alt="example 3D trajectories" class = "sphx-glr-single-img"/><section id="ns-transitions-int">
+<h4><code class="docutils literal notranslate"><span class="pre">Ns_transitions</span> <span class="pre">(int)</span></code><a class="headerlink" href="#ns-transitions-int" title="Link to this heading">#</a></h4>
+<p>Number of samples per transition between two readouts.
+Smoother transitions are achieved with more points, but it means longer
+waiting times between readouts if they are split during acquisition.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_039.png" srcset="../../_images/sphx_glr_example_3D_trajectories_039.png" alt="1, 50, 100, 200" class = "sphx-glr-single-img"/></section>
+<section id="nb-blades-int">
+<h4><code class="docutils literal notranslate"><span class="pre">nb_blades</span> <span class="pre">(int)</span></code><a class="headerlink" href="#nb-blades-int" title="Link to this heading">#</a></h4>
+<p>Number of blades used to group readouts into
+and partition the k-space. More blades means fewer lines per blade.
+It should be lower than <code class="docutils literal notranslate"><span class="pre">Nc</span></code> and divide it.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">5</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">15</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">30</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">60</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_040.png" srcset="../../_images/sphx_glr_example_3D_trajectories_040.png" alt="24, 8, 4, 2" class = "sphx-glr-single-img"/></section>
+<section id="blade-tilt-str-float">
+<h4><code class="docutils literal notranslate"><span class="pre">blade_tilt</span> <span class="pre">(str,</span> <span class="pre">float)</span></code><a class="headerlink" href="#blade-tilt-str-float" title="Link to this heading">#</a></h4>
+<p>Angle between each consecutive blades over the <span class="math notranslate nohighlight">\(k_z\)</span>-axis (in radians)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;golden&quot;</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">blade_tilt</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_041.png" srcset="../../_images/sphx_glr_example_3D_trajectories_041.png" alt="uniform, golden" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_argument</span><span class="p">(</span>
+    <span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="s2">&quot;2D&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_042.png" srcset="../../_images/sphx_glr_example_3D_trajectories_042.png" alt="uniform, golden" class = "sphx-glr-single-img"/></section>
+<section id="nb-trains-int">
+<h4><code class="docutils literal notranslate"><span class="pre">nb_trains</span> <span class="pre">(int)</span></code><a class="headerlink" href="#nb-trains-int" title="Link to this heading">#</a></h4>
+<p>Number of resulting shots, or readout trains, such that each of them
+will be composed of <span class="math notranslate nohighlight">\(n\)</span> readouts with <code class="docutils literal notranslate"><span class="pre">Nc</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">nb_trains</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> then <code class="docutils literal notranslate"><span class="pre">nb_trains</span></code> is set to <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span> <span class="mi">15</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">nb_trains</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_043.png" srcset="../../_images/sphx_glr_example_3D_trajectories_043.png" alt="8, 24, 40, 120" class = "sphx-glr-single-img"/></section>
+<section id="skip-factor-int">
+<h4><code class="docutils literal notranslate"><span class="pre">skip_factor</span> <span class="pre">(int)</span></code><a class="headerlink" href="#skip-factor-int" title="Link to this heading">#</a></h4>
+<p>Factor defining the way different blades alternate to skip lines,
+forming groups of <code class="docutils literal notranslate"><span class="pre">skip_factor</span></code> non-redundant blades.</p>
+<p>This enables the in-plane acceleration proposed by <a class="reference internal" href="#gmc22" id="id28"><span>[GMC22]</span></a> by
+increasing <code class="docutils literal notranslate"><span class="pre">skip_factor</span></code> and <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code> together by a same
+factor. Note that using <code class="docutils literal notranslate"><span class="pre">skip_factor</span></code> superior to <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code>
+as below results in k-space areas being not covered by any blade.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_turbine</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">skip_factor</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_044.png" srcset="../../_images/sphx_glr_example_3D_trajectories_044.png" alt="1, 2, 4, 10" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_argument</span><span class="p">(</span>
+    <span class="n">function</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span>
+    <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">,</span>
+    <span class="n">dim</span><span class="o">=</span><span class="s2">&quot;2D&quot;</span><span class="p">,</span>
+    <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_045.png" srcset="../../_images/sphx_glr_example_3D_trajectories_045.png" alt="1, 2, 4, 10" class = "sphx-glr-single-img"/></section>
+</section>
+<section id="repi">
+<h3>REPI<a class="headerlink" href="#repi" title="Link to this heading">#</a></h3>
+<p>The REPI (Radial Echo Planar Imaging) trajectory proposed in <a class="reference internal" href="#rms22" id="id29"><span>[RMS22]</span></a>
+and officially inspired from TURBINE proposed in <a class="reference internal" href="#mgm10" id="id30"><span>[MGM10]</span></a>.
+It consists of multi-echo stacks of lines or spirals rotated around any axis
+(here <span class="math notranslate nohighlight">\(k_z\)</span>-axis) in a radial fashion, but each stack is also slightly
+shifted along the rotation axis in order to be entangled with the others
+without redundancy. This feature is similar to choosing <code class="docutils literal notranslate"><span class="pre">skip_factor</span></code>
+equal to <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code> in TURBINE.</p>
+<p>Note that our implementation also proposes to segment the planes/stacks
+into several shots, instead of just one. Spirals can also be customized
+beyond the classic Archimedean spiral.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Nc</span> <span class="pre">(int)</span></code>: number of individual shots. See 3D radial</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ns_readouts</span> <span class="pre">(int)</span></code>: number of samples per readout. See 3D radial</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ns_transitions</span> <span class="pre">(int)</span></code>: number of samples per transition between
+two readouts. See TURBINE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_blades</span> <span class="pre">(int)</span></code>: number of blades used to group readouts into
+and partition the k-space. It should be lower than <code class="docutils literal notranslate"><span class="pre">Nc</span></code> and divide it.
+See TURBINE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_blade_revolutions</span> <span class="pre">(float)</span></code>: number of revolutions over
+lines/spirals within a blade over the <span class="math notranslate nohighlight">\(k_z\)</span> axis. See TURBINE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blade_tilt</span> <span class="pre">(str,</span> <span class="pre">float)</span></code>: angle between each consecutive blades
+over the <span class="math notranslate nohighlight">\(k_z\)</span>-axis (in radians).
+<code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">&quot;uniform&quot;)</span></code>. See TURBINE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_trains</span> <span class="pre">(int)</span></code>: number of resulting shots, or readout trains,
+such that each of them will be composed of <span class="math notranslate nohighlight">\(n\)</span> readouts with
+<code class="docutils literal notranslate"><span class="pre">Nc</span> <span class="pre">=</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">nb_trains</span></code>. If <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> then <code class="docutils literal notranslate"><span class="pre">nb_trains</span></code> is set
+to <code class="docutils literal notranslate"><span class="pre">nb_blades</span></code>. See TURBINE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_spiral_revolutions</span> <span class="pre">(float)</span></code>: number of revolutions performed
+from the center. <code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">1)</span></code>. See 2D spiral</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spiral</span> <span class="pre">(str,</span> <span class="pre">float)</span></code>: type of spiral defined through the general
+archimedean equation. <code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">&quot;archimedes&quot;)</span></code>. See 2D spiral</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_out</span> <span class="pre">(bool)</span></code>: define whether the shots should travel toward the center
+then outside (in-out) or not (center-out). <code class="docutils literal notranslate"><span class="pre">(default</span> <span class="pre">True)</span></code>. See 3D radial</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">trajectory</span></a> <span class="o">=</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_repi</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">nb_blade_revolutions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_revolutions</span></a><span class="p">,</span>
+    <span class="n">nb_spiral_revolutions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_revolutions</span></a><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_trajectory</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">trajectory</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">figure_size</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">figure_size</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_046.png" srcset="../../_images/sphx_glr_example_3D_trajectories_046.png" alt="example 3D trajectories" class = "sphx-glr-single-img"/><section id="nb-blade-revolutions-float">
+<h4><code class="docutils literal notranslate"><span class="pre">nb_blade_revolutions</span> <span class="pre">(float)</span></code><a class="headerlink" href="#nb-blade-revolutions-float" title="Link to this heading">#</a></h4>
+<p>Number of revolutions over lines/spirals within a blade
+over the <span class="math notranslate nohighlight">\(k_z\)</span> axis.</p>
+<p>Note that increasing it also tends to increase the distance
+between consecutive lines/spirals, requiring higher gradients
+and slew rates.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_repi</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">nb_blade_revolutions</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">nb_spiral_revolutions</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_047.png" srcset="../../_images/sphx_glr_example_3D_trajectories_047.png" alt="0, 0.5, 1, 2" class = "sphx-glr-single-img"/><p>Same but with a spiral pattern instead of radial.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mn</span><span class="o">.</span><span class="n">initialize_3D_repi</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span>
+    <span class="n">Ns_readouts</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span>
+    <span class="n">Ns_transitions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_blades</span></a><span class="p">,</span>
+    <span class="n">nb_blade_revolutions</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">nb_spiral_revolutions</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_revolutions</span></a><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">show_argument</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="p">,</span> <span class="n">subfig_size</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_example_3D_trajectories_048.png" srcset="../../_images/sphx_glr_example_3D_trajectories_048.png" alt="0, 0.5, 1, 2" class = "sphx-glr-single-img"/></section>
+</section>
+</section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <div role="list" class="citation-list">
@@ -1484,6 +1723,14 @@ Charles H. Cunningham, and Donald B. Plewes.
 “Temporal stability of adaptive 3D radial MRI
 using multidimensional golden means.”
 Magnetic Resonance in Medicine 61, no. 2 (2009): 354-363.</p>
+</div>
+<div class="citation" id="mgm10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MGM10<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id26">1</a>,<a role="doc-backlink" href="#id30">2</a>)</span>
+<p>McNab, Jennifer A., Daniel Gallichan, and Karla L. Miller.
+“3D steady‐state diffusion‐weighted imaging with trajectory using
+radially batched internal navigator echoes (TURBINE).”
+Magnetic Resonance in Medicine 63, no. 1 (2010): 235-242.</p>
 </div>
 <div class="citation" id="hm11" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">HM11</a><span class="fn-bracket">]</span></span>
@@ -1538,8 +1785,21 @@ IEEE Transactions on Medical Imaging 38, no. 8 (2018): 1833-1840.</p>
 “Three‐dimensional Yarnball k‐space acquisition for accelerated MRI.”
 Magnetic Resonance in Medicine 85, no. 4 (2021): 1840-1854.</p>
 </div>
+<div class="citation" id="gmc22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GMC22<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id27">1</a>,<a role="doc-backlink" href="#id28">2</a>)</span>
+<p>Graedel, Nadine N., Karla L. Miller, and Mark Chiew.
+“Ultrahigh resolution fMRI at 7T using radial‐cartesian TURBINE sampling.”
+Magnetic Resonance in Medicine 88, no. 5 (2022): 2058-2073.</p>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 4.546 seconds)</p>
+<div class="citation" id="rms22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id29">RMS22</a><span class="fn-bracket">]</span></span>
+<p>Rettenmeier, Christoph A., Danilo Maziero, and V. Andrew Stenger.
+“Three dimensional radial echo planar imaging for functional MRI.”
+Magnetic Resonance in Medicine 87, no. 1 (2022): 193-206.</p>
+</div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (1 minutes 8.699 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-generated-autoexamples-example-3d-trajectories-py">
 <div class="binder-badge docutils container">
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/mind-inria/mri-nufft/gh-pages?urlpath=lab/tree/examples/generated/autoexamples/example_3D_trajectories.ipynb"><img alt="Launch binder" src="../../_images/binder_badge_logo1.svg" style="width: 150px;" />
@@ -1659,6 +1919,21 @@ Magnetic Resonance in Medicine 85, no. 4 (2021): 1840-1854.</p>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seiffert-shells">Seiffert shells</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fmri-trajectories">fMRI trajectories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#turbine">TURBINE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ns-transitions-int"><code class="docutils literal notranslate"><span class="pre">Ns_transitions</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-blades-int"><code class="docutils literal notranslate"><span class="pre">nb_blades</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#blade-tilt-str-float"><code class="docutils literal notranslate"><span class="pre">blade_tilt</span> <span class="pre">(str,</span> <span class="pre">float)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-trains-int"><code class="docutils literal notranslate"><span class="pre">nb_trains</span> <span class="pre">(int)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-factor-int"><code class="docutils literal notranslate"><span class="pre">skip_factor</span> <span class="pre">(int)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repi">REPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nb-blade-revolutions-float"><code class="docutils literal notranslate"><span class="pre">nb_blade_revolutions</span> <span class="pre">(float)</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>

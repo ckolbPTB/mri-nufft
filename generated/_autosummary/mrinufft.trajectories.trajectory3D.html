@@ -52,7 +52,7 @@
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="initialize_3D_REPI" href="mrinufft.trajectories.trajectory3D.initialize_3D_REPI.html" />
+    <link rel="next" title="initialize_3D_annular_shells" href="mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells.html" />
     <link rel="prev" title="initialize_2D_waves" href="mrinufft.trajectories.trajectory2D.initialize_2D_waves.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -355,8 +355,6 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">trajectories.trajectory3D</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_REPI.html">initialize_3D_REPI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_TURBINE.html">initialize_3D_TURBINE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells.html">initialize_3D_annular_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_cones.html">initialize_3D_cones</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_floret.html">initialize_3D_floret</a></li>
@@ -364,8 +362,10 @@
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_helical_shells.html">initialize_3D_helical_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_park_radial.html">initialize_3D_park_radial</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_phyllotaxis_radial.html">initialize_3D_phyllotaxis_radial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_repi.html">initialize_3D_repi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells.html">initialize_3D_seiffert_shells</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral.html">initialize_3D_seiffert_spiral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_turbine.html">initialize_3D_turbine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_wave_caipi.html">initialize_3D_wave_caipi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_wong_radial.html">initialize_3D_wong_radial</a></li>
 </ul>
@@ -687,12 +687,6 @@ document.write(`
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_REPI.html#mrinufft.trajectories.trajectory3D.initialize_3D_REPI" title="mrinufft.trajectories.trajectory3D.initialize_3D_REPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_REPI</span></code></a></p></td>
-<td><p>Initialize 3D REPI trajectory.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_TURBINE.html#mrinufft.trajectories.trajectory3D.initialize_3D_TURBINE" title="mrinufft.trajectories.trajectory3D.initialize_3D_TURBINE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_TURBINE</span></code></a></p></td>
-<td><p>Initialize 3D TURBINE trajectory.</p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells.html#mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells" title="mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_annular_shells</span></code></a></p></td>
 <td><p>Initialize 3D trajectories with annular shells.</p></td>
 </tr>
@@ -714,11 +708,17 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_phyllotaxis_radial.html#mrinufft.trajectories.trajectory3D.initialize_3D_phyllotaxis_radial" title="mrinufft.trajectories.trajectory3D.initialize_3D_phyllotaxis_radial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_phyllotaxis_radial</span></code></a></p></td>
 <td><p>Initialize 3D radial trajectories with phyllotactic structure.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells.html#mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells" title="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_seiffert_shells</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_repi.html#mrinufft.trajectories.trajectory3D.initialize_3D_repi" title="mrinufft.trajectories.trajectory3D.initialize_3D_repi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_repi</span></code></a></p></td>
+<td><p>Initialize 3D REPI trajectory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells.html#mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells" title="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_shells"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_seiffert_shells</span></code></a></p></td>
 <td><p>Initialize 3D trajectories with Seiffert shells.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral.html#mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral" title="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_seiffert_spiral</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral.html#mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral" title="mrinufft.trajectories.trajectory3D.initialize_3D_seiffert_spiral"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_seiffert_spiral</span></code></a></p></td>
 <td><p>Initialize 3D trajectories with modulated Seiffert spirals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_turbine.html#mrinufft.trajectories.trajectory3D.initialize_3D_turbine" title="mrinufft.trajectories.trajectory3D.initialize_3D_turbine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_turbine</span></code></a></p></td>
+<td><p>Initialize 3D TURBINE trajectory.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="mrinufft.trajectories.trajectory3D.initialize_3D_wave_caipi.html#mrinufft.trajectories.trajectory3D.initialize_3D_wave_caipi" title="mrinufft.trajectories.trajectory3D.initialize_3D_wave_caipi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_3D_wave_caipi</span></code></a></p></td>
 <td><p>Initialize 3D trajectories with Wave-CAIPI.</p></td>
@@ -752,11 +752,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="mrinufft.trajectories.trajectory3D.initialize_3D_REPI.html"
+       href="mrinufft.trajectories.trajectory3D.initialize_3D_annular_shells.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">initialize_3D_REPI</p>
+        <p class="prev-next-title">initialize_3D_annular_shells</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
