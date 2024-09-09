@@ -853,6 +853,7 @@ document.write(`
     <span class="n">resolution</span><span class="o">=</span><span class="n">DEFAULT_RESOLUTION</span><span class="p">,</span>
     <span class="n">raster_time</span><span class="o">=</span><span class="n">DEFAULT_RASTER_TIME</span><span class="p">,</span>
     <span class="n">gamma</span><span class="o">=</span><span class="n">Gammas</span><span class="o">.</span><span class="n">HYDROGEN</span><span class="p">,</span>
+    <span class="n">get_final_positions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Derive a normalized trajectory over time to provide gradients.</span>
 
@@ -873,6 +874,9 @@ document.write(`
 <span class="sd">    gamma : float, optional</span>
 <span class="sd">        Gyromagnetic ratio of the selected nucleus in kHz/T</span>
 <span class="sd">        The default is Gammas.HYDROGEN.</span>
+<span class="sd">    get_final_positions : bool, optional</span>
+<span class="sd">        If `True`, return the final positions in k-space.</span>
+<span class="sd">        The default is `False`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -885,6 +889,8 @@ document.write(`
     <span class="c1"># Compute gradients and starting positions</span>
     <span class="n">gradients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">gamma</span> <span class="o">/</span> <span class="n">raster_time</span>
     <span class="n">initial_positions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">if</span> <span class="n">get_final_positions</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">initial_positions</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
     <span class="k">return</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">initial_positions</span></div>
 
 

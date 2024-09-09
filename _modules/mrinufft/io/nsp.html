@@ -655,6 +655,7 @@ document.write(`
     <span class="n">recon_tag</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span>
     <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">keep_txt_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">final_positions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create gradient file from gradients and initial positions.</span>
 
@@ -685,6 +686,8 @@ document.write(`
 <span class="sd">    keep_txt_file : bool, optional</span>
 <span class="sd">        Whether to keep the text file used temporarily which holds data pushed to</span>
 <span class="sd">        binary file, by default False</span>
+<span class="sd">    final_positions : np.ndarray, optional</span>
+<span class="sd">        Final positions. Shape (num_shots, dimension), by default None</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">num_shots</span> <span class="o">=</span> <span class="n">gradients</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -744,6 +747,20 @@ document.write(`
         <span class="p">)</span>
         <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="p">)</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">final_positions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Final positions not provided for version &gt;= 5,&quot;</span>
+                <span class="s2">&quot;calculating final positions from gradients&quot;</span>
+            <span class="p">)</span>
+            <span class="n">final_positions</span> <span class="o">=</span> <span class="n">initial_positions</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">iter2</span><span class="si">:</span><span class="s2">5.4f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">iter2</span> <span class="ow">in</span> <span class="n">iter1</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">iter1</span> <span class="ow">in</span> <span class="n">final_positions</span>
+            <span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="n">version</span> <span class="o">&lt;</span> <span class="mf">4.1</span><span class="p">:</span>
         <span class="c1"># Write the maximum Gradient</span>
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">max_grad</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -807,6 +824,7 @@ document.write(`
     <span class="n">check_constraints</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">gmax</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_GMAX</span><span class="p">,</span>
     <span class="n">smax</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_SMAX</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate gradients from k-space points and write to file.</span>
@@ -834,17 +852,20 @@ document.write(`
 <span class="sd">        Maximum gradient magnitude in T/m, by default 0.04</span>
 <span class="sd">    smax : float, optional</span>
 <span class="sd">        Maximum slew rate in T/m/ms, by default 0.1</span>
+<span class="sd">    version: float, optional</span>
+<span class="sd">        Trajectory versioning, by default 5</span>
 <span class="sd">    kwargs : dict, optional</span>
 <span class="sd">        Additional arguments for writing the gradient file.</span>
 <span class="sd">        These are arguments passed to write_gradients function above.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Convert normalized trajectory to gradients</span>
-    <span class="n">gradients</span><span class="p">,</span> <span class="n">initial_positions</span> <span class="o">=</span> <span class="n">convert_trajectory_to_gradients</span><span class="p">(</span>
+    <span class="n">gradients</span><span class="p">,</span> <span class="n">initial_positions</span><span class="p">,</span> <span class="n">final_positions</span> <span class="o">=</span> <span class="n">convert_trajectory_to_gradients</span><span class="p">(</span>
         <span class="n">trajectory</span><span class="p">,</span>
         <span class="n">norm_factor</span><span class="o">=</span><span class="n">norm_factor</span><span class="p">,</span>
         <span class="n">resolution</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">FOV</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_size</span><span class="p">),</span>
         <span class="n">raster_time</span><span class="o">=</span><span class="n">raster_time</span><span class="p">,</span>
         <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+        <span class="n">get_final_positions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Check constraints if requested</span>
@@ -867,10 +888,12 @@ document.write(`
     <span class="n">write_gradients</span><span class="p">(</span>
         <span class="n">gradients</span><span class="o">=</span><span class="n">gradients</span><span class="p">,</span>
         <span class="n">initial_positions</span><span class="o">=</span><span class="n">initial_positions</span><span class="p">,</span>
+        <span class="n">final_positions</span><span class="o">=</span><span class="n">final_positions</span><span class="p">,</span>
         <span class="n">grad_filename</span><span class="o">=</span><span class="n">grad_filename</span><span class="p">,</span>
         <span class="n">img_size</span><span class="o">=</span><span class="n">img_size</span><span class="p">,</span>
         <span class="n">FOV</span><span class="o">=</span><span class="n">FOV</span><span class="p">,</span>
         <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span></div>
 
@@ -951,6 +974,9 @@ document.write(`
             <span class="n">_</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">_pop_elements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">left_over</span><span class="p">)</span>
         <span class="n">initial_positions</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">_pop_elements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dimension</span> <span class="o">*</span> <span class="n">num_shots</span><span class="p">)</span>
         <span class="n">initial_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">initial_positions</span><span class="p">,</span> <span class="p">(</span><span class="n">num_shots</span><span class="p">,</span> <span class="n">dimension</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">final_positions</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">_pop_elements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dimension</span> <span class="o">*</span> <span class="n">num_shots</span><span class="p">)</span>
+            <span class="n">final_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">final_positions</span><span class="p">,</span> <span class="p">(</span><span class="n">num_shots</span><span class="p">,</span> <span class="n">dimension</span><span class="p">))</span>
         <span class="n">dwell_time_ns</span> <span class="o">=</span> <span class="n">dwell_time</span> <span class="o">*</span> <span class="mf">1e6</span>
         <span class="n">gradient_raster_time_ns</span> <span class="o">=</span> <span class="n">raster_time</span> <span class="o">*</span> <span class="mf">1e6</span>
         <span class="k">if</span> <span class="n">version</span> <span class="o">&lt;</span> <span class="mf">4.1</span><span class="p">:</span>
