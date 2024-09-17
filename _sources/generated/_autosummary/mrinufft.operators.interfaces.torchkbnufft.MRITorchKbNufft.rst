@@ -27,7 +27,7 @@ MRITorchKbNufft
       ~MRITorchKbNufft.op
       ~MRITorchKbNufft.pipe
       ~MRITorchKbNufft.with_autograd
-      ~MRITorchKbNufft.with_off_resonnance_correction
+      ~MRITorchKbNufft.with_off_resonance_correction
    
    
 

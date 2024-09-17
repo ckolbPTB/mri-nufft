@@ -178,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
@@ -283,8 +284,9 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.off_resonnance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonnance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.off_resonance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html">get_interpolators_from_fieldmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.stacked.html"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -435,6 +437,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="mrinufft.extras.html"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -683,7 +690,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.op"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.adj_op"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.adj_op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.data_consistency"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.data_consistency()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.with_off_resonnance_correction()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.with_off_resonance_correction()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.compute_smaps"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.compute_smaps()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.make_autograd"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.make_autograd()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.compute_density"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.compute_density()</span></code></a></li>
@@ -758,7 +765,7 @@ as required by ModOpt.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#mrinufft.operators.base.FourierOperatorBase.with_autograd" title="mrinufft.operators.base.FourierOperatorBase.with_autograd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_autograd</span></code></a></p></td>
 <td><p>Return a Fourier operator with autograd capabilities.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction" title="mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_off_resonnance_correction</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction" title="mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_off_resonance_correction</span></code></a></p></td>
 <td><p>Return a new operator with Off Resonnance Correction.</p></td>
 </tr>
 </tbody>
@@ -874,8 +881,8 @@ Specific backend can (and should!) implement a more efficient version.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction">
-<span class="sig-name descname"><span class="pre">with_off_resonnance_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/base.html#FourierOperatorBase.with_off_resonnance_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction">
+<span class="sig-name descname"><span class="pre">with_off_resonance_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/base.html#FourierOperatorBase.with_off_resonance_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction" title="Link to this definition">#</a></dt>
 <dd><p>Return a new operator with Off Resonnance Correction.</p>
 </dd></dl>
 
@@ -1104,7 +1111,7 @@ but includes any computed density.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.op"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.adj_op"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.adj_op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.data_consistency"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.data_consistency()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonnance_correction"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.with_off_resonnance_correction()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.with_off_resonance_correction()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.compute_smaps"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.compute_smaps()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.make_autograd"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.make_autograd()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.base.FourierOperatorBase.compute_density"><code class="docutils literal notranslate"><span class="pre">FourierOperatorBase.compute_density()</span></code></a></li>

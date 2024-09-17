@@ -26,7 +26,7 @@ MRIPynufft
       ~MRIPynufft.make_autograd
       ~MRIPynufft.op
       ~MRIPynufft.with_autograd
-      ~MRIPynufft.with_off_resonnance_correction
+      ~MRIPynufft.with_off_resonance_correction
    
    
 

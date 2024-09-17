@@ -51,7 +51,7 @@
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="extras.smaps" href="mrinufft.extras.smaps.html" />
+    <link rel="next" title="extras.data" href="mrinufft.extras.data.html" />
     <link rel="prev" title="add_phase_to_kspace_with_shifts" href="mrinufft.io.utils.add_phase_to_kspace_with_shifts.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
@@ -283,8 +284,9 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.off_resonnance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonnance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.off_resonance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html">get_interpolators_from_fieldmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.stacked.html"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -435,6 +437,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -685,10 +692,13 @@ document.write(`
 <p>Sensitivity map estimation methods.</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.extras.smaps.html#module-mrinufft.extras.smaps" title="mrinufft.extras.smaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smaps</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.extras.data.html#module-mrinufft.extras.data" title="mrinufft.extras.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>Field map generator module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.extras.smaps.html#module-mrinufft.extras.smaps" title="mrinufft.extras.smaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smaps</span></code></a></p></td>
 <td><p>SMaps module for sensitivity maps estimation.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="mrinufft.extras.utils.html#module-mrinufft.extras.utils" title="mrinufft.extras.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.extras.utils.html#module-mrinufft.extras.utils" title="mrinufft.extras.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils</span></code></a></p></td>
 <td><p>Utils for extras module.</p></td>
 </tr>
 </tbody>
@@ -717,11 +727,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="mrinufft.extras.smaps.html"
+       href="mrinufft.extras.data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

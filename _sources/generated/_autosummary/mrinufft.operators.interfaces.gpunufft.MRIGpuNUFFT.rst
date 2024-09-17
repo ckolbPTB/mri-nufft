@@ -28,7 +28,7 @@ MRIGpuNUFFT
       ~MRIGpuNUFFT.pipe
       ~MRIGpuNUFFT.toggle_grad_traj
       ~MRIGpuNUFFT.with_autograd
-      ~MRIGpuNUFFT.with_off_resonnance_correction
+      ~MRIGpuNUFFT.with_off_resonance_correction
    
    
 

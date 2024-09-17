@@ -26,7 +26,7 @@ MRIStackedNUFFT
       ~MRIStackedNUFFT.make_autograd
       ~MRIStackedNUFFT.op
       ~MRIStackedNUFFT.with_autograd
-      ~MRIStackedNUFFT.with_off_resonnance_correction
+      ~MRIStackedNUFFT.with_off_resonance_correction
    
    
 

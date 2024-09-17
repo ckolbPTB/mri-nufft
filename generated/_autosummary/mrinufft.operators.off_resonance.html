@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MRIFourierCorrected &#8212; MRI-nufft Documentation</title>
+    <title>operators.off_resonance &#8212; MRI-nufft Documentation</title>
   
   
   
@@ -47,12 +47,12 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/_autosummary/mrinufft.operators.off_resonance';</script>
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="operators.stacked" href="mrinufft.operators.stacked.html" />
-    <link rel="prev" title="operators.off_resonnance" href="mrinufft.operators.off_resonnance.html" />
+    <link rel="next" title="get_interpolators_from_fieldmap" href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html" />
+    <link rel="prev" title="sizeof_fmt" href="mrinufft.operators.interfaces.utils.utils.sizeof_fmt.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
@@ -283,8 +284,9 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="mrinufft.operators.off_resonnance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">MRIFourierCorrected</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html">get_interpolators_from_fieldmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.off_resonance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.operators.stacked.html"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -435,6 +437,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="mrinufft.extras.html"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -537,7 +544,7 @@
       
       
       
-      <li><a href="https://github.com/mind-inria/mri-nufft/edit/main/generated/_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected.rst" target="_blank"
+      <li><a href="https://github.com/mind-inria/mri-nufft/edit/main/generated/_autosummary/mrinufft.operators.off_resonance.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -554,7 +561,7 @@
       
       
       
-      <li><a href="https://github.com/mind-inria/mri-nufft/issues/new?title=Issue%20on%20page%20%2Fgenerated/_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mind-inria/mri-nufft/issues/new?title=Issue%20on%20page%20%2Fgenerated/_autosummary/mrinufft.operators.off_resonance.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -584,7 +591,7 @@
       
       
       
-      <li><a href="../../_sources/generated/_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected.rst" target="_blank"
+      <li><a href="../../_sources/generated/_autosummary/mrinufft.operators.off_resonance.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -655,9 +662,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -668,24 +673,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MRIFourierCorrected</h1>
+    <h1>operators.off_resonance</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.op"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.op()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.adj_op()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.get_grad()</span></code></a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -695,169 +687,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mrifouriercorrected">
-<h1>MRIFourierCorrected<a class="headerlink" href="#mrifouriercorrected" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="mrinufft.operators.off_resonnance.MRIFourierCorrected">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mrinufft.operators.off_resonnance.</span></span><span class="sig-name descname"><span class="pre">MRIFourierCorrected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fourier_op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/off_resonnance.html#MRIFourierCorrected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="mrinufft.operators.base.FourierOperatorBase.html#mrinufft.operators.base.FourierOperatorBase" title="mrinufft.operators.base.FourierOperatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">FourierOperatorBase</span></code></a></p>
-<p>Fourier Operator with B0 Inhomogeneities compensation.</p>
-<p>This is a wrapper around the Fourier Operator to compensate for the
-B0 inhomogeneities  in the  k-space.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fourier_op</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><em>object</em></a><em> of </em><em>class FourierBase</em>) – the fourier operator to wrap</p></li>
-<li><p><strong>B</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a>)</p></li>
-<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a>)</p></li>
-<li><p><strong>indices</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a>)</p></li>
-<li><p><strong>backend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>default 'cpu'</em>) – the backend to use for computations. Either ‘cpu’ or ‘gpu’.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Methods</p>
+  <section id="module-mrinufft.operators.off_resonance">
+<span id="operators-off-resonance"></span><h1><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code><a class="headerlink" href="#module-mrinufft.operators.off_resonance" title="Link to this heading">#</a></h1>
+<p>Off Resonance correction Operator wrapper.</p>
+<p>Based on the implementation of Guillaume Daval-Frérot in pysap-mri:
+<a class="github reference external" href="https://github.com/CEA-COSMIC/pysap-mri/blob/master/mri/operators/fourier/orc_wrapper.py">CEA-COSMIC/pysap-mri</a></p>
+<p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op" title="mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adj_op</span></code></a></p></td>
-<td><p>Compute Adjoint Operation with off-resonnance effect.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_shape</span></code></p></td>
-<td><p>Validate the shapes of the image or k-space data against operator shapes.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_density</span></code></p></td>
-<td><p>Compute the density compensation weights and set it.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_smaps</span></code></p></td>
-<td><p>Compute the sensitivity maps and set it.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data_consistency</span></code></p></td>
-<td><p>Compute the gradient data consistency.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad" title="mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_grad</span></code></a></p></td>
-<td><p>Compute the data consistency error.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lipschitz_cst</span></code></p></td>
-<td><p>Return the Lipschitz constant of the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_autograd</span></code></p></td>
-<td><p>Make a new Operator with autodiff support.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.op" title="mrinufft.operators.off_resonnance.MRIFourierCorrected.op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">op</span></code></a></p></td>
-<td><p>Compute Forward Operation with off-resonnances effect.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_autograd</span></code></p></td>
-<td><p>Return a Fourier operator with autograd capabilities.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_off_resonnance_correction</span></code></p></td>
-<td><p>Return a new operator with Off Resonnance Correction.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html#mrinufft.operators.off_resonance.get_interpolators_from_fieldmap" title="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_interpolators_from_fieldmap</span></code></a></p></td>
+<td><p>Approximate <code class="docutils literal notranslate"><span class="pre">exp(-2j*pi*fieldmap*readout_time)</span> <span class="pre">≈</span> <span class="pre">Σ</span> <span class="pre">B_n(t)C_n(r)</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p class="rubric">Attributes</p>
+<p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">autograd_available</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpx_dtype</span></code></p></td>
-<td><p>Return complex floating precision of the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></p></td>
-<td><p>Density compensation of the operator.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
-<td><p>Return floating precision of the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interfaces</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_coils</span></code></p></td>
-<td><p>Number of coils for the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_samples</span></code></p></td>
-<td><p>Return the number of samples used by the operator.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndim</span></code></p></td>
-<td><p>Number of dimensions in image space of the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_factor</span></code></p></td>
-<td><p>Normalization factor of the operator.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">samples</span></code></p></td>
-<td><p>Return the samples used by the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></p></td>
-<td><p>Shape of the image space of the operator.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">smaps</span></code></p></td>
-<td><p>Sensitivity maps of the operator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uses_density</span></code></p></td>
-<td><p>Return True if the operator uses density compensation.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uses_sense</span></code></p></td>
-<td><p>Return True if the operator uses sensitivity maps.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="mrinufft.operators.off_resonance.MRIFourierCorrected.html#mrinufft.operators.off_resonance.MRIFourierCorrected" title="mrinufft.operators.off_resonance.MRIFourierCorrected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MRIFourierCorrected</span></code></a></p></td>
+<td><p>Fourier Operator with B0 Inhomogeneities compensation.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mrinufft.operators.off_resonnance.MRIFourierCorrected.op">
-<span class="sig-name descname"><span class="pre">op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/off_resonnance.html#MRIFourierCorrected.op"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.op" title="Link to this definition">#</a></dt>
-<dd><p>Compute Forward Operation with off-resonnances effect.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a><em> or </em><a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)"><em>cupy.ndarray</em></a>) – N-D input image</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>masked distorded N-D k-space</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)">numpy.ndarray</a> or <a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)">cupy.ndarray</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op">
-<span class="sig-name descname"><span class="pre">adj_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/off_resonnance.html#MRIFourierCorrected.adj_op"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op" title="Link to this definition">#</a></dt>
-<dd><p>Compute Adjoint Operation with off-resonnance effect.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a><em> or </em><a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)"><em>cupy.ndarray</em></a>) – masked distorded N-D k-space</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>inverse Fourier transform of the distorded input k-space.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad">
-<span class="sig-name descname"><span class="pre">get_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mrinufft/operators/off_resonnance.html#MRIFourierCorrected.get_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad" title="Link to this definition">#</a></dt>
-<dd><p>Compute the data consistency error.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image_data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a><em> or </em><a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)"><em>cupy.ndarray</em></a>) – N-D input image</p></li>
-<li><p><strong>obs_data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><em>numpy.ndarray</em></a><em> or </em><a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)"><em>cupy.ndarray</em></a>) – N-D observed k-space</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>data consistency error in image space.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)">numpy.ndarray</a> or <a class="reference external" href="https://docs.cupy.dev/en/stable/reference/generated/cupy.ndarray.html#cupy.ndarray" title="(in CuPy v13.3.0)">cupy.ndarray</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
@@ -872,20 +724,20 @@ B0 inhomogeneities  in the  k-space.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="mrinufft.operators.off_resonnance.html"
+       href="mrinufft.operators.interfaces.utils.utils.sizeof_fmt.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></p>
+        <p class="prev-next-title">sizeof_fmt</p>
       </div>
     </a>
     <a class="right-next"
-       href="mrinufft.operators.stacked.html"
+       href="mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></p>
+        <p class="prev-next-title">get_interpolators_from_fieldmap</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -895,26 +747,6 @@ B0 inhomogeneities  in the  k-space.</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.op"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.op()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.adj_op"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.adj_op()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.off_resonnance.MRIFourierCorrected.get_grad"><code class="docutils literal notranslate"><span class="pre">MRIFourierCorrected.get_grad()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

@@ -178,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_display_config.html">Trajectory display configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_2D_trajectories.html">2D Trajectories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_gif_2D.html">2D Trajectories display</a></li>
@@ -283,8 +284,9 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.operators.off_resonnance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.operators.off_resonance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html">get_interpolators_from_fieldmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.off_resonance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.operators.stacked.html"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -435,6 +437,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.extras.html"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -754,7 +761,7 @@ of the operator roughly equal to 1.</p>
 /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/finufft/_interfaces.py:329: UserWarning: Argument `data` does not satisfy the following requirement: C. Copying array (this may reduce performance)
   warnings.warn(f&quot;Argument `{name}` does not satisfy the following requirement: {prop}. Copying array (this may reduce performance)&quot;)
 
-&lt;matplotlib.image.AxesImage object at 0x73f1eb4a2410&gt;
+&lt;matplotlib.image.AxesImage object at 0x7063f853de40&gt;
 </pre></div>
 </div>
 <p>As you can see, the radial sampling pattern as a strong concentration of sampling point in the center, resulting in a  low-frequency biased adjoint reconstruction.</p>
@@ -878,10 +885,10 @@ Text(0.5, 1.0, &#39;manual density compensation&#39;)
 <span class="nb">print</span><span class="p">(</span><a href="../../_autosummary/mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.html#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT" title="mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT" class="sphx-glr-backref-module-mrinufft-operators-interfaces-gpunufft sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nufft</span></a><span class="o">.</span><span class="n">density</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../../_images/sphx_glr_example_density_005.png" srcset="../../../_images/sphx_glr_example_density_005.png" alt="Ground Truth, no density compensation, Pipe density compensation" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[0.00155928 0.00705539 0.01422222 ... 0.56895894 0.46830535 0.60650784]
+<img src="../../../_images/sphx_glr_example_density_005.png" srcset="../../../_images/sphx_glr_example_density_005.png" alt="Ground Truth, no density compensation, Pipe density compensation" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[0.00154943 0.00707109 0.01425768 ... 0.5689589  0.4683053  0.6065078 ]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.178 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.878 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-generated-autoexamples-gpu-example-density-py">
 <div class="binder-badge docutils container">
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/mind-inria/mri-nufft/gh-pages?urlpath=lab/tree/examples/generated/autoexamples/GPU/example_density.ipynb"><img alt="Launch binder" src="../../../_images/binder_badge_logo.svg" style="width: 150px;" />

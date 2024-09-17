@@ -25,6 +25,7 @@
    :toctree:
    :recursive:
 
+   data
    smaps
    utils
 

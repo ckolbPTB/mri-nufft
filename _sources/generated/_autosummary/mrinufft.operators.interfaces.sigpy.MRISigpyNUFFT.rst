@@ -26,7 +26,7 @@ MRISigpyNUFFT
       ~MRISigpyNUFFT.make_autograd
       ~MRISigpyNUFFT.op
       ~MRISigpyNUFFT.with_autograd
-      ~MRISigpyNUFFT.with_off_resonnance_correction
+      ~MRISigpyNUFFT.with_off_resonance_correction
    
    
 

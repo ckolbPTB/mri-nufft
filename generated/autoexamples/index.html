@@ -179,6 +179,7 @@
 <li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_display_config.html">Trajectory display configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_2D_trajectories.html">2D Trajectories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_gif_2D.html">2D Trajectories display</a></li>
@@ -284,8 +285,9 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.operators.off_resonnance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonnance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.off_resonnance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.operators.off_resonance.html"><code class="docutils literal notranslate"><span class="pre">operators.off_resonance</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html">get_interpolators_from_fieldmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.off_resonance.MRIFourierCorrected.html">MRIFourierCorrected</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.operators.stacked.html"><code class="docutils literal notranslate"><span class="pre">operators.stacked</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -436,6 +438,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../_autosummary/mrinufft.extras.html"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -703,6 +710,9 @@ document.write(`
 </div><div class="sphx-glr-thumbcontainer" tooltip="The look of the display trajectories can be tweaked by using :pydisplayConfig"><img alt="" src="../../_images/sphx_glr_example_display_config_thumb.png" />
 <p><a class="reference internal" href="example_display_config.html#sphx-glr-generated-autoexamples-example-display-config-py"><span class="std std-ref">Trajectory display configuration</span></a></p>
   <div class="sphx-glr-thumbnail-title">Trajectory display configuration</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Example of Off-resonance Corrected NUFFT trajectory operator."><img alt="" src="../../_images/sphx_glr_example_offresonance_thumb.png" />
+<p><a class="reference internal" href="example_offresonance.html#sphx-glr-generated-autoexamples-example-offresonance-py"><span class="std std-ref">Off-resonance Corrected NUFFT Operator</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Off-resonance Corrected NUFFT Operator</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="A collection of 3D trajectories are generated and saved as a gif."><img alt="" src="../../_images/sphx_glr_example_gif_3D_thumb.gif" />
 <p><a class="reference internal" href="example_gif_3D.html#sphx-glr-generated-autoexamples-example-gif-3d-py"><span class="std std-ref">3D Trajectories display</span></a></p>
   <div class="sphx-glr-thumbnail-title">3D Trajectories display</div>

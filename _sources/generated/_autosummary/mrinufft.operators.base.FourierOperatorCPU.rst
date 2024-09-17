@@ -26,7 +26,7 @@ FourierOperatorCPU
       ~FourierOperatorCPU.make_autograd
       ~FourierOperatorCPU.op
       ~FourierOperatorCPU.with_autograd
-      ~FourierOperatorCPU.with_off_resonnance_correction
+      ~FourierOperatorCPU.with_off_resonance_correction
    
    
 

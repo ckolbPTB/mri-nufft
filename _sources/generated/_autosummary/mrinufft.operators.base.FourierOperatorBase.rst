@@ -26,7 +26,7 @@ FourierOperatorBase
       ~FourierOperatorBase.make_autograd
       ~FourierOperatorBase.op
       ~FourierOperatorBase.with_autograd
-      ~FourierOperatorBase.with_off_resonnance_correction
+      ~FourierOperatorBase.with_off_resonance_correction
    
    
 

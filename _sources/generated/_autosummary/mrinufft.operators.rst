@@ -28,6 +28,6 @@
    autodiff
    base
    interfaces
-   off_resonnance
+   off_resonance
    stacked
 

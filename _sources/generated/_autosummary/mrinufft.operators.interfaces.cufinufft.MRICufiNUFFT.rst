@@ -27,7 +27,7 @@ MRICufiNUFFT
       ~MRICufiNUFFT.op
       ~MRICufiNUFFT.toggle_grad_traj
       ~MRICufiNUFFT.with_autograd
-      ~MRICufiNUFFT.with_off_resonnance_correction
+      ~MRICufiNUFFT.with_off_resonance_correction
    
    
 

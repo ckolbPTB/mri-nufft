@@ -68,6 +68,23 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Example of Off-resonance Corrected NUFFT trajectory operator.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_offresonance_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_offresonance.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Off-resonance Corrected NUFFT Operator</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="A collection of 3D trajectories are generated and saved as a gif.">
 
 .. only:: html
@@ -181,6 +198,7 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
    /generated/autoexamples/example_stacked
    /generated/autoexamples/example_readme
    /generated/autoexamples/example_display_config
+   /generated/autoexamples/example_offresonance
    /generated/autoexamples/example_gif_3D
    /generated/autoexamples/example_2D_trajectories
    /generated/autoexamples/example_gif_2D

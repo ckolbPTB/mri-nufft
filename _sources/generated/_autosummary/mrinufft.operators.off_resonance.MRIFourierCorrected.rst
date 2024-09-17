@@ -1,7 +1,7 @@
 MRIFourierCorrected
 ===================
 
-.. currentmodule:: mrinufft.operators.off_resonnance
+.. currentmodule:: mrinufft.operators.off_resonance
 
 .. autoclass:: MRIFourierCorrected
    :members:
@@ -22,12 +22,12 @@ MRIFourierCorrected
       ~MRIFourierCorrected.compute_density
       ~MRIFourierCorrected.compute_smaps
       ~MRIFourierCorrected.data_consistency
-      ~MRIFourierCorrected.get_grad
       ~MRIFourierCorrected.get_lipschitz_cst
+      ~MRIFourierCorrected.get_spatial_coefficients
       ~MRIFourierCorrected.make_autograd
       ~MRIFourierCorrected.op
       ~MRIFourierCorrected.with_autograd
-      ~MRIFourierCorrected.with_off_resonnance_correction
+      ~MRIFourierCorrected.with_off_resonance_correction
    
    
 

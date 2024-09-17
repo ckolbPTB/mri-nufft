@@ -27,7 +27,7 @@ MRIfinufft
       ~MRIfinufft.op
       ~MRIfinufft.toggle_grad_traj
       ~MRIfinufft.with_autograd
-      ~MRIfinufft.with_off_resonnance_correction
+      ~MRIfinufft.with_off_resonance_correction
    
    
 

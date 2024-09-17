@@ -26,7 +26,7 @@ MRInumpy
       ~MRInumpy.make_autograd
       ~MRInumpy.op
       ~MRInumpy.with_autograd
-      ~MRInumpy.with_off_resonnance_correction
+      ~MRInumpy.with_off_resonance_correction
    
    
 

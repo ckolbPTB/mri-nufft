@@ -26,7 +26,7 @@ MRInfft
       ~MRInfft.make_autograd
       ~MRInfft.op
       ~MRInfft.with_autograd
-      ~MRInfft.with_off_resonnance_correction
+      ~MRInfft.with_off_resonance_correction
    
    
 

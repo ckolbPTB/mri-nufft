@@ -26,7 +26,7 @@ MRIBartNUFFT
       ~MRIBartNUFFT.make_autograd
       ~MRIBartNUFFT.op
       ~MRIBartNUFFT.with_autograd
-      ~MRIBartNUFFT.with_off_resonnance_correction
+      ~MRIBartNUFFT.with_off_resonance_correction
    
    
 

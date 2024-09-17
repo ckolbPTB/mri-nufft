@@ -26,7 +26,7 @@ MRIStackedNUFFTGPU
       ~MRIStackedNUFFTGPU.make_autograd
       ~MRIStackedNUFFTGPU.op
       ~MRIStackedNUFFTGPU.with_autograd
-      ~MRIStackedNUFFTGPU.with_off_resonnance_correction
+      ~MRIStackedNUFFTGPU.with_off_resonance_correction
    
    
 

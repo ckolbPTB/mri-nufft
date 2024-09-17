@@ -27,7 +27,7 @@ MRITensorflowNUFFT
       ~MRITensorflowNUFFT.op
       ~MRITensorflowNUFFT.pipe
       ~MRITensorflowNUFFT.with_autograd
-      ~MRITensorflowNUFFT.with_off_resonnance_correction
+      ~MRITensorflowNUFFT.with_off_resonance_correction
    
    
 

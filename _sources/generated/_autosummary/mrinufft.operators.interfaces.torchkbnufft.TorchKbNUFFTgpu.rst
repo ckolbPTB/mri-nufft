@@ -27,7 +27,7 @@ TorchKbNUFFTgpu
       ~TorchKbNUFFTgpu.op
       ~TorchKbNUFFTgpu.pipe
       ~TorchKbNUFFTgpu.with_autograd
-      ~TorchKbNUFFTgpu.with_off_resonnance_correction
+      ~TorchKbNUFFTgpu.with_off_resonance_correction
    
    
 
