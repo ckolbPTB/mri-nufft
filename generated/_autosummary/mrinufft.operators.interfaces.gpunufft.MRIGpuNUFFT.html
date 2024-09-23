@@ -691,6 +691,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.uses_sense"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.uses_sense</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.smaps"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.smaps</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.samples"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.samples</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.density</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.pipe"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.pipe()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.get_lipschitz_cst"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.get_lipschitz_cst()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT._safe_squeeze"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT._safe_squeeze()</span></code></a></li>
@@ -796,7 +797,7 @@ only in gpuNUFFT</p></li>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpx_dtype</span></code></p></td>
 <td><p>Return complex floating precision of the operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density" title="mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></a></p></td>
 <td><p>Density compensation of the operator.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
@@ -891,6 +892,12 @@ only in gpuNUFFT</p></li>
 <dt class="sig sig-object py" id="mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.samples">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">samples</span></span><a class="headerlink" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.samples" title="Link to this definition">#</a></dt>
 <dd><p>Return the samples used by the operator.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density" title="Link to this definition">#</a></dt>
+<dd><p>Density compensation of the operator.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1016,6 +1023,7 @@ N_coil x Image shape is not using sense.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.uses_sense"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.uses_sense</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.smaps"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.smaps</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.samples"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.samples</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.density"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.density</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.pipe"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.pipe()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT.get_lipschitz_cst"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT.get_lipschitz_cst()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.gpunufft.MRIGpuNUFFT._safe_squeeze"><code class="docutils literal notranslate"><span class="pre">MRIGpuNUFFT._safe_squeeze()</span></code></a></li>

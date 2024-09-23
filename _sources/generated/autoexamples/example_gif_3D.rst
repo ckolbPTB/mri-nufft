@@ -262,7 +262,7 @@ A collection of 3D trajectories are generated and saved as a gif.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (2 minutes 26.825 seconds)
+   **Total running time of the script:** (3 minutes 9.560 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_gif_3D.py:

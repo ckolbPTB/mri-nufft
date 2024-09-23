@@ -688,6 +688,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.smaps"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.smaps</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.samples"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.samples</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.density</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.op"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.adj_op"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.adj_op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT._adj_op_sense_device"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT._adj_op_sense_device()</span></code></a></li>
@@ -836,7 +837,7 @@ adjoint (type1). and in contiguous memory order.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpx_dtype</span></code></p></td>
 <td><p>Return complex floating precision of the operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density" title="mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">density</span></code></a></p></td>
 <td><p>Density compensation of the operator.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
@@ -894,6 +895,12 @@ adjoint (type1). and in contiguous memory order.</p>
 <dt class="sig sig-object py" id="mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.samples">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">samples</span></span><a class="headerlink" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.samples" title="Link to this definition">#</a></dt>
 <dd><p>Return the samples used by the operator.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density" title="Link to this definition">#</a></dt>
+<dd><p>Density compensation of the operator.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1109,6 +1116,7 @@ N_coil x Image shape is not using sense.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.smaps"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.smaps</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.samples"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.samples</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.density"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.density</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.op"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT.adj_op"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT.adj_op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mrinufft.operators.interfaces.cufinufft.MRICufiNUFFT._adj_op_sense_device"><code class="docutils literal notranslate"><span class="pre">MRICufiNUFFT._adj_op_sense_device()</span></code></a></li>

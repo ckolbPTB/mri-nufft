@@ -114,7 +114,7 @@ installable using ``pip install brainweb-dl``
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x76da937ecdf0>
+    <matplotlib.image.AxesImage object at 0x76af60fdce50>
 
 
 
@@ -209,7 +209,7 @@ Setup the Operator
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.513 seconds)
+   **Total running time of the script:** (0 minutes 9.458 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_stacked.py:

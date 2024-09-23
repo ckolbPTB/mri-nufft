@@ -111,7 +111,7 @@ installable using ``pip install brainweb-dl``
  .. code-block:: none
 
 
-    (<matplotlib.image.AxesImage object at 0x7064015ce9e0>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'ground truth'))
+    (<matplotlib.image.AxesImage object at 0x7b9af91b6a40>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'ground truth'))
 
 
 
@@ -145,7 +145,7 @@ it is advised to use other tools (e.g., FSL-BET).
  .. code-block:: none
 
 
-    (<matplotlib.image.AxesImage object at 0x706400dbf730>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'brain mask'))
+    (<matplotlib.image.AxesImage object at 0x7b9af8da3790>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'brain mask'))
 
 
 
@@ -183,7 +183,7 @@ the input Shepp-Logan phantom
  .. code-block:: none
 
 
-    (<matplotlib.image.AxesImage object at 0x706400944c10>, (-0.5, 180.5, 216.5, -0.5), <matplotlib.colorbar.Colorbar object at 0x70640098afb0>, Text(0.5, 1.0, 'B0 map [Hz]'))
+    (<matplotlib.image.AxesImage object at 0x7b9af8c25c60>, (-0.5, 180.5, 216.5, -0.5), <matplotlib.colorbar.Colorbar object at 0x7b9af8c6f010>, Text(0.5, 1.0, 'B0 map [Hz]'))
 
 
 
@@ -295,7 +295,7 @@ operator (right)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 4.835 seconds)
+   **Total running time of the script:** (0 minutes 6.482 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_offresonance.py:
