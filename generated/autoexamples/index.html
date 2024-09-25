@@ -52,7 +52,7 @@
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stacked NUFFT Operator" href="example_stacked.html" />
+    <link rel="next" title="References" href="example_cg.html" />
     <link rel="prev" title="Getting Started" href="../../getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,6 +176,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="example_cg.html">References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal Example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_display_config.html">Trajectory display configuration</a></li>
@@ -443,6 +444,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.extras.gradient.html"><code class="docutils literal notranslate"><span class="pre">extras.gradient</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.gradient.cg.html">cg</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../_autosummary/mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.extras.smaps.low_frequency.html">low_frequency</a></li>
 </ul>
@@ -701,7 +706,10 @@ document.write(`
   <section id="examples">
 <span id="general-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
 <p>This is a collection of examples showing how to use mri-nufft to perform MR image reconstruction.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Example of Stacked NUFFT trajectory operator."><img alt="" src="../../_images/sphx_glr_example_stacked_thumb.png" />
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This script demonstrates the use of the Conjugate Gradient (CG) method  for solving systems of linear equations of the form Ax = b, where A is a symmetric  positive-definite matrix. The CG method is an iterative algorithm that is particularly  useful for large, sparse systems where direct methods are computationally expensive."><img alt="" src="../../_images/sphx_glr_example_cg_thumb.png" />
+<p><span class="xref std std-ref">sphx_glr_generated_autoexamples_example_cg.py</span></p>
+  <div class="sphx-glr-thumbnail-title">Example of using the Conjugate Gradient method.</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Example of Stacked NUFFT trajectory operator."><img alt="" src="../../_images/sphx_glr_example_stacked_thumb.png" />
 <p><a class="reference internal" href="example_stacked.html#sphx-glr-generated-autoexamples-example-stacked-py"><span class="std std-ref">Stacked NUFFT Operator</span></a></p>
   <div class="sphx-glr-thumbnail-title">Stacked NUFFT Operator</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This script shows how to use the package to perform a simple NUFFT."><img alt="" src="../../_images/sphx_glr_example_readme_thumb.png" />
@@ -783,11 +791,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="example_stacked.html"
+       href="example_cg.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stacked NUFFT Operator</p>
+        <p class="prev-next-title">References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

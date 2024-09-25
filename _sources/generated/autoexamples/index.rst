@@ -17,6 +17,23 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This script demonstrates the use of the Conjugate Gradient (CG) method  for solving systems of linear equations of the form Ax = b, where A is a symmetric  positive-definite matrix. The CG method is an iterative algorithm that is particularly  useful for large, sparse systems where direct methods are computationally expensive.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_cg_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_cg.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Example of using the Conjugate Gradient method.</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Example of Stacked NUFFT trajectory operator.">
 
 .. only:: html
@@ -195,6 +212,7 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 .. toctree::
    :hidden:
 
+   /generated/autoexamples/example_cg
    /generated/autoexamples/example_stacked
    /generated/autoexamples/example_readme
    /generated/autoexamples/example_display_config

@@ -26,6 +26,7 @@
    :recursive:
 
    data
+   gradient
    smaps
    utils
 
