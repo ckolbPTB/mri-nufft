@@ -175,22 +175,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 has-children"><a class="reference internal" href="../autoexamples/index.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -213,10 +213,6 @@
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -734,9 +730,9 @@ non-positive, the iterations stop. Default is 1e-4.</p></li>
 
 <section id="examples-using-mrinufft-extras-gradient-cg">
 <span id="sphx-glr-backref-mrinufft-extras-gradient-cg"></span><h2>Examples using <code class="docutils literal notranslate"><span class="pre">mrinufft.extras.gradient.cg</span></code><a class="headerlink" href="#examples-using-mrinufft-extras-gradient-cg" title="Link to this heading">#</a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This script demonstrates the use of the Conjugate Gradient (CG) method  for solving systems of linear equations of the form Ax = b, where A is a symmetric  positive-definite matrix. The CG method is an iterative algorithm that is particularly  useful for large, sparse systems where direct methods are computationally expensive."><img alt="" src="../../_images/sphx_glr_example_cg_thumb.png" />
-<p><span class="xref std std-ref">sphx_glr_generated_autoexamples_example_cg.py</span></p>
-  <div class="sphx-glr-thumbnail-title">Example of using the Conjugate Gradient method.</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="An example to show how to reconstruct volumes using conjugate gradient method."><img alt="" src="../../_images/sphx_glr_example_cg_thumb.png" />
+<p><a class="reference internal" href="../autoexamples/GPU/example_cg.html#sphx-glr-generated-autoexamples-gpu-example-cg-py"><span class="std std-ref">Reconstruction with conjugate gradient</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Reconstruction with conjugate gradient</div>
 </div></div></section>
 </section>
 

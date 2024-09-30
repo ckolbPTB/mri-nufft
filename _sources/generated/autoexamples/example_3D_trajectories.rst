@@ -31,17 +31,17 @@ parameterization of 3D non-Cartesian trajectories. Since most arguments
 are redundant across the different patterns, some of the documentation
 will refer to previous patterns for explanation.
 
-Note that most sources have not been added yet, but will be in the near
-future. Also the examples hereafter only cover natively 3D trajectories
+Note that the examples hereafter only cover natively 3D trajectories
 or famous 3D trajectories obtained from 2D. Examples on how to use
-2D-to-3D expansion methods will be presented over another page.
+tools to make 3D trajectories out of 2D ones are presented in
+:ref:`sphx_glr_generated_autoexamples_example_trajectory_tools.py`
 
 In this page in particular, we invite the user to manually run the script
 to be able to manipulate the plot orientations with the matplotlib interface
 to better visualize the 3D volumes.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-36
+.. GENERATED FROM PYTHON SOURCE LINES 25-35
 
 .. code-block:: Python
 
@@ -49,27 +49,58 @@ to better visualize the 3D volumes.
     # External
     import matplotlib.pyplot as plt
     import numpy as np
+    from utils import show_argument, show_trajectory
 
     # Internal
     import mrinufft as mn
     from mrinufft import display_2D_trajectory, display_3D_trajectory
-    from utils import show_argument, show_trajectory
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
+    --------------------------------------------------------------------------------
+
+      CuPy may not function correctly because multiple CuPy packages are installed
+      in your environment:
+
+        cupy-cuda11x, cupy-cuda12x
+
+      Follow these steps to resolve this issue:
+
+        1. For all packages listed above, run the following command to remove all
+           existing CuPy installations:
+
+             $ pip uninstall <package_name>
+
+          If you previously installed CuPy via conda, also run the following:
+
+             $ conda uninstall cupy
+
+        2. Install the appropriate CuPy package.
+           Refer to the Installation Guide for detailed instructions.
+
+             https://docs.cupy.dev/en/stable/install.html
+
+    --------------------------------------------------------------------------------
+
+      warnings.warn(f'''
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-40
+.. GENERATED FROM PYTHON SOURCE LINES 36-39
 
 Script options
 ==============
 These options are used in the examples below as default values for all trajectories.
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-55
+.. GENERATED FROM PYTHON SOURCE LINES 39-54
 
 .. code-block:: Python
 
@@ -95,7 +126,7 @@ These options are used in the examples below as default values for all trajector
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-82
+.. GENERATED FROM PYTHON SOURCE LINES 55-81
 
 Radial trajectories
 ===================
@@ -124,7 +155,7 @@ Arguments:
   the center then outside (in-out) or not (center-out). ``(default False)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-87
+.. GENERATED FROM PYTHON SOURCE LINES 81-86
 
 .. code-block:: Python
 
@@ -145,7 +176,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-94
+.. GENERATED FROM PYTHON SOURCE LINES 87-93
 
 ``Nc (int)``
 ~~~~~~~~~~~~
@@ -154,7 +185,7 @@ The number of individual shots, here 3D radial lines, used to cover the
 k-space. More shots means better coverage but also longer acquisitions.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-100
+.. GENERATED FROM PYTHON SOURCE LINES 93-99
 
 .. code-block:: Python
 
@@ -176,7 +207,7 @@ k-space. More shots means better coverage but also longer acquisitions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-107
+.. GENERATED FROM PYTHON SOURCE LINES 100-106
 
 ``Ns (int)``
 ~~~~~~~~~~~~
@@ -185,7 +216,7 @@ The number of samples per shot. More samples means that either
 the acquisition window is lengthened or the sampling rate is increased.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 107-113
+.. GENERATED FROM PYTHON SOURCE LINES 106-112
 
 .. code-block:: Python
 
@@ -207,7 +238,7 @@ the acquisition window is lengthened or the sampling rate is increased.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-130
+.. GENERATED FROM PYTHON SOURCE LINES 113-129
 
 ``in_out (bool)``
 ~~~~~~~~~~~~~~~~~
@@ -226,7 +257,7 @@ Note that the behavior of both ``tilt`` and ``width`` are automatically adapted
 to the changes to avoid having to update them too when switching ``in_out``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 130-136
+.. GENERATED FROM PYTHON SOURCE LINES 129-135
 
 .. code-block:: Python
 
@@ -248,7 +279,7 @@ to the changes to avoid having to update them too when switching ``in_out``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-159
+.. GENERATED FROM PYTHON SOURCE LINES 136-158
 
 Golden means radial
 -------------------
@@ -273,7 +304,7 @@ Arguments:
   ``(default False)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 159-164
+.. GENERATED FROM PYTHON SOURCE LINES 158-163
 
 .. code-block:: Python
 
@@ -294,7 +325,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 165-188
+.. GENERATED FROM PYTHON SOURCE LINES 164-187
 
 Wong radial
 -------------------
@@ -320,7 +351,7 @@ Arguments:
   ``(default False)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 188-193
+.. GENERATED FROM PYTHON SOURCE LINES 187-192
 
 .. code-block:: Python
 
@@ -341,7 +372,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-218
+.. GENERATED FROM PYTHON SOURCE LINES 193-217
 
 Park radial
 -------------------
@@ -368,7 +399,7 @@ Arguments:
   ``(default False)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 218-223
+.. GENERATED FROM PYTHON SOURCE LINES 217-222
 
 .. code-block:: Python
 
@@ -389,7 +420,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 224-251
+.. GENERATED FROM PYTHON SOURCE LINES 223-250
 
 Freeform trajectories
 =====================
@@ -419,7 +450,7 @@ Arguments:
   by default. ``(default 1)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 251-256
+.. GENERATED FROM PYTHON SOURCE LINES 250-255
 
 .. code-block:: Python
 
@@ -440,7 +471,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 257-266
+.. GENERATED FROM PYTHON SOURCE LINES 256-265
 
 ``tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -452,7 +483,7 @@ common definitions of golden angles. The angle is automatically adapted
 when the ``in_out`` argument is switched to keep the same behavior.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 266-272
+.. GENERATED FROM PYTHON SOURCE LINES 265-271
 
 .. code-block:: Python
 
@@ -474,7 +505,7 @@ when the ``in_out`` argument is switched to keep the same behavior.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 273-279
+.. GENERATED FROM PYTHON SOURCE LINES 272-278
 
 ``nb_zigzags (float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -483,7 +514,7 @@ The number of “zigzags”, or revolutions around the 3D cone on a center-out s
 (doubled overall for in-out trajectories)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 279-285
+.. GENERATED FROM PYTHON SOURCE LINES 278-284
 
 .. code-block:: Python
 
@@ -505,7 +536,7 @@ The number of “zigzags”, or revolutions around the 3D cone on a center-out s
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 286-294
+.. GENERATED FROM PYTHON SOURCE LINES 285-293
 
 ``spiral (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -516,7 +547,7 @@ The shape of the spiral defined and documented in
 spirals are available as string options for convenience.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 294-300
+.. GENERATED FROM PYTHON SOURCE LINES 293-299
 
 .. code-block:: Python
 
@@ -538,7 +569,7 @@ spirals are available as string options for convenience.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 301-309
+.. GENERATED FROM PYTHON SOURCE LINES 300-308
 
 ``width (float)``
 ~~~~~~~~~~~~~~~~~
@@ -549,7 +580,7 @@ therefore ``width > 1`` creates overlap between cone regions and
 ``width < 1`` tends to more radial patterns.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 309-315
+.. GENERATED FROM PYTHON SOURCE LINES 308-314
 
 .. code-block:: Python
 
@@ -571,7 +602,7 @@ therefore ``width > 1`` creates overlap between cone regions and
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 316-341
+.. GENERATED FROM PYTHON SOURCE LINES 315-340
 
 FLORET
 ------
@@ -599,7 +630,7 @@ Arguments:
 - ``axes (tuple)``: axes over which cones are created, by default (2,)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 341-351
+.. GENERATED FROM PYTHON SOURCE LINES 340-350
 
 .. code-block:: Python
 
@@ -625,7 +656,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 352-365
+.. GENERATED FROM PYTHON SOURCE LINES 351-364
 
 ``axes (tuple)``
 ~~~~~~~~~~~~~~~~
@@ -641,7 +672,7 @@ k-space sphere by duplicating cones along several axes, as initially
 proposed by [Pip+11]_.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 366-378
+.. GENERATED FROM PYTHON SOURCE LINES 365-377
 
 .. code-block:: Python
 
@@ -669,7 +700,7 @@ proposed by [Pip+11]_.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 379-385
+.. GENERATED FROM PYTHON SOURCE LINES 378-384
 
 .. code-block:: Python
 
@@ -691,7 +722,7 @@ proposed by [Pip+11]_.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 386-409
+.. GENERATED FROM PYTHON SOURCE LINES 385-408
 
 Wave-CAIPI
 ----------
@@ -717,7 +748,7 @@ Arguments:
 - ``spacing (tuple(int, int))``: Spacing between helices over the
   2D :math:`k_x`-:math:`k_y` plane normalized similarly to `width`. ``(default (1, 1))``
 
-.. GENERATED FROM PYTHON SOURCE LINES 409-413
+.. GENERATED FROM PYTHON SOURCE LINES 408-412
 
 .. code-block:: Python
 
@@ -737,7 +768,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 414-419
+.. GENERATED FROM PYTHON SOURCE LINES 413-418
 
 ``nb_revolutions (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -745,7 +776,7 @@ Arguments:
 The number of revolutions of the helices from bottom to top.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 419-424
+.. GENERATED FROM PYTHON SOURCE LINES 418-423
 
 .. code-block:: Python
 
@@ -766,7 +797,7 @@ The number of revolutions of the helices from bottom to top.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 425-435
+.. GENERATED FROM PYTHON SOURCE LINES 424-434
 
 ``width (float)``
 ~~~~~~~~~~~~~~~~~
@@ -779,7 +810,7 @@ and therefore ``width > 1`` creates overlap between cone regions and
 See ``packing`` for more details about coverage.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 435-440
+.. GENERATED FROM PYTHON SOURCE LINES 434-439
 
 .. code-block:: Python
 
@@ -800,7 +831,7 @@ See ``packing`` for more details about coverage.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 441-457
+.. GENERATED FROM PYTHON SOURCE LINES 440-456
 
 ``packing (str)``
 ~~~~~~~~~~~~~~~~~
@@ -819,7 +850,7 @@ The ``"random"`` packing also naturally overlaps as the positions are determined
 following a uniform distribution over :math:`k_x` and :math:`k_y` dimensions.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 457-462
+.. GENERATED FROM PYTHON SOURCE LINES 456-461
 
 .. code-block:: Python
 
@@ -840,7 +871,7 @@ following a uniform distribution over :math:`k_x` and :math:`k_y` dimensions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 463-468
+.. GENERATED FROM PYTHON SOURCE LINES 462-467
 
 .. code-block:: Python
 
@@ -861,7 +892,7 @@ following a uniform distribution over :math:`k_x` and :math:`k_y` dimensions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 469-483
+.. GENERATED FROM PYTHON SOURCE LINES 468-482
 
 ``shape (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -878,7 +909,7 @@ a minimal 2-norm (eliminating the diagonals) except for circles with infinity-no
 (accumulating over the diagonals).
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 483-488
+.. GENERATED FROM PYTHON SOURCE LINES 482-487
 
 .. code-block:: Python
 
@@ -899,7 +930,7 @@ a minimal 2-norm (eliminating the diagonals) except for circles with infinity-no
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 489-494
+.. GENERATED FROM PYTHON SOURCE LINES 488-493
 
 .. code-block:: Python
 
@@ -920,7 +951,7 @@ a minimal 2-norm (eliminating the diagonals) except for circles with infinity-no
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 495-504
+.. GENERATED FROM PYTHON SOURCE LINES 494-503
 
 ``spacing (tuple(int, int))``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -932,7 +963,7 @@ complex behaviors for other packing methods as the diameters are normalized to
 fit within the cubic k-space.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 504-509
+.. GENERATED FROM PYTHON SOURCE LINES 503-508
 
 .. code-block:: Python
 
@@ -953,7 +984,7 @@ fit within the cubic k-space.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 510-516
+.. GENERATED FROM PYTHON SOURCE LINES 509-515
 
 .. code-block:: Python
 
@@ -975,7 +1006,7 @@ fit within the cubic k-space.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 517-547
+.. GENERATED FROM PYTHON SOURCE LINES 516-546
 
 Seiffert spirals / Yarnball
 ---------------------------
@@ -1008,7 +1039,7 @@ Arguments:
   then outside (in-out) or not (center-out). ``(default False)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 547-552
+.. GENERATED FROM PYTHON SOURCE LINES 546-551
 
 .. code-block:: Python
 
@@ -1029,7 +1060,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 553-560
+.. GENERATED FROM PYTHON SOURCE LINES 552-559
 
 ``curve_index (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1039,7 +1070,7 @@ corresponding to a planar spiral, and increasing the length and exploration of
 the curve while asymptotically approaching :math:`1`.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 560-568
+.. GENERATED FROM PYTHON SOURCE LINES 559-567
 
 .. code-block:: Python
 
@@ -1063,7 +1094,7 @@ the curve while asymptotically approaching :math:`1`.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 569-577
+.. GENERATED FROM PYTHON SOURCE LINES 568-576
 
 ``nb_revolutions (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1074,7 +1105,7 @@ number of times the shot reaches the starting pole of the sphere. It
 subsequently defines the length of the curve.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 577-588
+.. GENERATED FROM PYTHON SOURCE LINES 576-587
 
 .. code-block:: Python
 
@@ -1101,7 +1132,7 @@ subsequently defines the length of the curve.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 589-600
+.. GENERATED FROM PYTHON SOURCE LINES 588-599
 
 ``axis_tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1115,7 +1146,7 @@ Note that in the examples below, the ``spiral_tilt`` argument is set to 0
 for clarity.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 600-612
+.. GENERATED FROM PYTHON SOURCE LINES 599-611
 
 .. code-block:: Python
 
@@ -1143,7 +1174,7 @@ for clarity.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 613-626
+.. GENERATED FROM PYTHON SOURCE LINES 612-625
 
 ``spiral_tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1159,7 +1190,7 @@ Rather than picking random angles, we decided to provide the conventional "tilt"
 argument.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 626-638
+.. GENERATED FROM PYTHON SOURCE LINES 625-637
 
 .. code-block:: Python
 
@@ -1187,7 +1218,7 @@ argument.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 639-668
+.. GENERATED FROM PYTHON SOURCE LINES 638-667
 
 Shell trajectories
 ==================
@@ -1219,7 +1250,7 @@ Arguments:
   over a sphere (in radians). ``(default "uniform")``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 668-673
+.. GENERATED FROM PYTHON SOURCE LINES 667-672
 
 .. code-block:: Python
 
@@ -1240,7 +1271,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 674-679
+.. GENERATED FROM PYTHON SOURCE LINES 673-678
 
 ``nb_shells (int)``
 ~~~~~~~~~~~~~~~~~~~
@@ -1248,7 +1279,7 @@ Arguments:
 Number of shells, i.e. concentric spheres, used to partition the k-space sphere.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 679-687
+.. GENERATED FROM PYTHON SOURCE LINES 678-686
 
 .. code-block:: Python
 
@@ -1272,7 +1303,7 @@ Number of shells, i.e. concentric spheres, used to partition the k-space sphere.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 688-698
+.. GENERATED FROM PYTHON SOURCE LINES 687-697
 
 ``spiral_reduction (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1285,7 +1316,7 @@ Therefore we provided ``spiral_reduction`` to reduce (or increase) the pre-deter
 spiral curvature.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 698-706
+.. GENERATED FROM PYTHON SOURCE LINES 697-705
 
 .. code-block:: Python
 
@@ -1309,7 +1340,7 @@ spiral curvature.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 707-712
+.. GENERATED FROM PYTHON SOURCE LINES 706-711
 
 ``shell_tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1317,7 +1348,7 @@ spiral curvature.
 Angle between each consecutive shells (in radians).
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 712-720
+.. GENERATED FROM PYTHON SOURCE LINES 711-719
 
 .. code-block:: Python
 
@@ -1341,7 +1372,7 @@ Angle between each consecutive shells (in radians).
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 721-729
+.. GENERATED FROM PYTHON SOURCE LINES 720-728
 
 ``shot_tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1352,7 +1383,7 @@ for each individual shell following a density provided in [YRB06]_, it
 is advised to use adaptive keywords such as "uniform" rather than hard values.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 729-737
+.. GENERATED FROM PYTHON SOURCE LINES 728-736
 
 .. code-block:: Python
 
@@ -1376,7 +1407,7 @@ is advised to use adaptive keywords such as "uniform" rather than hard values.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 738-758
+.. GENERATED FROM PYTHON SOURCE LINES 737-757
 
 Annular shells
 --------------
@@ -1399,7 +1430,7 @@ Arguments:
   (in radians). ``(default pi / 2)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 758-763
+.. GENERATED FROM PYTHON SOURCE LINES 757-762
 
 .. code-block:: Python
 
@@ -1420,7 +1451,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 764-781
+.. GENERATED FROM PYTHON SOURCE LINES 763-780
 
 ``ring_tilt (float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1440,7 +1471,7 @@ and it partitions the spheres into several connex curves composed of exactly
 two shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 781-789
+.. GENERATED FROM PYTHON SOURCE LINES 780-788
 
 .. code-block:: Python
 
@@ -1464,7 +1495,7 @@ two shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 790-813
+.. GENERATED FROM PYTHON SOURCE LINES 789-812
 
 Seiffert shells
 ---------------
@@ -1490,7 +1521,7 @@ Arguments:
   over a sphere (in radians). ``(default "uniform")``. See helical shells
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 813-818
+.. GENERATED FROM PYTHON SOURCE LINES 812-817
 
 .. code-block:: Python
 
@@ -1511,7 +1542,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 819-858
+.. GENERATED FROM PYTHON SOURCE LINES 818-857
 
 fMRI trajectories
 =================
@@ -1553,7 +1584,7 @@ Arguments:
   then outside (in-out) or not (center-out). ``(default True)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 858-866
+.. GENERATED FROM PYTHON SOURCE LINES 857-865
 
 .. code-block:: Python
 
@@ -1577,7 +1608,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 867-874
+.. GENERATED FROM PYTHON SOURCE LINES 866-873
 
 ``Ns_transitions (int)``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1587,7 +1618,7 @@ Smoother transitions are achieved with more points, but it means longer
 waiting times between readouts if they are split during acquisition.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 874-885
+.. GENERATED FROM PYTHON SOURCE LINES 873-884
 
 .. code-block:: Python
 
@@ -1614,7 +1645,7 @@ waiting times between readouts if they are split during acquisition.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 886-893
+.. GENERATED FROM PYTHON SOURCE LINES 885-892
 
 ``nb_blades (int)``
 ~~~~~~~~~~~~~~~~~~~
@@ -1624,7 +1655,7 @@ and partition the k-space. More blades means fewer lines per blade.
 It should be lower than ``Nc`` and divide it.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 893-904
+.. GENERATED FROM PYTHON SOURCE LINES 892-903
 
 .. code-block:: Python
 
@@ -1651,7 +1682,7 @@ It should be lower than ``Nc`` and divide it.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 905-910
+.. GENERATED FROM PYTHON SOURCE LINES 904-909
 
 ``blade_tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1659,7 +1690,7 @@ It should be lower than ``Nc`` and divide it.
 Angle between each consecutive blades over the :math:`k_z`-axis (in radians)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 910-921
+.. GENERATED FROM PYTHON SOURCE LINES 909-920
 
 .. code-block:: Python
 
@@ -1686,7 +1717,7 @@ Angle between each consecutive blades over the :math:`k_z`-axis (in radians)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 922-928
+.. GENERATED FROM PYTHON SOURCE LINES 921-927
 
 .. code-block:: Python
 
@@ -1708,7 +1739,7 @@ Angle between each consecutive blades over the :math:`k_z`-axis (in radians)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 929-936
+.. GENERATED FROM PYTHON SOURCE LINES 928-935
 
 ``nb_trains (int)``
 ~~~~~~~~~~~~~~~~~~~
@@ -1718,7 +1749,7 @@ will be composed of :math:`n` readouts with ``Nc = n * nb_trains``.
 If ``"auto"`` then ``nb_trains`` is set to ``nb_blades``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 936-948
+.. GENERATED FROM PYTHON SOURCE LINES 935-947
 
 .. code-block:: Python
 
@@ -1746,7 +1777,7 @@ If ``"auto"`` then ``nb_trains`` is set to ``nb_blades``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 949-960
+.. GENERATED FROM PYTHON SOURCE LINES 948-959
 
 ``skip_factor (int)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1760,7 +1791,7 @@ factor. Note that using ``skip_factor`` superior to ``nb_blades``
 as below results in k-space areas being not covered by any blade.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 960-971
+.. GENERATED FROM PYTHON SOURCE LINES 959-970
 
 .. code-block:: Python
 
@@ -1787,7 +1818,7 @@ as below results in k-space areas being not covered by any blade.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 972-983
+.. GENERATED FROM PYTHON SOURCE LINES 971-982
 
 .. code-block:: Python
 
@@ -1814,7 +1845,7 @@ as below results in k-space areas being not covered by any blade.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 984-1024
+.. GENERATED FROM PYTHON SOURCE LINES 983-1023
 
 REPI
 ----
@@ -1857,7 +1888,7 @@ Arguments:
   then outside (in-out) or not (center-out). ``(default True)``. See 3D radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1025-1037
+.. GENERATED FROM PYTHON SOURCE LINES 1024-1036
 
 .. code-block:: Python
 
@@ -1885,7 +1916,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1038-1048
+.. GENERATED FROM PYTHON SOURCE LINES 1037-1047
 
 ``nb_blade_revolutions (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1898,7 +1929,7 @@ between consecutive lines/spirals, requiring higher gradients
 and slew rates.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1048-1061
+.. GENERATED FROM PYTHON SOURCE LINES 1047-1060
 
 .. code-block:: Python
 
@@ -1927,12 +1958,12 @@ and slew rates.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1062-1064
+.. GENERATED FROM PYTHON SOURCE LINES 1061-1063
 
 Same but with a spiral pattern instead of radial.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1065-1078
+.. GENERATED FROM PYTHON SOURCE LINES 1064-1077
 
 .. code-block:: Python
 
@@ -1961,7 +1992,7 @@ Same but with a spiral pattern instead of radial.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1079-1143
+.. GENERATED FROM PYTHON SOURCE LINES 1078-1142
 
 References
 ==========
@@ -2031,7 +2062,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 52.699 seconds)
+   **Total running time of the script:** (0 minutes 57.048 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_3D_trajectories.py:

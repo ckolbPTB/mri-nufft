@@ -24,18 +24,15 @@
 
 A collection of 2D non-Cartesian trajectories with analytical definitions.
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-19
+.. GENERATED FROM PYTHON SOURCE LINES 11-16
 
 Hereafter we detail and illustrate the different arguments used in the
 parameterization of 2D non-Cartesian trajectories. Since most arguments
 are redundant across the different patterns, some of the documentation
 will refer to previous patterns for explanation.
 
-Note that most sources have not been added yet, but will be in the near
-future.
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 19-31
+.. GENERATED FROM PYTHON SOURCE LINES 16-27
 
 .. code-block:: Python
 
@@ -43,28 +40,59 @@ future.
     # External
     import matplotlib.pyplot as plt
     import numpy as np
+    from utils import show_argument, show_trajectory
 
     # Internal
     import mrinufft as mn
     import mrinufft.trajectories.maths as mntm
     from mrinufft import display_2D_trajectory
-    from utils import show_argument, show_trajectory
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
+    --------------------------------------------------------------------------------
+
+      CuPy may not function correctly because multiple CuPy packages are installed
+      in your environment:
+
+        cupy-cuda11x, cupy-cuda12x
+
+      Follow these steps to resolve this issue:
+
+        1. For all packages listed above, run the following command to remove all
+           existing CuPy installations:
+
+             $ pip uninstall <package_name>
+
+          If you previously installed CuPy via conda, also run the following:
+
+             $ conda uninstall cupy
+
+        2. Install the appropriate CuPy package.
+           Refer to the Installation Guide for detailed instructions.
+
+             https://docs.cupy.dev/en/stable/install.html
+
+    --------------------------------------------------------------------------------
+
+      warnings.warn(f'''
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-35
+.. GENERATED FROM PYTHON SOURCE LINES 28-31
 
 Script options
 ==============
 These options are used in the examples below as default values for all trajectories.
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-49
+.. GENERATED FROM PYTHON SOURCE LINES 31-45
 
 .. code-block:: Python
 
@@ -89,7 +117,7 @@ These options are used in the examples below as default values for all trajector
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-67
+.. GENERATED FROM PYTHON SOURCE LINES 46-63
 
 Circular patterns
 ==================
@@ -109,7 +137,7 @@ Arguments:
   then outside (in-out) or not (center-out). ``(default False)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-72
+.. GENERATED FROM PYTHON SOURCE LINES 63-68
 
 .. code-block:: Python
 
@@ -130,7 +158,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-79
+.. GENERATED FROM PYTHON SOURCE LINES 69-75
 
 ``Nc (int)``
 ~~~~~~~~~~~~
@@ -139,7 +167,7 @@ The number of individual shots, here straight lines, used to cover the
 k-space. More shots means better coverage but also longer acquisitions.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-85
+.. GENERATED FROM PYTHON SOURCE LINES 75-81
 
 .. code-block:: Python
 
@@ -161,7 +189,7 @@ k-space. More shots means better coverage but also longer acquisitions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-93
+.. GENERATED FROM PYTHON SOURCE LINES 82-89
 
 ``Ns (int)``
 ~~~~~~~~~~~~
@@ -171,7 +199,7 @@ into more smaller segments, and therefore either the acquisition window
 is lengthened or the sampling rate is increased.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-99
+.. GENERATED FROM PYTHON SOURCE LINES 89-95
 
 .. code-block:: Python
 
@@ -193,7 +221,7 @@ is lengthened or the sampling rate is increased.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-109
+.. GENERATED FROM PYTHON SOURCE LINES 96-105
 
 ``tilt (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -205,7 +233,7 @@ common definitions of golden angles. The angle is automatically adapted
 when the ``in_out`` argument is switched to keep the same behavior.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-115
+.. GENERATED FROM PYTHON SOURCE LINES 105-111
 
 .. code-block:: Python
 
@@ -227,7 +255,7 @@ when the ``in_out`` argument is switched to keep the same behavior.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 116-132
+.. GENERATED FROM PYTHON SOURCE LINES 112-128
 
 ``in_out (bool)``
 ~~~~~~~~~~~~~~~~~
@@ -246,7 +274,7 @@ Note that the behavior of ``tilt`` is automatically adapted to the changes to av
 to update it too when switching ``in_out``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-138
+.. GENERATED FROM PYTHON SOURCE LINES 128-134
 
 .. code-block:: Python
 
@@ -268,7 +296,7 @@ to update it too when switching ``in_out``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 139-160
+.. GENERATED FROM PYTHON SOURCE LINES 135-156
 
 Spiral
 ------
@@ -292,7 +320,7 @@ Arguments:
   ``(default "archimedes")``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 160-165
+.. GENERATED FROM PYTHON SOURCE LINES 156-161
 
 .. code-block:: Python
 
@@ -313,7 +341,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 166-172
+.. GENERATED FROM PYTHON SOURCE LINES 162-168
 
 ``nb_revolutions (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -322,7 +350,7 @@ The number of revolutions performed from the center (i.e. performed
 twice for in-out trajectories).
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 172-180
+.. GENERATED FROM PYTHON SOURCE LINES 168-176
 
 .. code-block:: Python
 
@@ -346,7 +374,7 @@ twice for in-out trajectories).
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 181-198
+.. GENERATED FROM PYTHON SOURCE LINES 177-194
 
 ``spiral (str, float)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -366,7 +394,7 @@ such as hyperbolic or lithuus spirals, are not considered relevant because
 of their asymptotic behavior around the center.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 198-204
+.. GENERATED FROM PYTHON SOURCE LINES 194-200
 
 .. code-block:: Python
 
@@ -388,7 +416,7 @@ of their asymptotic behavior around the center.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 205-221
+.. GENERATED FROM PYTHON SOURCE LINES 201-217
 
 ``patch_center (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -407,7 +435,7 @@ over the first few samples. However the difference is extremely
 subtle, as shown below.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 221-231
+.. GENERATED FROM PYTHON SOURCE LINES 217-227
 
 .. code-block:: Python
 
@@ -433,7 +461,7 @@ subtle, as shown below.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 232-250
+.. GENERATED FROM PYTHON SOURCE LINES 228-246
 
 Fibonacci spiral
 ----------------
@@ -454,7 +482,7 @@ Arguments:
   ``(default True)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 250-256
+.. GENERATED FROM PYTHON SOURCE LINES 246-252
 
 .. code-block:: Python
 
@@ -476,7 +504,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 257-267
+.. GENERATED FROM PYTHON SOURCE LINES 253-263
 
 ``spiral_reduction (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -489,7 +517,7 @@ strong gradients, and therefore we provide this factor to reduce the
 spiral length, which makes k-space denser along the shorter shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 267-277
+.. GENERATED FROM PYTHON SOURCE LINES 263-273
 
 .. code-block:: Python
 
@@ -515,7 +543,7 @@ spiral length, which makes k-space denser along the shorter shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 278-293
+.. GENERATED FROM PYTHON SOURCE LINES 274-289
 
 ``patch_center (float)``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -533,7 +561,7 @@ but generally the difference is extremely subtle, as shown
 below.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 293-303
+.. GENERATED FROM PYTHON SOURCE LINES 289-299
 
 .. code-block:: Python
 
@@ -559,7 +587,7 @@ below.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 304-323
+.. GENERATED FROM PYTHON SOURCE LINES 300-319
 
 Cones
 -----
@@ -581,7 +609,7 @@ Arguments:
   ``(default 1)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 323-328
+.. GENERATED FROM PYTHON SOURCE LINES 319-324
 
 .. code-block:: Python
 
@@ -602,7 +630,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 329-335
+.. GENERATED FROM PYTHON SOURCE LINES 325-331
 
 ``nb_zigzags (float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -611,7 +639,7 @@ The number of “zigzags”, or sinusoidal patterns present over a center-out sh
 (doubled overall for in-out trajectories)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 335-343
+.. GENERATED FROM PYTHON SOURCE LINES 331-339
 
 .. code-block:: Python
 
@@ -635,7 +663,7 @@ The number of “zigzags”, or sinusoidal patterns present over a center-out sh
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 344-352
+.. GENERATED FROM PYTHON SOURCE LINES 340-348
 
 ``width (float)``
 ~~~~~~~~~~~~~~~~~
@@ -646,7 +674,7 @@ therefore ``width > 1`` creates overlap between cone regions and
 ``width < 1`` tends to more radial patterns.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 352-358
+.. GENERATED FROM PYTHON SOURCE LINES 348-354
 
 .. code-block:: Python
 
@@ -668,7 +696,7 @@ therefore ``width > 1`` creates overlap between cone regions and
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 359-378
+.. GENERATED FROM PYTHON SOURCE LINES 355-374
 
 Sinusoide
 ---------
@@ -690,7 +718,7 @@ Arguments:
   ``(default 1)``. See cones
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 378-383
+.. GENERATED FROM PYTHON SOURCE LINES 374-379
 
 .. code-block:: Python
 
@@ -711,7 +739,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 384-404
+.. GENERATED FROM PYTHON SOURCE LINES 380-400
 
 PROPELLER
 ---------
@@ -734,7 +762,7 @@ Arguments:
   ``(default "uniform")``. See radial
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 404-409
+.. GENERATED FROM PYTHON SOURCE LINES 400-405
 
 .. code-block:: Python
 
@@ -755,7 +783,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 410-417
+.. GENERATED FROM PYTHON SOURCE LINES 406-413
 
 ``nb_strips (int)``
 ~~~~~~~~~~~~~~~~~~~
@@ -765,7 +793,7 @@ the number of shots ``Nc``, and it is recommended to choose it such that the
 ratio is even to cover the center.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 417-423
+.. GENERATED FROM PYTHON SOURCE LINES 413-419
 
 .. code-block:: Python
 
@@ -787,7 +815,7 @@ ratio is even to cover the center.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 424-440
+.. GENERATED FROM PYTHON SOURCE LINES 420-436
 
 Rings
 -------
@@ -806,7 +834,7 @@ Arguments:
   It should be lower than or equal to ``Nc``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 440-445
+.. GENERATED FROM PYTHON SOURCE LINES 436-441
 
 .. code-block:: Python
 
@@ -827,7 +855,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 446-454
+.. GENERATED FROM PYTHON SOURCE LINES 442-450
 
 ``nb_rings (int)``
 ~~~~~~~~~~~~~~~~~~
@@ -838,7 +866,7 @@ several rings. Note that to fully sample a k-space circle, it should be
 set around :math:`FOV / (2 * resolution)`.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 454-459
+.. GENERATED FROM PYTHON SOURCE LINES 450-455
 
 .. code-block:: Python
 
@@ -859,14 +887,14 @@ set around :math:`FOV / (2 * resolution)`.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 460-464
+.. GENERATED FROM PYTHON SOURCE LINES 456-460
 
 This implementation allows using more shots than rings, and it will automatically
 attribute the additional shots to the longest rings to reduce the top gradient
 amplitude and slew rate.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 465-471
+.. GENERATED FROM PYTHON SOURCE LINES 461-467
 
 .. code-block:: Python
 
@@ -888,7 +916,7 @@ amplitude and slew rate.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 472-487
+.. GENERATED FROM PYTHON SOURCE LINES 468-483
 
 Rosette
 -------
@@ -906,7 +934,7 @@ Arguments:
   to define the shot curvature. ``(default 0)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 487-492
+.. GENERATED FROM PYTHON SOURCE LINES 483-488
 
 .. code-block:: Python
 
@@ -927,7 +955,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 493-505
+.. GENERATED FROM PYTHON SOURCE LINES 489-501
 
 ``coprime_index (int)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -942,7 +970,7 @@ details, please consult this `Wikipedia page`_.
 .. _Wikipedia page: https://en.wikipedia.org/wiki/Rose\_(mathematics)#Roses_with_rational_number_values_for_k.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 505-511
+.. GENERATED FROM PYTHON SOURCE LINES 501-507
 
 .. code-block:: Python
 
@@ -964,7 +992,7 @@ details, please consult this `Wikipedia page`_.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 512-530
+.. GENERATED FROM PYTHON SOURCE LINES 508-526
 
 Polar Lissajous
 ---------------
@@ -985,7 +1013,7 @@ Arguments:
   different segments of the k-space. ``(default 1)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 530-535
+.. GENERATED FROM PYTHON SOURCE LINES 526-531
 
 .. code-block:: Python
 
@@ -1006,7 +1034,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 536-543
+.. GENERATED FROM PYTHON SOURCE LINES 532-539
 
 ``coprime_index (int)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1016,7 +1044,7 @@ shot curvature. For now, it is less trivial to select than for rosette
 but it will be updated in the future.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 543-551
+.. GENERATED FROM PYTHON SOURCE LINES 539-547
 
 .. code-block:: Python
 
@@ -1040,7 +1068,7 @@ but it will be updated in the future.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 552-566
+.. GENERATED FROM PYTHON SOURCE LINES 548-562
 
 ``nb_segments (int)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1057,7 +1085,7 @@ opposing quarters of the k-space. It implies that ``nb_segments`` should
 be a divider of ``Nc``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 566-574
+.. GENERATED FROM PYTHON SOURCE LINES 562-570
 
 .. code-block:: Python
 
@@ -1081,7 +1109,7 @@ be a divider of ``Nc``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 575-588
+.. GENERATED FROM PYTHON SOURCE LINES 571-584
 
 Comments
 ~~~~~~~~
@@ -1097,7 +1125,7 @@ unexploited geometries.
 .. _MathCurve page: https://mathcurve.com/courbes2d.gb/lissajous/lissajous.shtml
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 588-600
+.. GENERATED FROM PYTHON SOURCE LINES 584-596
 
 .. code-block:: Python
 
@@ -1151,7 +1179,7 @@ unexploited geometries.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 601-618
+.. GENERATED FROM PYTHON SOURCE LINES 597-614
 
 Non-circular patterns
 =====================
@@ -1171,7 +1199,7 @@ Arguments:
   to covering the full band without overlapping other bands. ``(default 1)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 618-623
+.. GENERATED FROM PYTHON SOURCE LINES 614-619
 
 .. code-block:: Python
 
@@ -1192,7 +1220,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 624-629
+.. GENERATED FROM PYTHON SOURCE LINES 620-625
 
 ``nb_zigzags (float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1200,7 +1228,7 @@ Arguments:
 The number of sinusoidal patterns along a line, similar to cones and sinusoidal trajectories.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 629-635
+.. GENERATED FROM PYTHON SOURCE LINES 625-631
 
 .. code-block:: Python
 
@@ -1222,7 +1250,7 @@ The number of sinusoidal patterns along a line, similar to cones and sinusoidal 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 636-648
+.. GENERATED FROM PYTHON SOURCE LINES 632-644
 
 ``width (float)``
 ~~~~~~~~~~~~~~~~~
@@ -1237,7 +1265,7 @@ resulting in non-covered areas with large widths. This behavior might be subject
 changes in future versions.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 648-654
+.. GENERATED FROM PYTHON SOURCE LINES 644-650
 
 .. code-block:: Python
 
@@ -1259,7 +1287,7 @@ changes in future versions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 655-671
+.. GENERATED FROM PYTHON SOURCE LINES 651-667
 
 Lissajous
 ---------
@@ -1278,7 +1306,7 @@ Arguments:
   ``(default "1")``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 671-676
+.. GENERATED FROM PYTHON SOURCE LINES 667-672
 
 .. code-block:: Python
 
@@ -1299,7 +1327,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 677-683
+.. GENERATED FROM PYTHON SOURCE LINES 673-679
 
 ``density (float)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1308,7 +1336,7 @@ It relates to both the curve length and curvature, normalized such that
 ``density = 1`` corresponds to pseudo-diagonal curves for any given :math:`N_c`.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 683-689
+.. GENERATED FROM PYTHON SOURCE LINES 679-685
 
 .. code-block:: Python
 
@@ -1330,7 +1358,7 @@ It relates to both the curve length and curvature, normalized such that
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 690-696
+.. GENERATED FROM PYTHON SOURCE LINES 686-692
 
 References
 ==========
@@ -1342,7 +1370,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 19.412 seconds)
+   **Total running time of the script:** (0 minutes 22.596 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_2D_trajectories.py:

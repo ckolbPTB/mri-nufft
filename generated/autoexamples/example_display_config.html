@@ -51,8 +51,8 @@
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Off-resonance Corrected NUFFT Operator" href="example_offresonance.html" />
-    <link rel="prev" title="Minimal Example script" href="example_readme.html" />
+    <link rel="next" title="Trajectory tools" href="example_trajectory_tools.html" />
+    <link rel="prev" title="Stacked NUFFT operator" href="example_stacked.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,22 +175,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -213,10 +213,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -690,6 +686,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-options">Script options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-displays">Trajectory displays</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linewidth"><code class="docutils literal notranslate"><span class="pre">linewidth</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#palette"><code class="docutils literal notranslate"><span class="pre">palette</span></code></a></li>
@@ -703,7 +700,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-point-color-and-slewrate-point-color"><code class="docutils literal notranslate"><span class="pre">gradient_point_color</span></code> and <code class="docutils literal notranslate"><span class="pre">slewrate_point_color</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradients-profiles">Gradients profiles</a></li>
 </ul>
             </nav>
         </div>
@@ -722,18 +718,21 @@ to download the full example code. or to run this example in your browser via Bi
 </div>
 <section class="sphx-glr-example-title" id="trajectory-display-configuration">
 <span id="sphx-glr-generated-autoexamples-example-display-config-py"></span><h1>Trajectory display configuration<a class="headerlink" href="#trajectory-display-configuration" title="Link to this heading">#</a></h1>
-<p>The look of the display trajectories can be tweaked by using <code class="xref py py-class docutils literal notranslate"><span class="pre">displayConfig</span></code></p>
-<p>You can tune these parameters to your own taste and needs.</p>
+<p>An example to show how to customize trajectory displays.</p>
+<p>The parameters presented here can be tuned to your own taste and needs
+by using <code class="xref py py-class docutils literal notranslate"><span class="pre">displayConfig</span></code>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">mrinufft</span> <span class="kn">import</span> <span class="n">display_2D_trajectory</span><span class="p">,</span> <span class="n">display_3D_trajectory</span><span class="p">,</span> <span class="n">displayConfig</span>
 <span class="kn">from</span> <span class="nn">mrinufft.trajectories</span> <span class="kn">import</span> <span class="n">conify</span><span class="p">,</span> <span class="n">initialize_2D_spiral</span>
-
-<span class="c1"># Trajectory parameters</span>
+</pre></div>
+</div>
+<section id="script-options">
+<h2>Script options<a class="headerlink" href="#script-options" title="Link to this heading">#</a></h2>
+<p>These options are used in the examples below to define trajectories and display options.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trajectory parameters</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">=</span> <span class="mi">120</span>  <span class="c1"># Number of shots</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># Number of samples per shot</span>
 
@@ -741,35 +740,6 @@ to download the full example code. or to run this example in your browser via Bi
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">figure_size</span></a> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Figure size for trajectory plots</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">subfigure_size</span></a> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># Figure size for subplots</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>  <span class="c1"># Highlight one shot in particular</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning:
---------------------------------------------------------------------------------
-
-  CuPy may not function correctly because multiple CuPy packages are installed
-  in your environment:
-
-    cupy-cuda11x, cupy-cuda12x
-
-  Follow these steps to resolve this issue:
-
-    1. For all packages listed above, run the following command to remove all
-       existing CuPy installations:
-
-         $ pip uninstall &lt;package_name&gt;
-
-      If you previously installed CuPy via conda, also run the following:
-
-         $ conda uninstall cupy
-
-    2. Install the appropriate CuPy package.
-       Refer to the Installation Guide for detailed instructions.
-
-         https://docs.cupy.dev/en/stable/install.html
-
---------------------------------------------------------------------------------
-
-  warnings.warn(f&#39;&#39;&#39;
 </pre></div>
 </div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -786,30 +756,34 @@ to download the full example code. or to run this example in your browser via Bi
     <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
+</section>
 <section id="trajectory-displays">
 <h2>Trajectory displays<a class="headerlink" href="#trajectory-displays" title="Link to this heading">#</a></h2>
-<p>To show case the display parameters of trajectories, we will use the following trajectory
-The effect of trajectory parameter are explained in the <a class="reference internal" href="example_3D_trajectories.html#sphx-glr-generated-autoexamples-example-3d-trajectories-py"><span class="std std-ref">3D Trajectories</span></a> Example.</p>
+<p>The following trajectory will be used to showcase the display parameters.
+The trajectory parameters are explained in the
+<a class="reference internal" href="example_3D_trajectories.html#sphx-glr-generated-autoexamples-example-3d-trajectories-py"><span class="std std-ref">3D Trajectories</span></a> example.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a> <span class="o">=</span> <span class="n">conify</span><span class="p">(</span><span class="n">initialize_2D_spiral</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">//</span> <span class="mi">6</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">),</span> <span class="n">nb_cones</span><span class="o">=</span><span class="mi">6</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <section id="linewidth">
 <h3><code class="docutils literal notranslate"><span class="pre">linewidth</span></code><a class="headerlink" href="#linewidth" title="Link to this heading">#</a></h3>
-<p>The linewidth of the shot can be updated to have more or less empty space in the plot.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">linewidth</span></code> corresponds to the curve thickness, and can be changed
+to improve the shots visibility.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;linewidth&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_example_display_config_001.png" srcset="../../_images/sphx_glr_example_display_config_001.png" alt="linewidth=0.5, linewidth=2, linewidth=4" class = "sphx-glr-single-img"/></section>
 <section id="palette">
 <h3><code class="docutils literal notranslate"><span class="pre">palette</span></code><a class="headerlink" href="#palette" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">palette</span></code> parameter allows to change the color of the shots.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">palette</span></code> parameter allows you to change the color of the shots.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;palette&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span> <span class="s2">&quot;jet&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_example_display_config_002.png" srcset="../../_images/sphx_glr_example_display_config_002.png" alt="palette=tab10, palette=magma, palette=jet" class = "sphx-glr-single-img"/></section>
 <section id="one-shot-color">
 <h3><code class="docutils literal notranslate"><span class="pre">one_shot_color</span></code><a class="headerlink" href="#one-shot-color" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">one_shot_color</span></code> parameter allows to highlight one shot in particular.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">one_shot_color</span></code> parameter is used to highlight one shot in particular
+with a specified color.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">displayConfig</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">):</span>
     <span class="n">show_traj</span><span class="p">(</span>
         <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;one_shot_color&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">one_shot</span></a><span class="o">=-</span><span class="mi">5</span>
@@ -819,7 +793,8 @@ The effect of trajectory parameter are explained in the <a class="reference inte
 <img src="../../_images/sphx_glr_example_display_config_003.png" srcset="../../_images/sphx_glr_example_display_config_003.png" alt="one_shot_color=tab:blue, one_shot_color=tab:orange, one_shot_color=tab:green" class = "sphx-glr-single-img"/></section>
 <section id="nb-colors">
 <h3><code class="docutils literal notranslate"><span class="pre">nb_colors</span></code><a class="headerlink" href="#nb-colors" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">nb_colors</span></code> parameter allows to change the number of colors used to display the shots.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nb_colors</span></code> parameter allows you to change the number of colors used from the
+specified color palette to display the shots.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;nb_colors&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -829,22 +804,24 @@ The effect of trajectory parameter are explained in the <a class="reference inte
 <h2>Labels, titles and legends<a class="headerlink" href="#labels-titles-and-legends" title="Link to this heading">#</a></h2>
 <section id="fontsize">
 <h3><code class="docutils literal notranslate"><span class="pre">fontsize</span></code><a class="headerlink" href="#fontsize" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">fontsize</span></code> parameter allows to change the fontsize of the labels /title</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fontsize</span></code> parameter changes the fontsize of the labels/titles.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;fontsize&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">24</span><span class="p">])</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_example_display_config_005.png" srcset="../../_images/sphx_glr_example_display_config_005.png" alt="fontsize=12, fontsize=18, fontsize=24" class = "sphx-glr-single-img"/></section>
 <section id="pointsize">
 <h3><code class="docutils literal notranslate"><span class="pre">pointsize</span></code><a class="headerlink" href="#pointsize" title="Link to this heading">#</a></h3>
-<p>To show the gradient constraint violation we can use the <code class="docutils literal notranslate"><span class="pre">pointsize</span></code> parameter</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pointsize</span></code> parameter is used when showing the gradient constraint violations
+to change the violation point sizes.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span> <span class="s2">&quot;pointsize&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">show_constraints</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_example_display_config_006.png" srcset="../../_images/sphx_glr_example_display_config_006.png" alt="pointsize=0.5, pointsize=2, pointsize=4" class = "sphx-glr-single-img"/></section>
 <section id="gradient-point-color-and-slewrate-point-color">
 <h3><code class="docutils literal notranslate"><span class="pre">gradient_point_color</span></code> and <code class="docutils literal notranslate"><span class="pre">slewrate_point_color</span></code><a class="headerlink" href="#gradient-point-color-and-slewrate-point-color" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">gradient_point_color</span></code> and <code class="docutils literal notranslate"><span class="pre">slewrate_point_color</span></code> parameters allows to change the color of the points
-that are violating the gradient or slewrate constraints.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">gradient_point_color</span></code> and <code class="docutils literal notranslate"><span class="pre">slewrate_point_color</span></code> parameters allows you
+to change the color of the points where gradient or slew rate constraint violations
+are observed.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">show_traj</span><span class="p">(</span>
     <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">traj</span></a><span class="p">,</span>
     <span class="s2">&quot;slewrate_point_color&quot;</span><span class="p">,</span>
@@ -853,11 +830,7 @@ that are violating the gradient or slewrate constraints.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_example_display_config_007.png" srcset="../../_images/sphx_glr_example_display_config_007.png" alt="slewrate_point_color=tab:blue, slewrate_point_color=tab:orange, slewrate_point_color=tab:red" class = "sphx-glr-single-img"/></section>
-</section>
-<section id="gradients-profiles">
-<h2>Gradients profiles<a class="headerlink" href="#gradients-profiles" title="Link to this heading">#</a></h2>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 8.123 seconds)</p>
+<img src="../../_images/sphx_glr_example_display_config_007.png" srcset="../../_images/sphx_glr_example_display_config_007.png" alt="slewrate_point_color=tab:blue, slewrate_point_color=tab:orange, slewrate_point_color=tab:red" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.154 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-generated-autoexamples-example-display-config-py">
 <div class="binder-badge docutils container">
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/mind-inria/mri-nufft/gh-pages?urlpath=lab/tree/examples/generated/autoexamples/example_display_config.ipynb"><img alt="Launch binder" src="../../_images/binder_badge_logo1.svg" style="width: 150px;" />
@@ -876,6 +849,7 @@ that are violating the gradient or slewrate constraints.</p>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </section>
 </section>
+</section>
 
 
                 </article>
@@ -889,20 +863,20 @@ that are violating the gradient or slewrate constraints.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="example_readme.html"
+       href="example_stacked.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Minimal Example script</p>
+        <p class="prev-next-title">Stacked NUFFT operator</p>
       </div>
     </a>
     <a class="right-next"
-       href="example_offresonance.html"
+       href="example_trajectory_tools.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Off-resonance Corrected NUFFT Operator</p>
+        <p class="prev-next-title">Trajectory tools</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -922,6 +896,7 @@ that are violating the gradient or slewrate constraints.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-options">Script options</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-displays">Trajectory displays</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linewidth"><code class="docutils literal notranslate"><span class="pre">linewidth</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#palette"><code class="docutils literal notranslate"><span class="pre">palette</span></code></a></li>
@@ -935,7 +910,6 @@ that are violating the gradient or slewrate constraints.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-point-color-and-slewrate-point-color"><code class="docutils literal notranslate"><span class="pre">gradient_point_color</span></code> and <code class="docutils literal notranslate"><span class="pre">slewrate_point_color</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradients-profiles">Gradients profiles</a></li>
 </ul>
   </nav></div>
 

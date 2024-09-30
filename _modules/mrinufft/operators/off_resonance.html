@@ -174,22 +174,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../generated/autoexamples/index.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../generated/autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -212,10 +212,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -636,9 +632,11 @@ document.write(`
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="kn">from</span> <span class="nn">.._array_compat</span> <span class="kn">import</span> <span class="n">CUPY_AVAILABLE</span><span class="p">,</span> <span class="n">AUTOGRAD_AVAILABLE</span><span class="p">,</span> <span class="n">with_numpy_cupy</span>
 <span class="kn">from</span> <span class="nn">.._utils</span> <span class="kn">import</span> <span class="n">get_array_module</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">FourierOperatorBase</span><span class="p">,</span> <span class="n">CUPY_AVAILABLE</span><span class="p">,</span> <span class="n">AUTOGRAD_AVAILABLE</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">FourierOperatorBase</span>
+
 <span class="kn">from</span> <span class="nn">.interfaces.utils</span> <span class="kn">import</span> <span class="n">is_cuda_array</span>
 
 <span class="k">if</span> <span class="n">CUPY_AVAILABLE</span><span class="p">:</span>
@@ -650,6 +648,7 @@ document.write(`
 
 <div class="viewcode-block" id="get_interpolators_from_fieldmap">
 <a class="viewcode-back" href="../../../generated/_autosummary/mrinufft.operators.off_resonance.get_interpolators_from_fieldmap.html#mrinufft.operators.off_resonance.get_interpolators_from_fieldmap">[docs]</a>
+<span class="nd">@with_numpy_cupy</span>
 <span class="k">def</span> <span class="nf">get_interpolators_from_fieldmap</span><span class="p">(</span>
     <span class="n">b0_map</span><span class="p">,</span> <span class="n">readout_time</span><span class="p">,</span> <span class="n">n_time_segments</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">r2star_map</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
@@ -717,28 +716,15 @@ document.write(`
     <span class="c1"># get backend and device</span>
     <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="n">b0_map</span><span class="p">)</span>
 
-    <span class="c1"># cast arrays to fieldmap backend</span>
-    <span class="n">is_torch</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span>
-
-    <span class="k">if</span> <span class="n">is_cuda_array</span><span class="p">(</span><span class="n">b0_map</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">CUPY_AVAILABLE</span><span class="p">,</span> <span class="s2">&quot;GPU computation requires Cupy!&quot;</span>
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">cp</span>
-        <span class="n">b0_map</span> <span class="o">=</span> <span class="n">_to_cupy</span><span class="p">(</span><span class="n">b0_map</span><span class="p">)</span>
-        <span class="n">readout_time</span> <span class="o">=</span> <span class="n">_to_cupy</span><span class="p">(</span><span class="n">readout_time</span><span class="p">)</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">_to_cupy</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-        <span class="n">r2star_map</span> <span class="o">=</span> <span class="n">_to_cupy</span><span class="p">(</span><span class="n">r2star_map</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span>
-        <span class="n">b0_map</span> <span class="o">=</span> <span class="n">_to_numpy</span><span class="p">(</span><span class="n">b0_map</span><span class="p">)</span>
-        <span class="n">readout_time</span> <span class="o">=</span> <span class="n">_to_numpy</span><span class="p">(</span><span class="n">readout_time</span><span class="p">)</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">_to_numpy</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
-        <span class="n">r2star_map</span> <span class="o">=</span> <span class="n">_to_numpy</span><span class="p">(</span><span class="n">r2star_map</span><span class="p">)</span>
-
+    <span class="c1"># enforce data types</span>
+    <span class="n">b0_map</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b0_map</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">xp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">readout_time</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">readout_time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">xp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">b0_map</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r2star_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">r2star_map</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r2star_map</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">xp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
     <span class="c1"># Hz to radians / s</span>
     <span class="n">field_map</span> <span class="o">=</span> <span class="n">_get_complex_fieldmap</span><span class="p">(</span><span class="n">b0_map</span><span class="p">,</span> <span class="n">r2star_map</span><span class="p">)</span>
@@ -788,11 +774,6 @@ document.write(`
     <span class="n">B</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@</span> <span class="n">xp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">zk</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">*</span> <span class="n">readout_time</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
     <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
 
-    <span class="c1"># back to torch if required</span>
-    <span class="k">if</span> <span class="n">is_torch</span><span class="p">:</span>
-        <span class="n">B</span> <span class="o">=</span> <span class="n">_to_torch</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-        <span class="n">tl</span> <span class="o">=</span> <span class="n">_to_torch</span><span class="p">(</span><span class="n">tl</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">B</span><span class="p">,</span> <span class="n">tl</span></div>
 
 
@@ -802,40 +783,6 @@ document.write(`
     <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>  <span class="c1"># add a singleton dimension at axis 0</span>
     <span class="n">ss</span> <span class="o">=</span> <span class="n">xx</span> <span class="o">+</span> <span class="n">yy</span>  <span class="c1"># compute the outer sum</span>
     <span class="k">return</span> <span class="n">ss</span>
-
-
-<span class="c1"># TODO: /* refactor with_* decorators</span>
-<span class="k">def</span> <span class="nf">_to_numpy</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span>
-    <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span><span class="o">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span>
-
-
-<span class="k">def</span> <span class="nf">_to_cupy</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span>
-    <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_to_torch</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">input</span>
-
-
-<span class="c1"># */</span>
 
 
 <div class="viewcode-block" id="MRIFourierCorrected">

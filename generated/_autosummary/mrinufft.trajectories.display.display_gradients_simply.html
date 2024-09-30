@@ -175,22 +175,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 has-children"><a class="reference internal" href="../autoexamples/index.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -213,10 +213,6 @@
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -745,12 +741,12 @@ The default is <cite>None</cite>.</p></li>
 
 <section id="examples-using-mrinufft-trajectories-display-display-gradients-simply">
 <span id="sphx-glr-backref-mrinufft-trajectories-display-display-gradients-simply"></span><h2>Examples using <code class="docutils literal notranslate"><span class="pre">mrinufft.trajectories.display.display_gradients_simply</span></code><a class="headerlink" href="#examples-using-mrinufft-trajectories-display-display-gradients-simply" title="Link to this heading">#</a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="A collection of 3D trajectories are generated and saved as a gif."><img alt="" src="../../_images/sphx_glr_example_gif_3D_thumb.gif" />
-<p><a class="reference internal" href="../autoexamples/example_gif_3D.html#sphx-glr-generated-autoexamples-example-gif-3d-py"><span class="std std-ref">3D Trajectories display</span></a></p>
-  <div class="sphx-glr-thumbnail-title">3D Trajectories display</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="A collection of 2D trajectories are generated and saved as a gif."><img alt="" src="../../_images/sphx_glr_example_gif_2D_thumb.gif" />
-<p><a class="reference internal" href="../autoexamples/example_gif_2D.html#sphx-glr-generated-autoexamples-example-gif-2d-py"><span class="std std-ref">2D Trajectories display</span></a></p>
-  <div class="sphx-glr-thumbnail-title">2D Trajectories display</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="An animation to show 2D trajectory customization."><img alt="" src="../../_images/sphx_glr_example_gif_2D_thumb.gif" />
+<p><a class="reference internal" href="../autoexamples/example_gif_2D.html#sphx-glr-generated-autoexamples-example-gif-2d-py"><span class="std std-ref">Animated 2D trajectories</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Animated 2D trajectories</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An animation to show 3D trajectory customization."><img alt="" src="../../_images/sphx_glr_example_gif_3D_thumb.gif" />
+<p><a class="reference internal" href="../autoexamples/example_gif_3D.html#sphx-glr-generated-autoexamples-example-gif-3d-py"><span class="std std-ref">Animated 3D trajectories</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Animated 3D trajectories</div>
 </div></div></section>
 </section>
 

@@ -174,22 +174,22 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 has-children"><a class="reference internal" href="generated/autoexamples/index.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -212,10 +212,6 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -1793,18 +1789,10 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/_autosummary/mrinufft.operators.base.FourierOperatorBase.html#mrinufft.operators.base.FourierOperatorBase.with_autograd">with_autograd() (mrinufft.operators.base.FourierOperatorBase class method)</a>
 </li>
-      <li><a href="generated/_autosummary/mrinufft.operators.base.with_numpy.html#mrinufft.operators.base.with_numpy">with_numpy() (in module mrinufft.operators.base)</a>
-</li>
-      <li><a href="generated/_autosummary/mrinufft.operators.base.with_numpy_cupy.html#mrinufft.operators.base.with_numpy_cupy">with_numpy_cupy() (in module mrinufft.operators.base)</a>
-</li>
       <li><a href="generated/_autosummary/mrinufft.operators.base.FourierOperatorBase.html#mrinufft.operators.base.FourierOperatorBase.with_off_resonance_correction">with_off_resonance_correction() (mrinufft.operators.base.FourierOperatorBase method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/_autosummary/mrinufft.operators.base.with_tensorflow.html#mrinufft.operators.base.with_tensorflow">with_tensorflow() (in module mrinufft.operators.base)</a>
-</li>
-      <li><a href="generated/_autosummary/mrinufft.operators.base.with_torch.html#mrinufft.operators.base.with_torch">with_torch() (in module mrinufft.operators.base)</a>
-</li>
       <li><a href="generated/_autosummary/mrinufft.io.nsp.write_gradients.html#mrinufft.io.nsp.write_gradients">write_gradients() (in module mrinufft.io.nsp)</a>
 </li>
       <li><a href="generated/_autosummary/mrinufft.io.nsp.write_trajectory.html#mrinufft.io.nsp.write_trajectory">write_trajectory() (in module mrinufft.io.nsp)</a>

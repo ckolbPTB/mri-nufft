@@ -176,22 +176,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">GPU Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -214,10 +214,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -708,6 +704,9 @@ document.write(`
 </div><div class="sphx-glr-thumbcontainer" tooltip="A small pytorch example to showcase learning k-space sampling patterns. In this example we learn the 2D sampling pattern for a 3D MRI image, assuming straight line readouts. This example showcases the auto-diff capabilities of the NUFFT operator The image resolution is kept small to reduce computation time."><img alt="" src="../../../_images/sphx_glr_example_learn_straight_line_readouts_thumb.gif" />
 <p><a class="reference internal" href="example_learn_straight_line_readouts.html#sphx-glr-generated-autoexamples-gpu-example-learn-straight-line-readouts-py"><span class="std std-ref">Learn Straight line readout pattern</span></a></p>
   <div class="sphx-glr-thumbnail-title">Learn Straight line readout pattern</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="An example to show how to reconstruct volumes using conjugate gradient method."><img alt="" src="../../../_images/sphx_glr_example_cg_thumb.png" />
+<p><a class="reference internal" href="example_cg.html#sphx-glr-generated-autoexamples-gpu-example-cg-py"><span class="std std-ref">Reconstruction with conjugate gradient</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Reconstruction with conjugate gradient</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 </section>

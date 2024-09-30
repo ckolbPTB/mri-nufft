@@ -174,22 +174,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../generated/autoexamples/index.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_3D.html">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_gif_3D.html">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generated/autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../generated/autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -212,10 +212,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -637,30 +633,19 @@ document.write(`
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">mrinufft._utils</span> <span class="kn">import</span> <span class="n">auto_cast</span><span class="p">,</span> <span class="n">get_array_module</span><span class="p">,</span> <span class="n">power_method</span>
+<span class="kn">from</span> <span class="nn">mrinufft._array_compat</span> <span class="kn">import</span> <span class="n">with_numpy</span><span class="p">,</span> <span class="n">with_numpy_cupy</span><span class="p">,</span> <span class="n">AUTOGRAD_AVAILABLE</span>
+<span class="kn">from</span> <span class="nn">mrinufft._utils</span> <span class="kn">import</span> <span class="n">auto_cast</span><span class="p">,</span> <span class="n">power_method</span>
 <span class="kn">from</span> <span class="nn">mrinufft.density</span> <span class="kn">import</span> <span class="n">get_density</span>
 <span class="kn">from</span> <span class="nn">mrinufft.extras</span> <span class="kn">import</span> <span class="n">get_smaps</span>
 <span class="kn">from</span> <span class="nn">mrinufft.operators.interfaces.utils</span> <span class="kn">import</span> <span class="n">is_cuda_array</span><span class="p">,</span> <span class="n">is_host_array</span>
 
-<span class="n">CUPY_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="n">CUPY_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="n">AUTOGRAD_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">torch</span>
-
+<span class="k">if</span> <span class="n">AUTOGRAD_AVAILABLE</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">mrinufft.operators.autodiff</span> <span class="kn">import</span> <span class="n">MRINufftAutoGrad</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="n">AUTOGRAD_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
 
 
 <span class="c1"># Mapping between numpy float and complex types.</span>
@@ -752,146 +737,8 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># instance will be created later</span>
             <span class="n">operator</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">with_autograd</span><span class="p">,</span> <span class="n">wrt_data</span><span class="p">,</span> <span class="n">wrt_traj</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">operator</span></div>
-
-
-
-<div class="viewcode-block" id="with_numpy">
-<a class="viewcode-back" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy.html#mrinufft.operators.base.with_numpy">[docs]</a>
-<span class="k">def</span> <span class="nf">with_numpy</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure the function works internally with numpy array.&quot;&quot;&quot;</span>
-
-    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;__cuda_array_interface__&quot;</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;data is on gpu, it will be moved to CPU.&quot;</span><span class="p">)</span>
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Array library </span><span class="si">{</span><span class="n">xp</span><span class="si">}</span><span class="s2"> not supported.&quot;</span><span class="p">)</span>
-        <span class="n">ret_</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">is_cpu</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret_</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span></div>
-
-
-
-<div class="viewcode-block" id="with_tensorflow">
-<a class="viewcode-back" href="../../../generated/_autosummary/mrinufft.operators.base.with_tensorflow.html#mrinufft.operators.base.with_tensorflow">[docs]</a>
-<span class="k">def</span> <span class="nf">with_tensorflow</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure the function works internally with tensorflow array.&quot;&quot;&quot;</span>
-
-    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">dlpack</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">toDlpack</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-        <span class="n">ret_</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;cupy&quot;</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">dlpack</span><span class="o">.</span><span class="n">to_dlpack</span><span class="p">(</span><span class="n">ret_</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret_</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret_</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span></div>
-
-
-
-<div class="viewcode-block" id="with_numpy_cupy">
-<a class="viewcode-back" href="../../../generated/_autosummary/mrinufft.operators.base.with_numpy_cupy.html#mrinufft.operators.base.with_numpy_cupy">[docs]</a>
-<span class="k">def</span> <span class="nf">with_numpy_cupy</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure the function works internally with numpy or cupy array.&quot;&quot;&quot;</span>
-
-    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span> <span class="ow">and</span> <span class="n">is_cuda_array</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-            <span class="c1"># Move them to cupy</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-            <span class="c1"># Move to numpy</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">output</span>
-
-        <span class="k">if</span> <span class="n">output_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-                <span class="p">(</span><span class="n">is_host_array</span><span class="p">(</span><span class="n">data_</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_host_array</span><span class="p">(</span><span class="n">output_</span><span class="p">))</span>
-                <span class="ow">or</span> <span class="p">(</span><span class="n">is_cuda_array</span><span class="p">(</span><span class="n">data_</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_cuda_array</span><span class="p">(</span><span class="n">output_</span><span class="p">))</span>
-            <span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;input data and output should be &quot;</span> <span class="s2">&quot;on the same memory space.&quot;</span>
-                <span class="p">)</span>
-        <span class="n">ret_</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_</span><span class="p">,</span> <span class="n">output_</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span> <span class="ow">and</span> <span class="n">is_cuda_array</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">ret_</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">is_cpu</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">ret_</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span></div>
-
-
-
-<div class="viewcode-block" id="with_torch">
-<a class="viewcode-back" href="../../../generated/_autosummary/mrinufft.operators.base.with_torch.html#mrinufft.operators.base.with_torch">[docs]</a>
-<span class="k">def</span> <span class="nf">with_torch</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure the function works internally with Torch.&quot;&quot;&quot;</span>
-
-    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">xp</span> <span class="o">=</span> <span class="n">get_array_module</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span>
-            <span class="n">output_</span> <span class="o">=</span> <span class="n">output</span>
-
-        <span class="n">ret_</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_</span><span class="p">,</span> <span class="n">output_</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;cupy&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">from_dlpack</span><span class="p">(</span><span class="n">ret_</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ret_</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">ret_</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span></div>
 
 
 

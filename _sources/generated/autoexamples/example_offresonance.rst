@@ -18,17 +18,17 @@
 .. _sphx_glr_generated_autoexamples_example_offresonance.py:
 
 
-======================
-Off-resonance Corrected NUFFT Operator
-======================
+======================================
+Off-resonance corrected NUFFT operator
+======================================
 
-Example of Off-resonance Corrected NUFFT trajectory operator.
+An example to show how to setup an off-resonance corrected NUFFT operator.
 
-This examples show how to use the Off-resonance Corrected NUFFT operator to acquire 
-and reconstruct data in presence of field inhomogeneities.
-Here a spiral trajectory is used as a demonstration.
+This example shows how to use the off-resonance corrected (ORC) NUFFT operator
+to reconstruct data in presence of B0 field inhomogeneities.
+Hereafter a 2D spiral trajectory is used for demonstration.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-21
+.. GENERATED FROM PYTHON SOURCE LINES 13-22
 
 .. code-block:: Python
 
@@ -44,49 +44,22 @@ Here a spiral trajectory is used as a demonstration.
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
-    --------------------------------------------------------------------------------
-
-      CuPy may not function correctly because multiple CuPy packages are installed
-      in your environment:
-
-        cupy-cuda11x, cupy-cuda12x
-
-      Follow these steps to resolve this issue:
-
-        1. For all packages listed above, run the following command to remove all
-           existing CuPy installations:
-
-             $ pip uninstall <package_name>
-
-          If you previously installed CuPy via conda, also run the following:
-
-             $ conda uninstall cupy
-
-        2. Install the appropriate CuPy package.
-           Refer to the Installation Guide for detailed instructions.
-
-             https://docs.cupy.dev/en/stable/install.html
-
-    --------------------------------------------------------------------------------
-
-      warnings.warn(f'''
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-26
+.. GENERATED FROM PYTHON SOURCE LINES 23-31
 
-Data Generation
-===============
-For realistic 2D image we will use a slice from the brainweb dataset.
-installable using ``pip install brainweb-dl``
+Data preparation
+================
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-33
+Image loading
+-------------
+
+For realistic a 2D image we will use the BrainWeb dataset,
+installable using ``pip install brainweb-dl``.
+
+.. GENERATED FROM PYTHON SOURCE LINES 31-37
 
 .. code-block:: Python
 
@@ -94,42 +67,71 @@ installable using ``pip install brainweb-dl``
     from brainweb_dl import get_mri
 
     mri_data = get_mri(0, "T1")
-    mri_data = mri_data[::-1, ...][90]
-    plt.imshow(mri_data), plt.axis("off"), plt.title("ground truth")
+    mri_data = np.flip(mri_data, axis=(0, 1, 2))[90]
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-45
+
+.. code-block:: Python
+
+
+    plt.imshow(mri_data)
+    plt.axis("off")
+    plt.title("Groundtruth")
+    plt.show()
+
 
 
 
 
 .. image-sg:: /generated/autoexamples/images/sphx_glr_example_offresonance_001.png
-   :alt: ground truth
+   :alt: Groundtruth
    :srcset: /generated/autoexamples/images/sphx_glr_example_offresonance_001.png
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    (<matplotlib.image.AxesImage object at 0x7452d69b4400>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'ground truth'))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-39
+.. GENERATED FROM PYTHON SOURCE LINES 46-52
 
-Masking
-===============
-Here, we generate a binary mask to exclude the background.
-We perform a simple binary threshold; in real-world application,
-it is advised to use other tools (e.g., FSL-BET).
+Mask generation
+---------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-43
+A binary mask is generated to exclude the background.
+We use a simple binary threshold for this example, but for real-world application
+it is advised to use more advanced methods and tools (e.g., FSL-BET).
+
+.. GENERATED FROM PYTHON SOURCE LINES 52-55
 
 .. code-block:: Python
 
 
     brain_mask = mri_data > 0.1 * mri_data.max()
-    plt.imshow(brain_mask), plt.axis("off"), plt.title("brain mask")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 56-63
+
+.. code-block:: Python
+
+
+    plt.imshow(brain_mask)
+    plt.axis("off")
+    plt.title("brain mask")
+    plt.show()
+
 
 
 
@@ -140,34 +142,43 @@ it is advised to use other tools (e.g., FSL-BET).
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    (<matplotlib.image.AxesImage object at 0x7452d65a8fd0>, (-0.5, 180.5, 216.5, -0.5), Text(0.5, 1.0, 'brain mask'))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-48
+.. GENERATED FROM PYTHON SOURCE LINES 64-68
 
-Field Generation
-===============
-Here, we generate a radial B0 field with the same shape of
-the input Shepp-Logan phantom
+B0 field map generation
+-----------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-57
+A dummy B0 field map is generated for this example using the input shape.
+
+.. GENERATED FROM PYTHON SOURCE LINES 68-73
 
 .. code-block:: Python
 
 
     from mrinufft.extras import make_b0map
 
-    # generate field
     b0map, _ = make_b0map(mri_data.shape, b0range=(-200, 200), mask=brain_mask)
-    plt.imshow(brain_mask * b0map, cmap="bwr", vmin=-200, vmax=200), plt.axis(
-        "off"
-    ), plt.colorbar(), plt.title("B0 map [Hz]")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 74-82
+
+.. code-block:: Python
+
+
+    plt.imshow(brain_mask * b0map, cmap="bwr", vmin=-200, vmax=200)
+    plt.axis("off")
+    plt.colorbar()
+    plt.title("B0 map [Hz]")
+    plt.show()
+
 
 
 
@@ -178,21 +189,15 @@ the input Shepp-Logan phantom
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    (<matplotlib.image.AxesImage object at 0x7452d707b880>, (-0.5, 180.5, 216.5, -0.5), <matplotlib.colorbar.Colorbar object at 0x7452d645b100>, Text(0.5, 1.0, 'B0 map [Hz]'))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-60
+.. GENERATED FROM PYTHON SOURCE LINES 83-85
 
-Generate a Spiral trajectory
-----------------------------
+Trajectory generation
+---------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-72
+.. GENERATED FROM PYTHON SOURCE LINES 85-95
 
 .. code-block:: Python
 
@@ -206,7 +211,20 @@ Generate a Spiral trajectory
     t_read = np.repeat(t_read[None, ...], samples.shape[0], axis=0)
     density = voronoi(samples)
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 96-100
+
+.. code-block:: Python
+
+
     display_2D_trajectory(samples)
+    plt.show()
 
 
 
@@ -217,21 +235,15 @@ Generate a Spiral trajectory
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    <Axes: xlabel='kx', ylabel='ky'>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-75
+.. GENERATED FROM PYTHON SOURCE LINES 101-103
 
-Setup the Operator
-==================
+Operator setup
+==============
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-108
+.. GENERATED FROM PYTHON SOURCE LINES 103-135
 
 .. code-block:: Python
 
@@ -241,61 +253,86 @@ Setup the Operator
 
     # Generate standard NUFFT operator
     nufft = get_operator("finufft")(
-        samples=samples,
+        samples=2 * np.pi * samples,  # normalize for finufft
         shape=mri_data.shape,
         density=density,
     )
 
-    # Generate Fourier Corrected operator
-    mfi_nufft = MRIFourierCorrected(
+    # Generate NUFFT off-resonance corrected operator
+    orc_nufft = MRIFourierCorrected(
         nufft, b0_map=b0map, readout_time=t_read, mask=brain_mask
     )
 
-    # Generate K-Space
-    kspace = mfi_nufft.op(mri_data)
+    # Generate k-space
+    kspace_on = nufft.op(mri_data)
+    kspace_off = orc_nufft.op(mri_data)
 
-    # Reconstruct without field correction
-    mri_data_adj = nufft.adj_op(kspace)
+    # Reconstruct without B0 field inhomogeneity
+    mri_data_adj_ref = nufft.adj_op(kspace_on)
+    mri_data_adj_ref = np.squeeze(abs(mri_data_adj_ref))
+
+    # Reconstruct without B0 field correction
+    mri_data_adj = nufft.adj_op(kspace_off)
     mri_data_adj = np.squeeze(abs(mri_data_adj))
 
-    # Reconstruct with field correction
-    mri_data_adj_mfi = mfi_nufft.adj_op(kspace)
-    mri_data_adj_mfi = np.squeeze(abs(mri_data_adj_mfi))
-
-    fig2, ax2 = plt.subplots(1, 2)
-    ax2[0].imshow(mri_data_adj), ax2[0].axis("off"), ax2[0].set_title("w/o correction")
-    ax2[1].imshow(mri_data_adj_mfi), ax2[1].axis("off"), ax2[1].set_title("with correction")
-
-    plt.show()
+    # Reconstruct with B0 field correction
+    mri_data_adj_orc = orc_nufft.adj_op(kspace_off)
+    mri_data_adj_orc = np.squeeze(abs(mri_data_adj_orc))
 
 
 
-
-.. image-sg:: /generated/autoexamples/images/sphx_glr_example_offresonance_005.png
-   :alt: w/o correction, with correction
-   :srcset: /generated/autoexamples/images/sphx_glr_example_offresonance_005.png
-   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
 
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/_utils.py:94: UserWarning: Samples will be rescaled to [-pi, pi), assuming they were in [-0.5, 0.5)
-      warnings.warn(
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/finufft/_interfaces.py:329: UserWarning: Argument `data` does not satisfy the following requirement: C. Copying array (this may reduce performance)
+      warnings.warn(f"Argument `{name}` does not satisfy the following requirement: {prop}. Copying array (this may reduce performance)")
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-111
+.. GENERATED FROM PYTHON SOURCE LINES 136-138
 
-The blurring is significantly reduced using the Off-resonance Corrected
-operator (right)
+The blurring observed in the presence of B0 field inhomogeneities (middle)
+is significantly reduced using the off-resonance corrected NUFFT operator (right).
+
+.. GENERATED FROM PYTHON SOURCE LINES 138-153
+
+.. code-block:: Python
+
+
+    fig2, ax2 = plt.subplots(1, 3, figsize=(9, 3))
+    # No off-resonance
+    ax2[0].imshow(mri_data_adj_ref)
+    ax2[0].axis("off")
+    ax2[0].set_title("No off-resonance")
+    # No off-resonance correction
+    ax2[1].imshow(mri_data_adj)
+    ax2[1].axis("off")
+    ax2[1].set_title("Off-resonance")
+    # Off-resonance corrected
+    ax2[2].imshow(mri_data_adj_orc)
+    ax2[2].axis("off")
+    ax2[2].set_title("Corrected off-resonance")
+    plt.show()
+
+
+
+.. image-sg:: /generated/autoexamples/images/sphx_glr_example_offresonance_005.png
+   :alt: No off-resonance, Off-resonance, Corrected off-resonance
+   :srcset: /generated/autoexamples/images/sphx_glr_example_offresonance_005.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 4.786 seconds)
+   **Total running time of the script:** (0 minutes 1.961 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_offresonance.py:

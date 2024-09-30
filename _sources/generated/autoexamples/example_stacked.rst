@@ -19,16 +19,16 @@
 
 
 ======================
-Stacked NUFFT Operator
+Stacked NUFFT operator
 ======================
 
-Example of Stacked NUFFT trajectory operator.
+An example to show how to setup a stacked NUFFT operator.
 
-This examples show how to use the Stacked NUFFT operator to acquire and reconstruct data
-in kspace where the sampling of pattern is a stack of non cartesian trajectory.
-Here a stack of spiral is used as a demonstration.
+This example shows how to use the stacked NUFFT operator to reconstruct data
+when the sampling pattern in k-space is a stack of 2D non-Cartesian trajectories.
+Hereafter a stack of 2D spirals is used for demonstration.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-21
+.. GENERATED FROM PYTHON SOURCE LINES 13-22
 
 .. code-block:: Python
 
@@ -44,49 +44,22 @@ Here a stack of spiral is used as a demonstration.
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
-    --------------------------------------------------------------------------------
-
-      CuPy may not function correctly because multiple CuPy packages are installed
-      in your environment:
-
-        cupy-cuda11x, cupy-cuda12x
-
-      Follow these steps to resolve this issue:
-
-        1. For all packages listed above, run the following command to remove all
-           existing CuPy installations:
-
-             $ pip uninstall <package_name>
-
-          If you previously installed CuPy via conda, also run the following:
-
-             $ conda uninstall cupy
-
-        2. Install the appropriate CuPy package.
-           Refer to the Installation Guide for detailed instructions.
-
-             https://docs.cupy.dev/en/stable/install.html
-
-    --------------------------------------------------------------------------------
-
-      warnings.warn(f'''
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-26
+.. GENERATED FROM PYTHON SOURCE LINES 23-31
 
-Data Generation
-===============
-For realistic 3D images we will use the brainweb dataset.
-installable using ``pip install brainweb-dl``
+Data preparation
+================
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-36
+Image loading
+-------------
+
+For realistic 3D images we will use the BrainWeb dataset,
+installable using ``pip install brainweb-dl``.
+
+.. GENERATED FROM PYTHON SOURCE LINES 31-37
 
 .. code-block:: Python
 
@@ -94,11 +67,26 @@ installable using ``pip install brainweb-dl``
     from brainweb_dl import get_mri
 
     mri_data = get_mri(0, "T1")
-    mri_data = mri_data[::-1, ...]
-    fig, ax = plt.subplots(1, 3)
+    mri_data = np.flip(mri_data, axis=(0, 1, 2))
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-46
+
+.. code-block:: Python
+
+
+    fig, ax = plt.subplots(1, 3, figsize=(10, 3))
     ax[0].imshow(mri_data[90, :, :])
     ax[1].imshow(mri_data[:, 108, :])
     ax[2].imshow(mri_data[:, :, 90])
+    plt.show()
+
 
 
 
@@ -109,21 +97,20 @@ installable using ``pip install brainweb-dl``
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    <matplotlib.image.AxesImage object at 0x7145d3b72770>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-39
+.. GENERATED FROM PYTHON SOURCE LINES 47-54
 
-Generate a Spiral trajectory
-----------------------------
+Trajectory generation
+---------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-50
+Only the 2D pattern needs to be initialized, along with
+its density to improve the adjoint NUFFT operation and
+the location of the different slices.
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 54-62
 
 .. code-block:: Python
 
@@ -133,10 +120,23 @@ Generate a Spiral trajectory
 
     samples = initialize_2D_spiral(Nc=16, Ns=500, nb_revolutions=10)
     density = voronoi(samples)
+    kz_slices = np.arange(mri_data.shape[-1])  # Specify locations for the stacks.
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 63-68
+
+.. code-block:: Python
+
 
     display_2D_trajectory(samples)
-    # specify locations for the stack of trajectories.
-    kz_slices = np.arange(mri_data.shape[-1])
+    plt.show()
+
 
 
 
@@ -150,12 +150,12 @@ Generate a Spiral trajectory
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-53
+.. GENERATED FROM PYTHON SOURCE LINES 69-71
 
-Setup the Operator
-==================
+Operator setup
+==============
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-79
+.. GENERATED FROM PYTHON SOURCE LINES 71-91
 
 .. code-block:: Python
 
@@ -163,7 +163,7 @@ Setup the Operator
     from mrinufft.operators.stacked import MRIStackedNUFFT
 
     stacked_nufft = MRIStackedNUFFT(
-        samples=samples,
+        samples=2 * np.pi * samples,  # normalize for finufft
         shape=mri_data.shape,
         z_index=kz_slices,
         backend="finufft",
@@ -173,17 +173,35 @@ Setup the Operator
     )
 
     kspace_stack = stacked_nufft.op(mri_data)
-    print(kspace_stack.shape)
+    print(f"K-space shape: {kspace_stack.shape}")
 
     mri_data_adj = stacked_nufft.adj_op(kspace_stack)
     mri_data_adj = np.squeeze(abs(mri_data_adj))
-    print(mri_data_adj.shape)
+    print(f"Volume shape: {mri_data_adj.shape}")
 
-    fig2, ax2 = plt.subplots(1, 3)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    K-space shape: (1, 1, 1448000)
+    Volume shape: (181, 217, 181)
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 92-98
+
+.. code-block:: Python
+
+
+    fig2, ax2 = plt.subplots(1, 3, figsize=(10, 3))
     ax2[0].imshow(mri_data_adj[90, :, :])
     ax2[1].imshow(mri_data_adj[:, 108, :])
     ax2[2].imshow(mri_data_adj[:, :, 90])
-
     plt.show()
 
 
@@ -194,22 +212,13 @@ Setup the Operator
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/_utils.py:94: UserWarning: Samples will be rescaled to [-pi, pi), assuming they were in [-0.5, 0.5)
-      warnings.warn(
-    (1, 1, 1448000)
-    (181, 217, 181)
-
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.453 seconds)
+   **Total running time of the script:** (0 minutes 3.320 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_stacked.py:

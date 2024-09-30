@@ -18,12 +18,12 @@
 .. _sphx_glr_generated_autoexamples_example_readme.py:
 
 
-Minimal Example script
+Minimal example script
 ======================
 
-This script shows how to use the package to perform a simple NUFFT.
+An example to show how to perform a simple NUFFT.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-58
+.. GENERATED FROM PYTHON SOURCE LINES 7-36
 
 .. code-block:: Python
 
@@ -36,7 +36,7 @@ This script shows how to use the package to perform a simple NUFFT.
     from mrinufft.density import voronoi
     from mrinufft.trajectories import display
 
-    # Create a 2D Radial trajectory for demo
+    # Create a 2D radial trajectory for demo
     samples_loc = mrinufft.initialize_2D_radial(Nc=100, Ns=500)
     # Get a 2D image for the demo (512x512)
     image = np.complex64(face(gray=True)[256:768, 256:768])
@@ -48,27 +48,49 @@ This script shows how to use the package to perform a simple NUFFT.
     # For better image quality we use a density compensation
     density = voronoi(samples_loc)
 
-    # And create the associated operator.
+    # And create the associated operator
     nufft = NufftOperator(
         samples_loc, shape=image.shape, density=density, n_coils=1, squeeze_dims=True
     )
 
-    kspace_data = nufft.op(image)  # Image -> Kspace
-    image2 = nufft.adj_op(kspace_data)  # Kspace -> Image
+    kspace_data = nufft.op(image)  # Image -> K-space
+    image2 = nufft.adj_op(kspace_data)  # K-space -> Image
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/_utils.py:94: UserWarning: Samples will be rescaled to [-pi, pi), assuming they were in [-0.5, 0.5)
+      warnings.warn(
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 37-63
+
+.. code-block:: Python
+
 
     # Show the results
     fig, ax = plt.subplots(2, 2)
     ax = ax.flatten()
-
+    # Upper left reference image
     ax[0].imshow(abs(image), cmap="gray")
     ax[0].axis("off")
     ax[0].set_title("original image")
+    # Upper right trajectory
     display.display_2D_trajectory(samples_loc, subfigure=ax[1])
     ax[1].set_aspect("equal")
     ax[1].set_title("Sampled points in k-space")
+    # Bottom left reconstructed image
     ax[2].imshow(abs(image2), cmap="gray")
     ax[2].axis("off")
     ax[2].set_title("Auto adjoint image")
+    # Bottom right error
     ax[3].imshow(
         abs(image2) / np.max(abs(image2)) - abs(image) / np.max(abs(image)), cmap="gray"
     )
@@ -87,55 +109,21 @@ This script shows how to use the package to perform a simple NUFFT.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
-    --------------------------------------------------------------------------------
-
-      CuPy may not function correctly because multiple CuPy packages are installed
-      in your environment:
-
-        cupy-cuda11x, cupy-cuda12x
-
-      Follow these steps to resolve this issue:
-
-        1. For all packages listed above, run the following command to remove all
-           existing CuPy installations:
-
-             $ pip uninstall <package_name>
-
-          If you previously installed CuPy via conda, also run the following:
-
-             $ conda uninstall cupy
-
-        2. Install the appropriate CuPy package.
-           Refer to the Installation Guide for detailed instructions.
-
-             https://docs.cupy.dev/en/stable/install.html
-
-    --------------------------------------------------------------------------------
-
-      warnings.warn(f'''
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/_utils.py:94: UserWarning: Samples will be rescaled to [-pi, pi), assuming they were in [-0.5, 0.5)
-      warnings.warn(
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 59-64
+.. GENERATED FROM PYTHON SOURCE LINES 64-69
 
 .. note::
-   This image is not the same as the original one because the NUFFT operator
-   is not a perfect adjoint, and we undersampled by a factor of 5.
-   The artefact of reconstruction can be remove by using an iterative reconstruction method.
+   This resulting image is not the same as the original one because the NUFFT operator
+   is not a perfect inverse operation but an adjoint, and we undersampled by a factor of 5.
+   The reconstruction artifacts can be removed by using an iterative reconstruction method.
    Check PySAP-mri documentation for examples.
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 5.656 seconds)
+   **Total running time of the script:** (0 minutes 2.015 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_readme.py:

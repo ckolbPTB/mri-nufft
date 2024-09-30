@@ -85,6 +85,23 @@ This is a collection of examples showing features of mri-nufft, particularly tho
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to reconstruct volumes using conjugate gradient method.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_cg_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_GPU_example_cg.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Reconstruction with conjugate gradient</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -99,4 +116,5 @@ This is a collection of examples showing features of mri-nufft, particularly tho
    /generated/autoexamples/GPU/example_learn_samples
    /generated/autoexamples/GPU/example_learn_samples_multicoil
    /generated/autoexamples/GPU/example_learn_straight_line_readouts
+   /generated/autoexamples/GPU/example_cg
 

@@ -5,7 +5,7 @@
 Examples
 ========
 
-This is a collection of examples showing how to use mri-nufft to perform MR image reconstruction.
+This is a collection of examples showing how to use MRI-nufft to perform MR image reconstruction.
 
 
 
@@ -14,108 +14,6 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
     <div class="sphx-glr-thumbnails">
 
 .. thumbnail-parent-div-open
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This script demonstrates the use of the Conjugate Gradient (CG) method  for solving systems of linear equations of the form Ax = b, where A is a symmetric  positive-definite matrix. The CG method is an iterative algorithm that is particularly  useful for large, sparse systems where direct methods are computationally expensive.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_cg_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_cg.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Example of using the Conjugate Gradient method.</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Example of Stacked NUFFT trajectory operator.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_stacked_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_stacked.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Stacked NUFFT Operator</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This script shows how to use the package to perform a simple NUFFT.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_readme_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_readme.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Minimal Example script</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="The look of the display trajectories can be tweaked by using :pydisplayConfig">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_display_config_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_display_config.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Trajectory display configuration</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Example of Off-resonance Corrected NUFFT trajectory operator.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_offresonance_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_offresonance.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Off-resonance Corrected NUFFT Operator</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="A collection of 3D trajectories are generated and saved as a gif.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_gif_3D_thumb.gif
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_gif_3D.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">3D Trajectories display</div>
-    </div>
-
 
 .. raw:: html
 
@@ -136,40 +34,6 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A collection of 2D trajectories are generated and saved as a gif.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_gif_2D_thumb.gif
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_gif_2D.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">2D Trajectories display</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="A small pytorch example to showcase learning k-space sampling patterns. This example showcases the auto-diff capabilities of the NUFFT operator  wrt to k-space trajectory in mri-nufft.">
-
-.. only:: html
-
-  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_learn_samples_multires_thumb.gif
-    :alt:
-
-  :ref:`sphx_glr_generated_autoexamples_example_learn_samples_multires.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Learn Sampling pattern with multi-resolution</div>
-    </div>
-
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="A collection of 3D non-Cartesian trajectories with analytical definitions.">
 
 .. only:: html
@@ -182,6 +46,125 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">3D Trajectories</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An animation to show 2D trajectory customization.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_gif_2D_thumb.gif
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_gif_2D.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Animated 2D trajectories</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An animation to show 3D trajectory customization.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_gif_3D_thumb.gif
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_gif_3D.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Animated 3D trajectories</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example using PyTorch to showcase learning k-space sampling patterns with decimation.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_learn_samples_multires_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_learn_samples_multires.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Learning sampling pattern with decimation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to perform a simple NUFFT.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_readme_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_readme.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Minimal example script</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to setup an off-resonance corrected NUFFT operator.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_offresonance_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_offresonance.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Off-resonance corrected NUFFT operator</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to setup a stacked NUFFT operator.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_stacked_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_stacked.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stacked NUFFT operator</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to customize trajectory displays.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_display_config_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_display_config.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Trajectory display configuration</div>
     </div>
 
 
@@ -212,16 +195,15 @@ This is a collection of examples showing how to use mri-nufft to perform MR imag
 .. toctree::
    :hidden:
 
-   /generated/autoexamples/example_cg
-   /generated/autoexamples/example_stacked
-   /generated/autoexamples/example_readme
-   /generated/autoexamples/example_display_config
-   /generated/autoexamples/example_offresonance
-   /generated/autoexamples/example_gif_3D
    /generated/autoexamples/example_2D_trajectories
-   /generated/autoexamples/example_gif_2D
-   /generated/autoexamples/example_learn_samples_multires
    /generated/autoexamples/example_3D_trajectories
+   /generated/autoexamples/example_gif_2D
+   /generated/autoexamples/example_gif_3D
+   /generated/autoexamples/example_learn_samples_multires
+   /generated/autoexamples/example_readme
+   /generated/autoexamples/example_offresonance
+   /generated/autoexamples/example_stacked
+   /generated/autoexamples/example_display_config
    /generated/autoexamples/example_trajectory_tools
 
 
@@ -303,6 +285,23 @@ This is a collection of examples showing features of mri-nufft, particularly tho
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Learn Straight line readout pattern</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to reconstruct volumes using conjugate gradient method.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_cg_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_GPU_example_cg.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Reconstruction with conjugate gradient</div>
     </div>
 
 

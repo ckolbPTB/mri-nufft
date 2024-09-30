@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3D Trajectories display &#8212; MRI-nufft Documentation</title>
+    <title>Animated 3D trajectories &#8212; MRI-nufft Documentation</title>
   
   
   
@@ -51,8 +51,8 @@
     <link rel="icon" href="../../_static/mri-nufft-icon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2D Trajectories" href="example_2D_trajectories.html" />
-    <link rel="prev" title="Off-resonance Corrected NUFFT Operator" href="example_offresonance.html" />
+    <link rel="next" title="Learning sampling pattern with decimation" href="example_learn_samples_multires.html" />
+    <link rel="prev" title="Animated 2D trajectories" href="example_gif_2D.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,22 +175,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="example_cg.html">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT Operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal Example script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_display_config.html">Trajectory display configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_offresonance.html">Off-resonance Corrected NUFFT Operator</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3D Trajectories display</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_2D_trajectories.html">2D Trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_gif_2D.html">2D Trajectories display</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_learn_samples_multires.html">Learn Sampling pattern with multi-resolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_3D_trajectories.html">3D Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_gif_2D.html">Animated 2D trajectories</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Animated 3D trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_learn_samples_multires.html">Learning sampling pattern with decimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_readme.html">Minimal example script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_density.html">Density Compensation Routines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_samples.html">Learn Sampling pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
 </ul>
 </details></li>
 </ul>
@@ -213,10 +213,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.check_backend.html">check_backend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.get_operator.html">get_operator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.list_backends.html">list_backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_numpy.html">with_numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_numpy_cupy.html">with_numpy_cupy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_tensorflow.html">with_tensorflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.with_torch.html">with_torch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.FourierOperatorBase.html">FourierOperatorBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/mrinufft.operators.base.FourierOperatorCPU.html">FourierOperatorCPU</a></li>
 </ul>
@@ -667,7 +663,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -678,11 +676,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>3D Trajectories display</h1>
+    <h1>Animated 3D trajectories</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-options">Script options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-generation">Trajectory generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-rendering">Animation rendering</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -697,22 +705,54 @@ document.write(`
 <p><a class="reference internal" href="#sphx-glr-download-generated-autoexamples-example-gif-3d-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code. or to run this example in your browser via Binder</p>
 </div>
-<section class="sphx-glr-example-title" id="d-trajectories-display">
-<span id="sphx-glr-generated-autoexamples-example-gif-3d-py"></span><h1>3D Trajectories display<a class="headerlink" href="#d-trajectories-display" title="Link to this heading">#</a></h1>
-<p>A collection of 3D trajectories are generated and saved as a gif.</p>
+<section class="sphx-glr-example-title" id="animated-3d-trajectories">
+<span id="sphx-glr-generated-autoexamples-example-gif-3d-py"></span><h1>Animated 3D trajectories<a class="headerlink" href="#animated-3d-trajectories" title="Link to this heading">#</a></h1>
+<p>An animation to show 3D trajectory customization.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
 <span class="kn">import</span> <span class="nn">joblib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tempfile</span> <span class="k">as</span> <span class="nn">tmp</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageSequence</span>
 
 <span class="kn">import</span> <span class="nn">mrinufft.trajectories.display</span> <span class="k">as</span> <span class="nn">mtd</span>
 <span class="kn">import</span> <span class="nn">mrinufft.trajectories.trajectory3D</span> <span class="k">as</span> <span class="nn">mtt</span>
 <span class="kn">from</span> <span class="nn">mrinufft.trajectories.display</span> <span class="kn">import</span> <span class="n">displayConfig</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning:
+--------------------------------------------------------------------------------
 
-<span class="c1"># Options</span>
+  CuPy may not function correctly because multiple CuPy packages are installed
+  in your environment:
 
-<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span>
+    cupy-cuda11x, cupy-cuda12x
+
+  Follow these steps to resolve this issue:
+
+    1. For all packages listed above, run the following command to remove all
+       existing CuPy installations:
+
+         $ pip uninstall &lt;package_name&gt;
+
+      If you previously installed CuPy via conda, also run the following:
+
+         $ conda uninstall cupy
+
+    2. Install the appropriate CuPy package.
+       Refer to the Installation Guide for detailed instructions.
+
+         https://docs.cupy.dev/en/stable/install.html
+
+--------------------------------------------------------------------------------
+
+  warnings.warn(f&#39;&#39;&#39;
+</pre></div>
+</div>
+<section id="script-options">
+<h2>Script options<a class="headerlink" href="#script-options" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a> <span class="o">=</span> <span class="mi">200</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_repetitions</span></a> <span class="o">=</span> <span class="mi">8</span>
 
@@ -721,11 +761,12 @@ to download the full example code. or to run this example in your browser via Bi
 
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_frames</span></a> <span class="o">=</span> <span class="mi">3</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">duration</span></a> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># seconds</span>
-
-
-<span class="c1"># Generation</span>
-
-<span class="c1"># Initialize trajectory function</span>
+</pre></div>
+</div>
+</section>
+<section id="trajectory-generation">
+<h2>Trajectory generation<a class="headerlink" href="#trajectory-generation" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize trajectory function</span>
 <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">functions</span></a> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># 3D Cones</span>
     <span class="p">(</span><span class="s2">&quot;3D Cones&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mtt</span><span class="o">.</span><span class="n">initialize_3D_cones</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Nc</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Ns</span></a><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">x</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
@@ -825,16 +866,19 @@ to download the full example code. or to run this example in your browser via Bi
     <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_frames</span></a><span class="p">),</span>  <span class="c1"># nb_revolutions &amp; width</span>
     <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nb_frames</span></a><span class="p">,</span>  <span class="c1"># None</span>
 <span class="p">]</span>
-
-
-<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">frame_setup</span></a> <span class="o">=</span> <span class="p">[</span>
+</pre></div>
+</div>
+</section>
+<section id="animation-rendering">
+<h2>Animation rendering<a class="headerlink" href="#animation-rendering" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">frame_setup</span></a> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f</span></a><span class="p">),</span> <span class="n">args</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">functions</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">arguments</span></a><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 <span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">draw_frame</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s2">&quot;/tmp/&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">draw_frame</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Draw a single frame of the gif and save it to a tmp file.&quot;&quot;&quot;</span>
     <span class="n">trajectory</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
     <span class="c1"># General configuration</span>
@@ -857,8 +901,7 @@ to download the full example code. or to run this example in your browser via Bi
     <span class="p">)</span>
 
     <span class="c1"># Save figure</span>
-    <span class="n">hashed</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">hash</span><span class="p">((</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <a href="https://docs.python.org/3/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()))</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">save_dir</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hashed</span><span class="si">}</span><span class="s2">.png&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/tempfile.html#tempfile.NamedTemporaryFile" title="tempfile.NamedTemporaryFile" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-function"><span class="n">tmp</span><span class="o">.</span><span class="n">NamedTemporaryFile</span></a><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.png&quot;</span>
     <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html#matplotlib.pyplot.savefig" title="matplotlib.pyplot.savefig" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span></a><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
     <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.close.html#matplotlib.pyplot.close" title="matplotlib.pyplot.close" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">close</span></a><span class="p">()</span>
     <span class="k">return</span> <span class="n">filename</span>
@@ -885,7 +928,7 @@ to download the full example code. or to run this example in your browser via Bi
 <span class="c1"># sphinx_gallery_thumbnail_path = &#39;generated/autoexamples/images/mrinufft_3D_traj.gif&#39;</span>
 </pre></div>
 </div>
-<img src="../../_images/mrinufft_3D_traj.gif" srcset="../../_images/mrinufft_3D_traj.gif" alt="example density" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (2 minutes 21.839 seconds)</p>
+<img src="../../_images/mrinufft_3D_traj.gif" srcset="../../_images/mrinufft_3D_traj.gif" alt="example density" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (2 minutes 18.825 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-generated-autoexamples-example-gif-3d-py">
 <div class="binder-badge docutils container">
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/mind-inria/mri-nufft/gh-pages?urlpath=lab/tree/examples/generated/autoexamples/example_gif_3D.ipynb"><img alt="Launch binder" src="../../_images/binder_badge_logo1.svg" style="width: 150px;" />
@@ -903,6 +946,7 @@ to download the full example code. or to run this example in your browser via Bi
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </section>
+</section>
 
 
                 </article>
@@ -916,20 +960,20 @@ to download the full example code. or to run this example in your browser via Bi
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="example_offresonance.html"
+       href="example_gif_2D.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Off-resonance Corrected NUFFT Operator</p>
+        <p class="prev-next-title">Animated 2D trajectories</p>
       </div>
     </a>
     <a class="right-next"
-       href="example_2D_trajectories.html"
+       href="example_learn_samples_multires.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2D Trajectories</p>
+        <p class="prev-next-title">Learning sampling pattern with decimation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -939,6 +983,23 @@ to download the full example code. or to run this example in your browser via Bi
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-options">Script options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-generation">Trajectory generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation-rendering">Animation rendering</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

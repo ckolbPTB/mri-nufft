@@ -39,7 +39,7 @@ to manipulate the plot orientations with the matplotlib interface to better
 visualize the 3D volumes.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-36
+.. GENERATED FROM PYTHON SOURCE LINES 23-34
 
 .. code-block:: Python
 
@@ -47,13 +47,12 @@ visualize the 3D volumes.
     # External
     import matplotlib.pyplot as plt
     import numpy as np
+    from utils import show_argument, show_trajectory
 
     # Internal
     import mrinufft as mn
     import mrinufft.trajectories.tools as tools
-
     from mrinufft.trajectories.utils import KMAX
-    from utils import show_argument, show_trajectory
 
 
 
@@ -62,14 +61,13 @@ visualize the 3D volumes.
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 37-40
+.. GENERATED FROM PYTHON SOURCE LINES 35-38
 
 Script options
 ==============
 These options are used in the examples below as default values for all trajectories.
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-55
+.. GENERATED FROM PYTHON SOURCE LINES 38-53
 
 .. code-block:: Python
 
@@ -95,7 +93,7 @@ These options are used in the examples below as default values for all trajector
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-63
+.. GENERATED FROM PYTHON SOURCE LINES 54-61
 
 Direct tools
 ============
@@ -105,7 +103,7 @@ instanciated trajectories, i.e. arrays of size :math:`(N_c, N_s, N_d)`
 with :math:`N_c` the number of shots, :math:`N_s` the number of samples
 per shot and :math:`N_d` the number of dimensions (2 or 3).
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-74
+.. GENERATED FROM PYTHON SOURCE LINES 63-72
 
 Preparation
 -----------
@@ -117,7 +115,7 @@ We can define a few simple trajectories to use in later examples:
 Single shots from 2D radial, Fermat's spiral, and 2D/3D cones.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-88
+.. GENERATED FROM PYTHON SOURCE LINES 72-86
 
 .. code-block:: Python
 
@@ -142,7 +140,7 @@ Single shots from 2D radial, Fermat's spiral, and 2D/3D cones.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-95
+.. GENERATED FROM PYTHON SOURCE LINES 87-93
 
 .. code-block:: Python
 
@@ -164,7 +162,7 @@ Single shots from 2D radial, Fermat's spiral, and 2D/3D cones.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-101
+.. GENERATED FROM PYTHON SOURCE LINES 94-99
 
 Planes
 ~~~~~~
@@ -172,7 +170,7 @@ Planes
 We will also be using them as planes, or thick planes for 3D shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-120
+.. GENERATED FROM PYTHON SOURCE LINES 99-118
 
 .. code-block:: Python
 
@@ -202,7 +200,7 @@ We will also be using them as planes, or thick planes for 3D shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 121-127
+.. GENERATED FROM PYTHON SOURCE LINES 119-125
 
 .. code-block:: Python
 
@@ -224,7 +222,7 @@ We will also be using them as planes, or thick planes for 3D shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 128-145
+.. GENERATED FROM PYTHON SOURCE LINES 126-143
 
 Stack
 -----
@@ -244,7 +242,7 @@ Arguments:
   strictly bounded to k-space. ``(default True)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 145-149
+.. GENERATED FROM PYTHON SOURCE LINES 143-147
 
 .. code-block:: Python
 
@@ -264,7 +262,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 150-162
+.. GENERATED FROM PYTHON SOURCE LINES 148-160
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -279,7 +277,7 @@ with stacked-NUFFT operators, reducing time and memory
 consumption during reconstruction.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 162-166
+.. GENERATED FROM PYTHON SOURCE LINES 160-164
 
 .. code-block:: Python
 
@@ -299,7 +297,7 @@ consumption during reconstruction.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-176
+.. GENERATED FROM PYTHON SOURCE LINES 165-174
 
 .. code-block:: Python
 
@@ -324,7 +322,7 @@ consumption during reconstruction.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 177-182
+.. GENERATED FROM PYTHON SOURCE LINES 175-180
 
 It can also be applied twice to single shots to create
 a plane before stacking it over the :math:`k_z`-axis.
@@ -332,7 +330,7 @@ Note here that is does not make a lot of sense for
 non-radial trajectories such as spirals.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 183-196
+.. GENERATED FROM PYTHON SOURCE LINES 181-194
 
 .. code-block:: Python
 
@@ -361,7 +359,7 @@ non-radial trajectories such as spirals.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 197-206
+.. GENERATED FROM PYTHON SOURCE LINES 195-204
 
 ``hard_bounded (bool)``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -373,7 +371,7 @@ In the example below, the thickness is deliberately increased to
 emphasize this point.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 206-221
+.. GENERATED FROM PYTHON SOURCE LINES 204-219
 
 .. code-block:: Python
 
@@ -404,7 +402,7 @@ emphasize this point.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 222-240
+.. GENERATED FROM PYTHON SOURCE LINES 220-238
 
 Rotate
 ------
@@ -425,7 +423,7 @@ Arguments:
   over the :math:`k_z`-axis. ``(default None)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 240-246
+.. GENERATED FROM PYTHON SOURCE LINES 238-244
 
 .. code-block:: Python
 
@@ -447,7 +445,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 247-256
+.. GENERATED FROM PYTHON SOURCE LINES 245-254
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -459,7 +457,7 @@ create 3D trajectories, but the density (and redundancy) along that
 axis is then much greater than anywhere else.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 256-264
+.. GENERATED FROM PYTHON SOURCE LINES 254-262
 
 .. code-block:: Python
 
@@ -483,7 +481,7 @@ axis is then much greater than anywhere else.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 265-275
+.. GENERATED FROM PYTHON SOURCE LINES 263-273
 
 .. code-block:: Python
 
@@ -509,7 +507,7 @@ axis is then much greater than anywhere else.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 276-304
+.. GENERATED FROM PYTHON SOURCE LINES 274-302
 
 Precess
 -------
@@ -540,7 +538,7 @@ Arguments:
   of the first shot as the axis. ``(default None)``
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 304-314
+.. GENERATED FROM PYTHON SOURCE LINES 302-312
 
 .. code-block:: Python
 
@@ -566,7 +564,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 315-322
+.. GENERATED FROM PYTHON SOURCE LINES 313-320
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -576,7 +574,7 @@ This method provides a way to distribute duplicated trajectories
 axis tilting the azimuthal orientation.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 322-333
+.. GENERATED FROM PYTHON SOURCE LINES 320-331
 
 .. code-block:: Python
 
@@ -603,7 +601,7 @@ axis tilting the azimuthal orientation.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 334-340
+.. GENERATED FROM PYTHON SOURCE LINES 332-338
 
 It is however most often used with single shots to
 cover more evenly the k-space sphere, such as with 3D cones
@@ -612,7 +610,7 @@ the golden angle is known to approximate an even distribution
 of points over a sphere surface.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 341-353
+.. GENERATED FROM PYTHON SOURCE LINES 339-351
 
 .. code-block:: Python
 
@@ -640,7 +638,7 @@ of points over a sphere surface.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 354-364
+.. GENERATED FROM PYTHON SOURCE LINES 352-362
 
 ``half_sphere (bool)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -653,7 +651,7 @@ otherwise shots would likely be stacked in a redundant way.
 In the example hereafter, center-out shots are shown for clarity.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 364-384
+.. GENERATED FROM PYTHON SOURCE LINES 362-382
 
 .. code-block:: Python
 
@@ -689,7 +687,7 @@ In the example hereafter, center-out shots are shown for clarity.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 385-392
+.. GENERATED FROM PYTHON SOURCE LINES 383-390
 
 ``partition (str)``
 ~~~~~~~~~~~~~~~~~~~
@@ -699,7 +697,7 @@ split of the :math:`k_z`-axis, designating whether the axis should
 be fragmented by radius or angle respectively.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 392-410
+.. GENERATED FROM PYTHON SOURCE LINES 390-408
 
 .. code-block:: Python
 
@@ -733,7 +731,7 @@ be fragmented by radius or angle respectively.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 411-417
+.. GENERATED FROM PYTHON SOURCE LINES 409-415
 
 While "polar" looks more natural in the absence of rotation (``tilt=None``),
 it results in too many shots close to the rotation axis, and therefore
@@ -742,7 +740,7 @@ is obtained with an "axial" partition and "golden" tilt along
 the provided axis.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 418-436
+.. GENERATED FROM PYTHON SOURCE LINES 416-434
 
 .. code-block:: Python
 
@@ -776,13 +774,13 @@ the provided axis.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 437-440
+.. GENERATED FROM PYTHON SOURCE LINES 435-438
 
 The distribution over the k-space sphere surface can be shown by
 displaying only the tip of the shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 441-452
+.. GENERATED FROM PYTHON SOURCE LINES 439-450
 
 .. code-block:: Python
 
@@ -809,7 +807,7 @@ displaying only the tip of the shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 453-474
+.. GENERATED FROM PYTHON SOURCE LINES 451-472
 
 ``axis (int, array)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -833,7 +831,7 @@ The first case is single shots, where the provided axis should
 simply correspond to the shot axis.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 474-492
+.. GENERATED FROM PYTHON SOURCE LINES 472-490
 
 .. code-block:: Python
 
@@ -867,13 +865,13 @@ simply correspond to the shot axis.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 493-496
+.. GENERATED FROM PYTHON SOURCE LINES 491-494
 
 The second case is planar trajectories, where the axis orthogonal
 to the shots plane is preferred.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 497-508
+.. GENERATED FROM PYTHON SOURCE LINES 495-506
 
 .. code-block:: Python
 
@@ -900,7 +898,7 @@ to the shots plane is preferred.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 509-515
+.. GENERATED FROM PYTHON SOURCE LINES 507-513
 
 Some trickier cases exist in the literature, with the example of Seiffert spirals.
 Those 3D spirals neither correspond to a single-axis shot or a plane, so the authors
@@ -909,7 +907,7 @@ In order to handle the redundant distribution, they added a pseudo-random rotati
 within the shot axes.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 519-540
+.. GENERATED FROM PYTHON SOURCE LINES 517-538
 
 Conify
 ------
@@ -933,7 +931,7 @@ Arguments:
   mostly to avoid 1D cones if ``max_angle`` is equal to pi / 2, by default True.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 540-546
+.. GENERATED FROM PYTHON SOURCE LINES 538-544
 
 .. code-block:: Python
 
@@ -955,7 +953,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 547-556
+.. GENERATED FROM PYTHON SOURCE LINES 545-554
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -967,7 +965,7 @@ Also, the distortion is likely to increase the required gradient amplitudes
 and slew rates.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 556-562
+.. GENERATED FROM PYTHON SOURCE LINES 554-560
 
 .. code-block:: Python
 
@@ -989,7 +987,7 @@ and slew rates.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 563-572
+.. GENERATED FROM PYTHON SOURCE LINES 561-570
 
 .. code-block:: Python
 
@@ -1014,14 +1012,14 @@ and slew rates.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 573-577
+.. GENERATED FROM PYTHON SOURCE LINES 571-575
 
 Similarly to other tools, it can be used with single shots.
 In that case, ``nb_cones`` is set to ``Nc`` to create as many
 individual cones.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 578-584
+.. GENERATED FROM PYTHON SOURCE LINES 576-582
 
 .. code-block:: Python
 
@@ -1043,7 +1041,7 @@ individual cones.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 585-594
+.. GENERATED FROM PYTHON SOURCE LINES 583-592
 
 .. code-block:: Python
 
@@ -1068,7 +1066,7 @@ individual cones.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 595-604
+.. GENERATED FROM PYTHON SOURCE LINES 593-602
 
 ``max_angle (float)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1080,7 +1078,7 @@ to reduce the maximum angle but duplicate all of the cones along
 another axis to still cover the whole k-space.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 604-622
+.. GENERATED FROM PYTHON SOURCE LINES 602-620
 
 .. code-block:: Python
 
@@ -1114,7 +1112,7 @@ another axis to still cover the whole k-space.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 623-630
+.. GENERATED FROM PYTHON SOURCE LINES 621-628
 
 ``borderless (bool)``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1124,7 +1122,7 @@ when equal to ``False``, or instead simply partition the
 sphere over a polar split.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 630-649
+.. GENERATED FROM PYTHON SOURCE LINES 628-647
 
 .. code-block:: Python
 
@@ -1159,7 +1157,7 @@ sphere over a polar split.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 650-672
+.. GENERATED FROM PYTHON SOURCE LINES 648-670
 
 Epify
 -----
@@ -1184,7 +1182,7 @@ Arguments:
   the start of odd shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 672-681
+.. GENERATED FROM PYTHON SOURCE LINES 670-679
 
 .. code-block:: Python
 
@@ -1209,7 +1207,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 682-688
+.. GENERATED FROM PYTHON SOURCE LINES 680-686
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1218,7 +1216,7 @@ The trajectory to change by prolonging and merging the shots together.
 Hereafter the shots are merged by pairs with short transitions.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 688-698
+.. GENERATED FROM PYTHON SOURCE LINES 686-696
 
 .. code-block:: Python
 
@@ -1244,7 +1242,7 @@ Hereafter the shots are merged by pairs with short transitions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 699-705
+.. GENERATED FROM PYTHON SOURCE LINES 697-703
 
 .. code-block:: Python
 
@@ -1266,7 +1264,7 @@ Hereafter the shots are merged by pairs with short transitions.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 706-713
+.. GENERATED FROM PYTHON SOURCE LINES 704-711
 
 ``Ns_transitions (int)``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1276,7 +1274,7 @@ Smoother transitions are achieved with more points, but it means longer
 waiting times between readouts if they are split during acquisition.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 713-726
+.. GENERATED FROM PYTHON SOURCE LINES 711-724
 
 .. code-block:: Python
 
@@ -1305,7 +1303,7 @@ waiting times between readouts if they are split during acquisition.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 727-732
+.. GENERATED FROM PYTHON SOURCE LINES 725-730
 
 ``nb_trains (int)``
 ~~~~~~~~~~~~~~~~~~~
@@ -1313,7 +1311,7 @@ waiting times between readouts if they are split during acquisition.
 Number of resulting multi-readout shots, or trains.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 732-745
+.. GENERATED FROM PYTHON SOURCE LINES 730-743
 
 .. code-block:: Python
 
@@ -1342,7 +1340,7 @@ Number of resulting multi-readout shots, or trains.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 746-752
+.. GENERATED FROM PYTHON SOURCE LINES 744-750
 
 ``reverse_odd_shots (bool)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1351,7 +1349,7 @@ Whether to reverse every odd shots such that, as in most trajectories,
 even shots end up closer to the start of odd shots.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 752-765
+.. GENERATED FROM PYTHON SOURCE LINES 750-763
 
 .. code-block:: Python
 
@@ -1380,7 +1378,7 @@ even shots end up closer to the start of odd shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 766-782
+.. GENERATED FROM PYTHON SOURCE LINES 764-780
 
 Prewind/rewind
 --------------
@@ -1399,7 +1397,7 @@ Arguments:
 - ``Ns_transitions (int)``: number of pre-winding/rewinding steps.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 782-788
+.. GENERATED FROM PYTHON SOURCE LINES 780-786
 
 .. code-block:: Python
 
@@ -1421,7 +1419,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 789-798
+.. GENERATED FROM PYTHON SOURCE LINES 787-796
 
 ``trajectory (array)``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1433,7 +1431,7 @@ Note that the radial prewinding and rewinding parts are overlapping
 with the actual trajectory.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 798-806
+.. GENERATED FROM PYTHON SOURCE LINES 796-804
 
 .. code-block:: Python
 
@@ -1457,7 +1455,7 @@ with the actual trajectory.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 807-812
+.. GENERATED FROM PYTHON SOURCE LINES 805-810
 
 .. code-block:: Python
 
@@ -1478,7 +1476,7 @@ with the actual trajectory.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 813-820
+.. GENERATED FROM PYTHON SOURCE LINES 811-818
 
 ``Ns_transitions (int)``
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1488,7 +1486,7 @@ Smoother transitions are achieved with more points, but it may imply delayed
 readout starts and longer TRs.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 820-831
+.. GENERATED FROM PYTHON SOURCE LINES 818-829
 
 .. code-block:: Python
 
@@ -1515,12 +1513,12 @@ readout starts and longer TRs.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 832-834
+.. GENERATED FROM PYTHON SOURCE LINES 830-832
 
 Functional tools
 ================
 
-.. GENERATED FROM PYTHON SOURCE LINES 836-842
+.. GENERATED FROM PYTHON SOURCE LINES 834-840
 
 Preparation
 -----------
@@ -1529,7 +1527,7 @@ We can define a few functions that will be used in the following
 examples, using again 2D radial, Fermat's spiral, and 2D/3D cones:
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 842-859
+.. GENERATED FROM PYTHON SOURCE LINES 840-857
 
 .. code-block:: Python
 
@@ -1557,7 +1555,7 @@ examples, using again 2D radial, Fermat's spiral, and 2D/3D cones:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 860-882
+.. GENERATED FROM PYTHON SOURCE LINES 858-880
 
 Stack spherically
 -----------------
@@ -1582,7 +1580,7 @@ Arguments:
   function provided with ``trajectory_func``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 882-888
+.. GENERATED FROM PYTHON SOURCE LINES 880-886
 
 .. code-block:: Python
 
@@ -1604,7 +1602,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 889-898
+.. GENERATED FROM PYTHON SOURCE LINES 887-896
 
 ``trajectory_func (function)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1616,7 +1614,7 @@ and focus more ressources over larger areas. In opposition to
 with ``tools.stack_spherically``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 898-904
+.. GENERATED FROM PYTHON SOURCE LINES 896-902
 
 .. code-block:: Python
 
@@ -1638,7 +1636,7 @@ with ``tools.stack_spherically``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 905-914
+.. GENERATED FROM PYTHON SOURCE LINES 903-912
 
 .. code-block:: Python
 
@@ -1663,7 +1661,7 @@ with ``tools.stack_spherically``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 915-921
+.. GENERATED FROM PYTHON SOURCE LINES 913-919
 
 In the previous example, we can observe that spirals and cones
 are nicely adapted for each stack, while shrinking the shots
@@ -1672,7 +1670,7 @@ improved). Instead, each radial disc could be normalized to
 cover a cylinder with variable density over :math:`k_z`.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 922-943
+.. GENERATED FROM PYTHON SOURCE LINES 920-941
 
 .. code-block:: Python
 
@@ -1709,7 +1707,7 @@ cover a cylinder with variable density over :math:`k_z`.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 944-969
+.. GENERATED FROM PYTHON SOURCE LINES 942-967
 
 Shellify
 --------
@@ -1737,7 +1735,7 @@ Arguments:
   function provided with ``trajectory_func``.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 969-975
+.. GENERATED FROM PYTHON SOURCE LINES 967-973
 
 .. code-block:: Python
 
@@ -1759,7 +1757,7 @@ Arguments:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 976-988
+.. GENERATED FROM PYTHON SOURCE LINES 974-986
 
 ``trajectory_func (function)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1774,7 +1772,7 @@ Companion functions will be added in the future in order
 to manipulate individual spheres.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 988-995
+.. GENERATED FROM PYTHON SOURCE LINES 986-993
 
 .. code-block:: Python
 
@@ -1797,7 +1795,7 @@ to manipulate individual spheres.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 996-1005
+.. GENERATED FROM PYTHON SOURCE LINES 994-1003
 
 ``hemisphere_mode (str)``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1809,7 +1807,7 @@ promoting continuity (for example in spirals) by reversing
 the azimuthal angle.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1005-1020
+.. GENERATED FROM PYTHON SOURCE LINES 1003-1018
 
 .. code-block:: Python
 
@@ -1840,7 +1838,7 @@ the azimuthal angle.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 1021-1029
+.. GENERATED FROM PYTHON SOURCE LINES 1019-1027
 
 References
 ==========
@@ -1854,7 +1852,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 29.558 seconds)
+   **Total running time of the script:** (0 minutes 28.955 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_trajectory_tools.py:

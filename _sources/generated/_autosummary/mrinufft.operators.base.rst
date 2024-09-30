@@ -18,10 +18,6 @@
       check_backend
       get_operator
       list_backends
-      with_numpy
-      with_numpy_cupy
-      with_tensorflow
-      with_torch
    
    
 

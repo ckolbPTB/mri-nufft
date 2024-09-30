@@ -22,33 +22,40 @@
 Trajectory display configuration
 ================================
 
-The look of the display trajectories can be tweaked by using :py:class:`displayConfig`
+An example to show how to customize trajectory displays.
 
-You can tune these parameters to your own taste and needs.
+The parameters presented here can be tuned to your own taste and needs
+by using :py:class:`displayConfig`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-14
+.. GENERATED FROM PYTHON SOURCE LINES 11-19
 
 .. code-block:: Python
 
 
     import matplotlib as mpl
     import matplotlib.pyplot as plt
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 15-30
-
-.. code-block:: Python
-
     import numpy as np
 
     from mrinufft import display_2D_trajectory, display_3D_trajectory, displayConfig
     from mrinufft.trajectories import conify, initialize_2D_spiral
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 20-23
+
+Script options
+==============
+These options are used in the examples below to define trajectories and display options.
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-33
+
+.. code-block:: Python
+
 
     # Trajectory parameters
     Nc = 120  # Number of shots
@@ -64,42 +71,9 @@ You can tune these parameters to your own taste and needs.
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
-    --------------------------------------------------------------------------------
-
-      CuPy may not function correctly because multiple CuPy packages are installed
-      in your environment:
-
-        cupy-cuda11x, cupy-cuda12x
-
-      Follow these steps to resolve this issue:
-
-        1. For all packages listed above, run the following command to remove all
-           existing CuPy installations:
-
-             $ pip uninstall <package_name>
-
-          If you previously installed CuPy via conda, also run the following:
-
-             $ conda uninstall cupy
-
-        2. Install the appropriate CuPy package.
-           Refer to the Installation Guide for detailed instructions.
-
-             https://docs.cupy.dev/en/stable/install.html
-
-    --------------------------------------------------------------------------------
-
-      warnings.warn(f'''
 
 
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 31-47
+.. GENERATED FROM PYTHON SOURCE LINES 34-50
 
 .. code-block:: Python
 
@@ -126,14 +100,16 @@ You can tune these parameters to your own taste and needs.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-52
+.. GENERATED FROM PYTHON SOURCE LINES 51-57
 
 Trajectory displays
-====================
-To show case the display parameters of trajectories, we will use the following trajectory
-The effect of trajectory parameter are explained in the :ref:`sphx_glr_generated_autoexamples_example_3D_trajectories.py` Example.
+===================
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-56
+The following trajectory will be used to showcase the display parameters.
+The trajectory parameters are explained in the
+:ref:`sphx_glr_generated_autoexamples_example_3D_trajectories.py` example.
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-61
 
 .. code-block:: Python
 
@@ -147,13 +123,14 @@ The effect of trajectory parameter are explained in the :ref:`sphx_glr_generated
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 57-60
+.. GENERATED FROM PYTHON SOURCE LINES 62-66
 
 ``linewidth``
 -------------
-The linewidth of the shot can be updated to have more or less empty space in the plot.
+The ``linewidth`` corresponds to the curve thickness, and can be changed
+to improve the shots visibility.
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-62
+.. GENERATED FROM PYTHON SOURCE LINES 66-68
 
 .. code-block:: Python
 
@@ -171,13 +148,13 @@ The linewidth of the shot can be updated to have more or less empty space in the
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-66
+.. GENERATED FROM PYTHON SOURCE LINES 69-72
 
 ``palette``
 -----------
-The ``palette`` parameter allows to change the color of the shots.
+The ``palette`` parameter allows you to change the color of the shots.
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-68
+.. GENERATED FROM PYTHON SOURCE LINES 72-74
 
 .. code-block:: Python
 
@@ -195,13 +172,14 @@ The ``palette`` parameter allows to change the color of the shots.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-72
+.. GENERATED FROM PYTHON SOURCE LINES 75-79
 
 ``one_shot_color``
 ------------------
-The ``one_shot_color`` parameter allows to highlight one shot in particular.
+The ``one_shot_color`` parameter is used to highlight one shot in particular
+with a specified color.
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-77
+.. GENERATED FROM PYTHON SOURCE LINES 79-84
 
 .. code-block:: Python
 
@@ -222,18 +200,19 @@ The ``one_shot_color`` parameter allows to highlight one shot in particular.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-81
+.. GENERATED FROM PYTHON SOURCE LINES 85-89
 
 ``nb_colors``
 -------------
-The ``nb_colors`` parameter allows to change the number of colors used to display the shots.
+The ``nb_colors`` parameter allows you to change the number of colors used from the
+specified color palette to display the shots.
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-84
+.. GENERATED FROM PYTHON SOURCE LINES 89-92
 
 .. code-block:: Python
 
-
     show_traj(traj, "nb_colors", [1, 4, 10])
+
 
 
 
@@ -247,21 +226,20 @@ The ``nb_colors`` parameter allows to change the number of colors used to displa
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-87
+.. GENERATED FROM PYTHON SOURCE LINES 93-95
 
 Labels, titles and legends
 ==========================
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-92
+.. GENERATED FROM PYTHON SOURCE LINES 97-100
 
 ``fontsize``
 ------------
-The ``fontsize`` parameter allows to change the fontsize of the labels /title
+The ``fontsize`` parameter changes the fontsize of the labels/titles.
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-95
+.. GENERATED FROM PYTHON SOURCE LINES 100-102
 
 .. code-block:: Python
-
 
     show_traj(traj, "fontsize", [12, 18, 24])
 
@@ -277,13 +255,14 @@ The ``fontsize`` parameter allows to change the fontsize of the labels /title
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-99
+.. GENERATED FROM PYTHON SOURCE LINES 103-107
 
 ``pointsize``
 -------------
-To show the gradient constraint violation we can use the ``pointsize`` parameter
+The ``pointsize`` parameter is used when showing the gradient constraint violations
+to change the violation point sizes.
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-101
+.. GENERATED FROM PYTHON SOURCE LINES 107-109
 
 .. code-block:: Python
 
@@ -301,17 +280,17 @@ To show the gradient constraint violation we can use the ``pointsize`` parameter
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-106
+.. GENERATED FROM PYTHON SOURCE LINES 110-115
 
 ``gradient_point_color`` and ``slewrate_point_color``
 -----------------------------------------------------
-The ``gradient_point_color`` and ``slewrate_point_color`` parameters allows to change the color of the points
-that are violating the gradient or slewrate constraints.
+The ``gradient_point_color`` and ``slewrate_point_color`` parameters allows you
+to change the color of the points where gradient or slew rate constraint violations
+are observed.
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-115
+.. GENERATED FROM PYTHON SOURCE LINES 115-121
 
 .. code-block:: Python
-
 
     show_traj(
         traj,
@@ -319,8 +298,6 @@ that are violating the gradient or slewrate constraints.
         ["tab:blue", "tab:orange", "tab:red"],
         show_constraints=True,
     )
-
-
 
 
 
@@ -333,15 +310,10 @@ that are violating the gradient or slewrate constraints.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 116-118
-
-Gradients profiles
-==================
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 8.123 seconds)
+   **Total running time of the script:** (0 minutes 5.154 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_display_config.py:

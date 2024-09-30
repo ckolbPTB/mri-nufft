@@ -18,28 +18,77 @@
 .. _sphx_glr_generated_autoexamples_example_gif_3D.py:
 
 
-=======================
-3D Trajectories display
-=======================
+========================
+Animated 3D trajectories
+========================
 
-A collection of 3D trajectories are generated and saved as a gif.
+An animation to show 3D trajectory customization.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-194
+.. GENERATED FROM PYTHON SOURCE LINES 9-22
 
 .. code-block:: Python
 
 
     import time
+
     import joblib
     import matplotlib.pyplot as plt
     import numpy as np
+    import tempfile as tmp
     from PIL import Image, ImageSequence
 
     import mrinufft.trajectories.display as mtd
     import mrinufft.trajectories.trajectory3D as mtt
     from mrinufft.trajectories.display import displayConfig
 
-    # Options
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
+    --------------------------------------------------------------------------------
+
+      CuPy may not function correctly because multiple CuPy packages are installed
+      in your environment:
+
+        cupy-cuda11x, cupy-cuda12x
+
+      Follow these steps to resolve this issue:
+
+        1. For all packages listed above, run the following command to remove all
+           existing CuPy installations:
+
+             $ pip uninstall <package_name>
+
+          If you previously installed CuPy via conda, also run the following:
+
+             $ conda uninstall cupy
+
+        2. Install the appropriate CuPy package.
+           Refer to the Installation Guide for detailed instructions.
+
+             https://docs.cupy.dev/en/stable/install.html
+
+    --------------------------------------------------------------------------------
+
+      warnings.warn(f'''
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-25
+
+Script options
+==============
+
+.. GENERATED FROM PYTHON SOURCE LINES 25-37
+
+.. code-block:: Python
+
 
     Nc = 8 * 8
     Ns = 200
@@ -52,7 +101,22 @@ A collection of 3D trajectories are generated and saved as a gif.
     duration = 150  # seconds
 
 
-    # Generation
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-40
+
+Trajectory generation
+=====================
+
+.. GENERATED FROM PYTHON SOURCE LINES 40-143
+
+.. code-block:: Python
+
 
     # Initialize trajectory function
     functions = [
@@ -156,6 +220,23 @@ A collection of 3D trajectories are generated and saved as a gif.
     ]
 
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 144-146
+
+Animation rendering
+===================
+
+.. GENERATED FROM PYTHON SOURCE LINES 146-203
+
+.. code-block:: Python
+
+
     frame_setup = [
         (f, i, name, arg)
         for (name, f), args in list(zip(functions, arguments))
@@ -163,7 +244,7 @@ A collection of 3D trajectories are generated and saved as a gif.
     ]
 
 
-    def draw_frame(func, index, name, arg, save_dir="/tmp/"):
+    def draw_frame(func, index, name, arg):
         """Draw a single frame of the gif and save it to a tmp file."""
         trajectory = func(arg)
         # General configuration
@@ -186,8 +267,7 @@ A collection of 3D trajectories are generated and saved as a gif.
         )
 
         # Save figure
-        hashed = joblib.hash((index, name, arg, time.time()))
-        filename = save_dir + f"{hashed}.png"
+        filename = f"{tmp.NamedTemporaryFile().name}.png"
         plt.savefig(filename, bbox_inches="tight")
         plt.close()
         return filename
@@ -220,7 +300,7 @@ A collection of 3D trajectories are generated and saved as a gif.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 216-220
+.. GENERATED FROM PYTHON SOURCE LINES 225-229
 
 .. image-sg:: /generated/autoexamples/images/mrinufft_3D_traj.gif
    :alt: example density
@@ -230,7 +310,7 @@ A collection of 3D trajectories are generated and saved as a gif.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (2 minutes 21.839 seconds)
+   **Total running time of the script:** (2 minutes 18.825 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_gif_3D.py:

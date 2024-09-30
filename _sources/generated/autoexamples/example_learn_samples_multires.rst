@@ -18,55 +18,61 @@
 .. _sphx_glr_generated_autoexamples_example_learn_samples_multires.py:
 
 
-===============================================
-Learn Sampling pattern with multi-resolution
-===============================================
+=========================================
+Learning sampling pattern with decimation
+=========================================
 
-A small pytorch example to showcase learning k-space sampling patterns.
-This example showcases the auto-diff capabilities of the NUFFT operator 
-wrt to k-space trajectory in mri-nufft.
+An example using PyTorch to showcase learning k-space sampling patterns with decimation.
 
-In this example we learn the k-space samples :math:`\mathbf{K}` for the following cost function:
+This example showcases the auto-differentiation capabilities of the NUFFT operator
+with respect to the k-space trajectory in MRI-nufft.
+
+Hereafter we learn the k-space sample locations :math:`\mathbf{K}` using the following cost function:
 
 .. math::
     \mathbf{\hat{K}} =  arg \min_{\mathbf{K}} ||  \mathcal{F}_\mathbf{K}^* D_\mathbf{K} \mathcal{F}_\mathbf{K} \mathbf{x} - \mathbf{x} ||_2^2
     
-where :math:`\mathcal{F}_\mathbf{K}` is the forward NUFFT operator and :math:`D_\mathbf{K}` is the density compensators for trajectory :math:`\mathbf{K}`,  :math:`\mathbf{x}` is the MR image which is also the target image to be reconstructed.
+where :math:`\mathcal{F}_\mathbf{K}` is the forward NUFFT operator,
+:math:`D_\mathbf{K}` is the density compensator for trajectory :math:`\mathbf{K}`,
+and :math:`\mathbf{x}` is the MR image which is also the target image to be reconstructed.
 
-Additionally, in-order to converge faster, we also learn the trajectory in a multi-resolution fashion. This is done by first optimizing a 8 times decimated trajectory locations, called control points. After a fixed number of iterations (5 in this example), these control points are upscaled by a factor of 2. However, note that the NUFFT operator always holds linearly interpolated version of the control points as k-space sampling trajectory.
+Additionally, in order to converge faster, we also learn the trajectory in a multi-resolution fashion.
+This is done by first optimizing x8 times decimated trajectory locations, called control points.
+After a fixed number of iterations (5 in this example), these control points are upscaled by a factor of 2.
+Note that the NUFFT operator always holds linearly interpolated version of the control points as k-space sampling trajectory.
 
 .. note::
     This example can run on a binder instance as it is purely CPU based backend (finufft), and is restricted to a 2D single coil toy case.
 
 .. warning::
-    This example only showcases the autodiff capabilities, the learned sampling pattern is not scanner compliant as the scanner gradients required to implement it violate the hardware constraints. In practice, a projection :math:`\Pi_\mathcal{Q}(\mathbf{K})` into the scanner constraints set :math:`\mathcal{Q}` is recommended (see [Proj]_). This is implemented in the proprietary SPARKLING package [Sparks]_. Users are encouraged to contact the authors if they want to use it.
+    This example only showcases the auto-differentiation capabilities, the learned sampling pattern
+    is not scanner compliant as the gradients required to implement it violate the hardware constraints.
+    In practice, a projection :math:`\Pi_\mathcal{Q}(\mathbf{K})` onto the scanner constraints set :math:`\mathcal{Q}` is recommended
+    (see [Cha+16]_). This is implemented in the proprietary SPARKLING package [Cha+22]_.
+    Users are encouraged to contact the authors if they want to use it.
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-31
+.. GENERATED FROM PYTHON SOURCE LINES 37-41
 
 .. colab-link::
    :needs_gpu: 0
 
    !pip install mri-nufft[finufft]
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-35
-
-Imports
--------
-
-.. GENERATED FROM PYTHON SOURCE LINES 35-49
+.. GENERATED FROM PYTHON SOURCE LINES 41-56
 
 .. code-block:: Python
 
 
     import time
-    import joblib
 
     import brainweb_dl as bwdl
+    import joblib
     import matplotlib.pyplot as plt
     import numpy as np
+    import tempfile as tmp
     import torch
-    from tqdm import tqdm
     from PIL import Image, ImageSequence
+    from tqdm import tqdm
 
     from mrinufft import get_operator
     from mrinufft.trajectories import initialize_2D_radial
@@ -75,18 +81,53 @@ Imports
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
+    --------------------------------------------------------------------------------
+
+      CuPy may not function correctly because multiple CuPy packages are installed
+      in your environment:
+
+        cupy-cuda11x, cupy-cuda12x
+
+      Follow these steps to resolve this issue:
+
+        1. For all packages listed above, run the following command to remove all
+           existing CuPy installations:
+
+             $ pip uninstall <package_name>
+
+          If you previously installed CuPy via conda, also run the following:
+
+             $ conda uninstall cupy
+
+        2. Install the appropriate CuPy package.
+           Refer to the Installation Guide for detailed instructions.
+
+             https://docs.cupy.dev/en/stable/install.html
+
+    --------------------------------------------------------------------------------
+
+      warnings.warn(f'''
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-55
 
-Setup a simple class to learn trajectory
-----------------------------------------
+.. GENERATED FROM PYTHON SOURCE LINES 57-65
+
+Utils
+=====
+
+Model class
+-----------
 .. note::
     While we are only learning the NUFFT operator, we still need the gradient `wrt_data=True` to have all the gradients computed correctly.
-    See [Projector]_ for more details.
+    See [GRC23]_ for more details.
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-118
+.. GENERATED FROM PYTHON SOURCE LINES 65-128
 
 .. code-block:: Python
 
@@ -160,41 +201,74 @@ Setup a simple class to learn trajectory
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 119-121
+.. GENERATED FROM PYTHON SOURCE LINES 129-131
 
-Util function to plot the state of the model
---------------------------------------------
+State plotting
+--------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 121-174
+.. GENERATED FROM PYTHON SOURCE LINES 131-174
 
 .. code-block:: Python
 
 
 
-    def plot_state(
-        axs, mri_2D, traj, recon, control_points=None, loss=None, save_name=None
-    ):
+    def plot_state(axs, image, traj, recon, control_points=None, loss=None, save_name=None):
         axs = axs.flatten()
-        axs[0].imshow(np.abs(mri_2D[0]), cmap="gray")
+        # Upper left reference image
+        axs[0].imshow(np.abs(image[0]), cmap="gray")
         axs[0].axis("off")
         axs[0].set_title("MR Image")
+
+        # Upper right trajectory
         axs[1].scatter(*traj.T, s=0.5)
         if control_points is not None:
             axs[1].scatter(*control_points.T, s=1, color="r")
-            axs[1].legend(["Trajectory", "Control Points"])
+            axs[1].legend(
+                ["Trajectory", "Control points"], loc="right", bbox_to_anchor=(2, 0.6)
+            )
+        axs[1].grid(True)
         axs[1].set_title("Trajectory")
+        axs[1].set_xlim(-0.5, 0.5)
+        axs[1].set_ylim(-0.5, 0.5)
+        axs[1].set_aspect("equal")
+
+        # Down left reconstructed image
         axs[2].imshow(np.abs(recon[0][0].detach().cpu().numpy()), cmap="gray")
         axs[2].axis("off")
         axs[2].set_title("Reconstruction")
+
+        # Down right loss evolution
         if loss is not None:
             axs[3].plot(loss)
+            axs[3].set_ylim(0, None)
             axs[3].grid("on")
             axs[3].set_title("Loss")
+            plt.subplots_adjust(hspace=0.3)
+
+        # Save & close
         if save_name is not None:
             plt.savefig(save_name, bbox_inches="tight")
             plt.close()
         else:
             plt.show()
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 175-177
+
+Optimizer upscaling
+-------------------
+
+.. GENERATED FROM PYTHON SOURCE LINES 177-204
+
+.. code-block:: Python
+
 
 
     def upsample_optimizer(optimizer, new_optimizer, factor=2):
@@ -229,20 +303,68 @@ Util function to plot the state of the model
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 175-178
+.. GENERATED FROM PYTHON SOURCE LINES 205-211
 
-Setup Inputs (models, trajectory and image)
--------------------------------------------
-First we create the model with a simple radial trajectory (32 shots of 256 points)
+Data preparation
+================
 
-.. GENERATED FROM PYTHON SOURCE LINES 178-183
+A single image to train the model over. Note that in practice
+we would use a whole dataset instead (e.g. fastMRI).
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 211-216
 
 .. code-block:: Python
 
 
-    init_traj = initialize_2D_radial(32, 256).astype(np.float32)
-    model = Model(init_traj, img_size=(256, 256))
-    model.eval()
+    volume = np.flip(bwdl.get_mri(4, "T1"), axis=(0, 1, 2))
+    image = torch.from_numpy(volume[-80, ...].astype(np.float32))[None]
+    image = image / torch.mean(image)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 217-218
+
+A basic radial trajectory with an acceleration factor of 8.
+
+.. GENERATED FROM PYTHON SOURCE LINES 218-225
+
+.. code-block:: Python
+
+
+    AF = 8
+    initial_traj = initialize_2D_radial(image.shape[1] // AF, image.shape[2]).astype(
+        np.float32
+    )
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 226-231
+
+Trajectory learning
+===================
+
+Initialisation
+--------------
+
+.. GENERATED FROM PYTHON SOURCE LINES 231-235
+
+.. code-block:: Python
+
+
+    model = Model(initial_traj, img_size=image.shape[1:])
+    model = model.eval()
 
 
 
@@ -255,38 +377,25 @@ First we create the model with a simple radial trajectory (32 shots of 256 point
     /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/_utils.py:94: UserWarning: Samples will be rescaled to [-pi, pi), assuming they were in [-0.5, 0.5)
       warnings.warn(
 
-    Model(
-      (operator): MRINufftAutoGrad()
-    )
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 184-188
+.. GENERATED FROM PYTHON SOURCE LINES 236-239
 
-The image on which we are going to train.
-.. note ::
-   In practice we would use instead a dataset (e.g. fastMRI)
+The image obtained before learning the sampling pattern
+is highly degraded because of the acceleration factor and simplicity
+of the trajectory.
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 188-204
+.. GENERATED FROM PYTHON SOURCE LINES 239-246
 
 .. code-block:: Python
 
 
-    mri_2D = torch.from_numpy(np.flipud(bwdl.get_mri(4, "T1")[80, ...]).astype(np.float32))[
-        None
-    ]
-    mri_2D = mri_2D / torch.mean(mri_2D)
+    initial_recons = model(image)
 
+    fig, axs = plt.subplots(1, 3, figsize=(9, 3))
+    plot_state(axs, image, initial_traj, initial_recons)
 
-    # Initialisation
-    # --------------
-    # Before training, here is the simple reconstruction we have using a
-    # density compensated adjoint.
-
-    recon = model(mri_2D)
-    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    plot_state(axs, mri_2D, init_traj, recon, model.control.detach().cpu().numpy())
 
 
 
@@ -309,24 +418,26 @@ The image on which we are going to train.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 205-207
+.. GENERATED FROM PYTHON SOURCE LINES 247-249
 
-Start training loop
--------------------
+Training loop
+-------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 207-265
+.. GENERATED FROM PYTHON SOURCE LINES 249-294
 
 .. code-block:: Python
 
+
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    model.train()
+
     losses = []
     image_files = []
-    model.train()
     while model.current_decim >= 1:
         with tqdm(range(30), unit="steps") as tqdms:
             for i in tqdms:
-                out = model(mri_2D)
-                loss = torch.nn.functional.mse_loss(out, mri_2D[None, None])
+                out = model(image)
+                loss = torch.nn.functional.mse_loss(out, image[None, None])
                 numpy_loss = (loss.detach().cpu().numpy(),)
 
                 tqdms.set_postfix({"loss": numpy_loss})
@@ -340,13 +451,12 @@ Start training loop
                     for param in model.parameters():
                         param.clamp_(-0.5, 0.5)
                 # Generate images for gif
-                hashed = joblib.hash((i, "learn_traj", time.time()))
-                filename = "/tmp/" + f"{hashed}.png"
+                filename = f"{tmp.NamedTemporaryFile().name}.png"
                 plt.clf()
                 fig, axs = plt.subplots(2, 2, figsize=(10, 10), num=1)
                 plot_state(
                     axs,
-                    mri_2D,
+                    image,
                     model.get_trajectory().detach().cpu().numpy(),
                     out,
                     model.control.detach().cpu().numpy(),
@@ -363,20 +473,6 @@ Start training loop
                 )
 
 
-    # Make a GIF of all images.
-    imgs = [Image.open(img) for img in image_files]
-    imgs[0].save(
-        "mrinufft_learn_traj_multires.gif",
-        save_all=True,
-        append_images=imgs[1:],
-        optimize=False,
-        duration=2,
-        loop=0,
-    )
-
-    # sphinx_gallery_thumbnail_path = 'generated/autoexamples/images/mrinufft_learn_traj_multires.gif'
-
-
 
 
 
@@ -388,52 +484,84 @@ Start training loop
       warnings.warn(
     /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/finufft/_interfaces.py:329: UserWarning: Argument `data` does not satisfy the following requirement: C. Copying array (this may reduce performance)
       warnings.warn(f"Argument `{name}` does not satisfy the following requirement: {prop}. Copying array (this may reduce performance)")
-    /volatile/github-ci-mind-inria/action-runner/_work/mri-nufft/mri-nufft/examples/example_learn_samples_multires.py:215: UserWarning: Using a target size (torch.Size([1, 1, 1, 256, 256])) that is different to the input size (torch.Size([1, 1, 256, 256])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
-      loss = torch.nn.functional.mse_loss(out, mri_2D[None, None])
-      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.7415447, dtype=float32),)]/volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/operators/autodiff.py:98: UserWarning: Casting complex values to real discards the imaginary part (Triggered internally at ../aten/src/ATen/native/Copy.cpp:305.)
+    /volatile/github-ci-mind-inria/action-runner/_work/mri-nufft/mri-nufft/examples/example_learn_samples_multires.py:259: UserWarning: Using a target size (torch.Size([1, 1, 1, 256, 256])) that is different to the input size (torch.Size([1, 1, 256, 256])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+      loss = torch.nn.functional.mse_loss(out, image[None, None])
+      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.74174887, dtype=float32),)]/volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/mrinufft/operators/autodiff.py:98: UserWarning: Casting complex values to real discards the imaginary part (Triggered internally at ../aten/src/ATen/native/Copy.cpp:305.)
       grad_traj = torch.transpose(torch.sum(grad_traj, dim=1), 0, 1).to(
-      3%|▎         | 1/30 [00:00<00:21,  1.37steps/s, loss=(array(0.7415447, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:21,  1.37steps/s, loss=(array(0.6619946, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:20,  1.39steps/s, loss=(array(0.6619946, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:20,  1.39steps/s, loss=(array(0.5736034, dtype=float32),)]     10%|█         | 3/30 [00:02<00:18,  1.42steps/s, loss=(array(0.5736034, dtype=float32),)]     10%|█         | 3/30 [00:02<00:18,  1.42steps/s, loss=(array(0.48102552, dtype=float32),)]     13%|█▎        | 4/30 [00:02<00:18,  1.41steps/s, loss=(array(0.48102552, dtype=float32),)]     13%|█▎        | 4/30 [00:02<00:18,  1.41steps/s, loss=(array(0.3928566, dtype=float32),)]      17%|█▋        | 5/30 [00:03<00:17,  1.39steps/s, loss=(array(0.3928566, dtype=float32),)]     17%|█▋        | 5/30 [00:03<00:17,  1.39steps/s, loss=(array(0.32410884, dtype=float32),)]     20%|██        | 6/30 [00:04<00:17,  1.40steps/s, loss=(array(0.32410884, dtype=float32),)]     20%|██        | 6/30 [00:04<00:17,  1.40steps/s, loss=(array(0.2896265, dtype=float32),)]      23%|██▎       | 7/30 [00:05<00:17,  1.28steps/s, loss=(array(0.2896265, dtype=float32),)]     23%|██▎       | 7/30 [00:05<00:17,  1.28steps/s, loss=(array(0.2867202, dtype=float32),)]     27%|██▋       | 8/30 [00:05<00:16,  1.32steps/s, loss=(array(0.2867202, dtype=float32),)]     27%|██▋       | 8/30 [00:05<00:16,  1.32steps/s, loss=(array(0.30415672, dtype=float32),)]     30%|███       | 9/30 [00:06<00:15,  1.35steps/s, loss=(array(0.30415672, dtype=float32),)]     30%|███       | 9/30 [00:06<00:15,  1.35steps/s, loss=(array(0.32396573, dtype=float32),)]     33%|███▎      | 10/30 [00:07<00:14,  1.36steps/s, loss=(array(0.32396573, dtype=float32),)]     33%|███▎      | 10/30 [00:07<00:14,  1.36steps/s, loss=(array(0.33222532, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:13,  1.38steps/s, loss=(array(0.33222532, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:13,  1.38steps/s, loss=(array(0.32644412, dtype=float32),)]     40%|████      | 12/30 [00:08<00:13,  1.38steps/s, loss=(array(0.32644412, dtype=float32),)]     40%|████      | 12/30 [00:08<00:13,  1.38steps/s, loss=(array(0.31118166, dtype=float32),)]     43%|████▎     | 13/30 [00:09<00:12,  1.37steps/s, loss=(array(0.31118166, dtype=float32),)]     43%|████▎     | 13/30 [00:09<00:12,  1.37steps/s, loss=(array(0.29294798, dtype=float32),)]     47%|████▋     | 14/30 [00:10<00:11,  1.37steps/s, loss=(array(0.29294798, dtype=float32),)]     47%|████▋     | 14/30 [00:10<00:11,  1.37steps/s, loss=(array(0.27734062, dtype=float32),)]     50%|█████     | 15/30 [00:11<00:12,  1.18steps/s, loss=(array(0.27734062, dtype=float32),)]     50%|█████     | 15/30 [00:11<00:12,  1.18steps/s, loss=(array(0.26735976, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:11,  1.23steps/s, loss=(array(0.26735976, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:11,  1.23steps/s, loss=(array(0.2631218, dtype=float32),)]      57%|█████▋    | 17/30 [00:12<00:10,  1.26steps/s, loss=(array(0.2631218, dtype=float32),)]     57%|█████▋    | 17/30 [00:12<00:10,  1.26steps/s, loss=(array(0.26294827, dtype=float32),)]     60%|██████    | 18/30 [00:13<00:09,  1.28steps/s, loss=(array(0.26294827, dtype=float32),)]     60%|██████    | 18/30 [00:13<00:09,  1.28steps/s, loss=(array(0.26474643, dtype=float32),)]     63%|██████▎   | 19/30 [00:14<00:08,  1.31steps/s, loss=(array(0.26474643, dtype=float32),)]     63%|██████▎   | 19/30 [00:14<00:08,  1.31steps/s, loss=(array(0.26689276, dtype=float32),)]     67%|██████▋   | 20/30 [00:15<00:07,  1.32steps/s, loss=(array(0.26689276, dtype=float32),)]     67%|██████▋   | 20/30 [00:15<00:07,  1.32steps/s, loss=(array(0.26814476, dtype=float32),)]     70%|███████   | 21/30 [00:15<00:06,  1.33steps/s, loss=(array(0.26814476, dtype=float32),)]     70%|███████   | 21/30 [00:15<00:06,  1.33steps/s, loss=(array(0.2675589, dtype=float32),)]      73%|███████▎  | 22/30 [00:16<00:05,  1.35steps/s, loss=(array(0.2675589, dtype=float32),)]     73%|███████▎  | 22/30 [00:16<00:05,  1.35steps/s, loss=(array(0.26499516, dtype=float32),)]     77%|███████▋  | 23/30 [00:17<00:05,  1.35steps/s, loss=(array(0.26499516, dtype=float32),)]     77%|███████▋  | 23/30 [00:17<00:05,  1.35steps/s, loss=(array(0.26102257, dtype=float32),)]     80%|████████  | 24/30 [00:18<00:05,  1.18steps/s, loss=(array(0.26102257, dtype=float32),)]     80%|████████  | 24/30 [00:18<00:05,  1.18steps/s, loss=(array(0.2565049, dtype=float32),)]      83%|████████▎ | 25/30 [00:19<00:04,  1.22steps/s, loss=(array(0.2565049, dtype=float32),)]     83%|████████▎ | 25/30 [00:19<00:04,  1.22steps/s, loss=(array(0.252238, dtype=float32),)]      87%|████████▋ | 26/30 [00:19<00:03,  1.26steps/s, loss=(array(0.252238, dtype=float32),)]     87%|████████▋ | 26/30 [00:19<00:03,  1.26steps/s, loss=(array(0.2487159, dtype=float32),)]     90%|█████████ | 27/30 [00:20<00:02,  1.29steps/s, loss=(array(0.2487159, dtype=float32),)]     90%|█████████ | 27/30 [00:20<00:02,  1.29steps/s, loss=(array(0.24605152, dtype=float32),)]     93%|█████████▎| 28/30 [00:21<00:01,  1.32steps/s, loss=(array(0.24605152, dtype=float32),)]     93%|█████████▎| 28/30 [00:21<00:01,  1.32steps/s, loss=(array(0.24414784, dtype=float32),)]     97%|█████████▋| 29/30 [00:22<00:00,  1.33steps/s, loss=(array(0.24414784, dtype=float32),)]     97%|█████████▋| 29/30 [00:22<00:00,  1.33steps/s, loss=(array(0.24282902, dtype=float32),)]    100%|██████████| 30/30 [00:22<00:00,  1.35steps/s, loss=(array(0.24282902, dtype=float32),)]    100%|██████████| 30/30 [00:22<00:00,  1.32steps/s, loss=(array(0.24282902, dtype=float32),)]
-      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.2418597, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:21,  1.32steps/s, loss=(array(0.2418597, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:21,  1.32steps/s, loss=(array(0.24115989, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:21,  1.33steps/s, loss=(array(0.24115989, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:21,  1.33steps/s, loss=(array(0.24021475, dtype=float32),)]     10%|█         | 3/30 [00:02<00:24,  1.09steps/s, loss=(array(0.24021475, dtype=float32),)]     10%|█         | 3/30 [00:02<00:24,  1.09steps/s, loss=(array(0.23891652, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:22,  1.16steps/s, loss=(array(0.23891652, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:22,  1.16steps/s, loss=(array(0.23723283, dtype=float32),)]     17%|█▋        | 5/30 [00:04<00:20,  1.21steps/s, loss=(array(0.23723283, dtype=float32),)]     17%|█▋        | 5/30 [00:04<00:20,  1.21steps/s, loss=(array(0.2352075, dtype=float32),)]      20%|██        | 6/30 [00:04<00:19,  1.24steps/s, loss=(array(0.2352075, dtype=float32),)]     20%|██        | 6/30 [00:04<00:19,  1.24steps/s, loss=(array(0.23294675, dtype=float32),)]     23%|██▎       | 7/30 [00:05<00:18,  1.26steps/s, loss=(array(0.23294675, dtype=float32),)]     23%|██▎       | 7/30 [00:05<00:18,  1.26steps/s, loss=(array(0.23059377, dtype=float32),)]     27%|██▋       | 8/30 [00:06<00:17,  1.28steps/s, loss=(array(0.23059377, dtype=float32),)]     27%|██▋       | 8/30 [00:06<00:17,  1.28steps/s, loss=(array(0.22829439, dtype=float32),)]     30%|███       | 9/30 [00:07<00:16,  1.29steps/s, loss=(array(0.22829439, dtype=float32),)]     30%|███       | 9/30 [00:07<00:16,  1.29steps/s, loss=(array(0.2261697, dtype=float32),)]      33%|███▎      | 10/30 [00:07<00:15,  1.30steps/s, loss=(array(0.2261697, dtype=float32),)]     33%|███▎      | 10/30 [00:07<00:15,  1.30steps/s, loss=(array(0.22429207, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:14,  1.30steps/s, loss=(array(0.22429207, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:14,  1.30steps/s, loss=(array(0.22267047, dtype=float32),)]     40%|████      | 12/30 [00:09<00:15,  1.14steps/s, loss=(array(0.22267047, dtype=float32),)]     40%|████      | 12/30 [00:09<00:15,  1.14steps/s, loss=(array(0.2212572, dtype=float32),)]      43%|████▎     | 13/30 [00:10<00:14,  1.18steps/s, loss=(array(0.2212572, dtype=float32),)]     43%|████▎     | 13/30 [00:10<00:14,  1.18steps/s, loss=(array(0.21997133, dtype=float32),)]     47%|████▋     | 14/30 [00:11<00:13,  1.21steps/s, loss=(array(0.21997133, dtype=float32),)]     47%|████▋     | 14/30 [00:11<00:13,  1.21steps/s, loss=(array(0.21872887, dtype=float32),)]     50%|█████     | 15/30 [00:12<00:12,  1.23steps/s, loss=(array(0.21872887, dtype=float32),)]     50%|█████     | 15/30 [00:12<00:12,  1.23steps/s, loss=(array(0.21746805, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:11,  1.25steps/s, loss=(array(0.21746805, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:11,  1.25steps/s, loss=(array(0.2161628, dtype=float32),)]      57%|█████▋    | 17/30 [00:13<00:10,  1.27steps/s, loss=(array(0.2161628, dtype=float32),)]     57%|█████▋    | 17/30 [00:13<00:10,  1.27steps/s, loss=(array(0.21482143, dtype=float32),)]     60%|██████    | 18/30 [00:14<00:09,  1.28steps/s, loss=(array(0.21482143, dtype=float32),)]     60%|██████    | 18/30 [00:14<00:09,  1.28steps/s, loss=(array(0.21347252, dtype=float32),)]     63%|██████▎   | 19/30 [00:15<00:08,  1.30steps/s, loss=(array(0.21347252, dtype=float32),)]     63%|██████▎   | 19/30 [00:15<00:08,  1.30steps/s, loss=(array(0.21214908, dtype=float32),)]     67%|██████▋   | 20/30 [00:16<00:07,  1.30steps/s, loss=(array(0.21214908, dtype=float32),)]     67%|██████▋   | 20/30 [00:16<00:07,  1.30steps/s, loss=(array(0.21087638, dtype=float32),)]     70%|███████   | 21/30 [00:17<00:08,  1.12steps/s, loss=(array(0.21087638, dtype=float32),)]     70%|███████   | 21/30 [00:17<00:08,  1.12steps/s, loss=(array(0.20966643, dtype=float32),)]     73%|███████▎  | 22/30 [00:17<00:06,  1.15steps/s, loss=(array(0.20966643, dtype=float32),)]     73%|███████▎  | 22/30 [00:18<00:06,  1.15steps/s, loss=(array(0.20851901, dtype=float32),)]     77%|███████▋  | 23/30 [00:18<00:05,  1.20steps/s, loss=(array(0.20851901, dtype=float32),)]     77%|███████▋  | 23/30 [00:18<00:05,  1.20steps/s, loss=(array(0.20742208, dtype=float32),)]     80%|████████  | 24/30 [00:19<00:04,  1.23steps/s, loss=(array(0.20742208, dtype=float32),)]     80%|████████  | 24/30 [00:19<00:04,  1.23steps/s, loss=(array(0.20635882, dtype=float32),)]     83%|████████▎ | 25/30 [00:20<00:04,  1.25steps/s, loss=(array(0.20635882, dtype=float32),)]     83%|████████▎ | 25/30 [00:20<00:04,  1.25steps/s, loss=(array(0.2053118, dtype=float32),)]      87%|████████▋ | 26/30 [00:21<00:03,  1.23steps/s, loss=(array(0.2053118, dtype=float32),)]     87%|████████▋ | 26/30 [00:21<00:03,  1.23steps/s, loss=(array(0.2042667, dtype=float32),)]     90%|█████████ | 27/30 [00:21<00:02,  1.25steps/s, loss=(array(0.2042667, dtype=float32),)]     90%|█████████ | 27/30 [00:21<00:02,  1.25steps/s, loss=(array(0.20321469, dtype=float32),)]     93%|█████████▎| 28/30 [00:22<00:01,  1.27steps/s, loss=(array(0.20321469, dtype=float32),)]     93%|█████████▎| 28/30 [00:22<00:01,  1.27steps/s, loss=(array(0.2021545, dtype=float32),)]      97%|█████████▋| 29/30 [00:23<00:00,  1.15steps/s, loss=(array(0.2021545, dtype=float32),)]     97%|█████████▋| 29/30 [00:23<00:00,  1.15steps/s, loss=(array(0.20109081, dtype=float32),)]    100%|██████████| 30/30 [00:24<00:00,  1.20steps/s, loss=(array(0.20109081, dtype=float32),)]    100%|██████████| 30/30 [00:24<00:00,  1.23steps/s, loss=(array(0.20109081, dtype=float32),)]
-      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.2000314, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:22,  1.27steps/s, loss=(array(0.2000314, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:22,  1.27steps/s, loss=(array(0.19908856, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:21,  1.28steps/s, loss=(array(0.19908856, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:21,  1.28steps/s, loss=(array(0.19816664, dtype=float32),)]     10%|█         | 3/30 [00:02<00:21,  1.27steps/s, loss=(array(0.19816664, dtype=float32),)]     10%|█         | 3/30 [00:02<00:21,  1.27steps/s, loss=(array(0.19726351, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:20,  1.26steps/s, loss=(array(0.19726351, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:20,  1.26steps/s, loss=(array(0.19637614, dtype=float32),)]     17%|█▋        | 5/30 [00:03<00:19,  1.25steps/s, loss=(array(0.19637614, dtype=float32),)]     17%|█▋        | 5/30 [00:03<00:19,  1.25steps/s, loss=(array(0.1955024, dtype=float32),)]      20%|██        | 6/30 [00:04<00:19,  1.25steps/s, loss=(array(0.1955024, dtype=float32),)]     20%|██        | 6/30 [00:04<00:19,  1.25steps/s, loss=(array(0.19464162, dtype=float32),)]     23%|██▎       | 7/30 [00:05<00:18,  1.26steps/s, loss=(array(0.19464162, dtype=float32),)]     23%|██▎       | 7/30 [00:05<00:18,  1.26steps/s, loss=(array(0.19379574, dtype=float32),)]     27%|██▋       | 8/30 [00:06<00:19,  1.12steps/s, loss=(array(0.19379574, dtype=float32),)]     27%|██▋       | 8/30 [00:06<00:19,  1.12steps/s, loss=(array(0.19296828, dtype=float32),)]     30%|███       | 9/30 [00:07<00:17,  1.18steps/s, loss=(array(0.19296828, dtype=float32),)]     30%|███       | 9/30 [00:07<00:17,  1.18steps/s, loss=(array(0.19216314, dtype=float32),)]     33%|███▎      | 10/30 [00:08<00:16,  1.23steps/s, loss=(array(0.19216314, dtype=float32),)]     33%|███▎      | 10/30 [00:08<00:16,  1.23steps/s, loss=(array(0.19138408, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:14,  1.27steps/s, loss=(array(0.19138408, dtype=float32),)]     37%|███▋      | 11/30 [00:08<00:14,  1.27steps/s, loss=(array(0.19063278, dtype=float32),)]     40%|████      | 12/30 [00:09<00:13,  1.30steps/s, loss=(array(0.19063278, dtype=float32),)]     40%|████      | 12/30 [00:09<00:13,  1.30steps/s, loss=(array(0.18990873, dtype=float32),)]     43%|████▎     | 13/30 [00:10<00:12,  1.32steps/s, loss=(array(0.18990873, dtype=float32),)]     43%|████▎     | 13/30 [00:10<00:12,  1.32steps/s, loss=(array(0.18921031, dtype=float32),)]     47%|████▋     | 14/30 [00:11<00:12,  1.33steps/s, loss=(array(0.18921031, dtype=float32),)]     47%|████▋     | 14/30 [00:11<00:12,  1.33steps/s, loss=(array(0.18853423, dtype=float32),)]     50%|█████     | 15/30 [00:11<00:11,  1.34steps/s, loss=(array(0.18853423, dtype=float32),)]     50%|█████     | 15/30 [00:11<00:11,  1.34steps/s, loss=(array(0.18787757, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:10,  1.35steps/s, loss=(array(0.18787757, dtype=float32),)]     53%|█████▎    | 16/30 [00:12<00:10,  1.35steps/s, loss=(array(0.18723802, dtype=float32),)]     57%|█████▋    | 17/30 [00:13<00:10,  1.23steps/s, loss=(array(0.18723802, dtype=float32),)]     57%|█████▋    | 17/30 [00:13<00:10,  1.23steps/s, loss=(array(0.18661419, dtype=float32),)]     60%|██████    | 18/30 [00:14<00:09,  1.26steps/s, loss=(array(0.18661419, dtype=float32),)]     60%|██████    | 18/30 [00:14<00:09,  1.26steps/s, loss=(array(0.18600571, dtype=float32),)]     63%|██████▎   | 19/30 [00:15<00:08,  1.29steps/s, loss=(array(0.18600571, dtype=float32),)]     63%|██████▎   | 19/30 [00:15<00:08,  1.29steps/s, loss=(array(0.18541247, dtype=float32),)]     67%|██████▋   | 20/30 [00:15<00:07,  1.30steps/s, loss=(array(0.18541247, dtype=float32),)]     67%|██████▋   | 20/30 [00:15<00:07,  1.30steps/s, loss=(array(0.1848343, dtype=float32),)]      70%|███████   | 21/30 [00:16<00:06,  1.32steps/s, loss=(array(0.1848343, dtype=float32),)]     70%|███████   | 21/30 [00:16<00:06,  1.32steps/s, loss=(array(0.18427087, dtype=float32),)]     73%|███████▎  | 22/30 [00:17<00:06,  1.33steps/s, loss=(array(0.18427087, dtype=float32),)]     73%|███████▎  | 22/30 [00:17<00:06,  1.33steps/s, loss=(array(0.18372108, dtype=float32),)]     77%|███████▋  | 23/30 [00:17<00:05,  1.34steps/s, loss=(array(0.18372108, dtype=float32),)]     77%|███████▋  | 23/30 [00:17<00:05,  1.34steps/s, loss=(array(0.18318355, dtype=float32),)]     80%|████████  | 24/30 [00:18<00:04,  1.34steps/s, loss=(array(0.18318355, dtype=float32),)]     80%|████████  | 24/30 [00:18<00:04,  1.34steps/s, loss=(array(0.18265624, dtype=float32),)]     83%|████████▎ | 25/30 [00:19<00:04,  1.22steps/s, loss=(array(0.18265624, dtype=float32),)]     83%|████████▎ | 25/30 [00:19<00:04,  1.22steps/s, loss=(array(0.18213792, dtype=float32),)]     87%|████████▋ | 26/30 [00:20<00:03,  1.26steps/s, loss=(array(0.18213792, dtype=float32),)]     87%|████████▋ | 26/30 [00:20<00:03,  1.26steps/s, loss=(array(0.18162796, dtype=float32),)]     90%|█████████ | 27/30 [00:21<00:02,  1.29steps/s, loss=(array(0.18162796, dtype=float32),)]     90%|█████████ | 27/30 [00:21<00:02,  1.29steps/s, loss=(array(0.18112668, dtype=float32),)]     93%|█████████▎| 28/30 [00:21<00:01,  1.30steps/s, loss=(array(0.18112668, dtype=float32),)]     93%|█████████▎| 28/30 [00:21<00:01,  1.30steps/s, loss=(array(0.18063489, dtype=float32),)]     97%|█████████▋| 29/30 [00:22<00:00,  1.30steps/s, loss=(array(0.18063489, dtype=float32),)]     97%|█████████▋| 29/30 [00:22<00:00,  1.30steps/s, loss=(array(0.18015379, dtype=float32),)]    100%|██████████| 30/30 [00:23<00:00,  1.31steps/s, loss=(array(0.18015379, dtype=float32),)]    100%|██████████| 30/30 [00:23<00:00,  1.28steps/s, loss=(array(0.18015379, dtype=float32),)]
-      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.17968418, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:24,  1.18steps/s, loss=(array(0.17968418, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:24,  1.18steps/s, loss=(array(0.17922212, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:23,  1.18steps/s, loss=(array(0.17922212, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:23,  1.18steps/s, loss=(array(0.1787579, dtype=float32),)]      10%|█         | 3/30 [00:02<00:22,  1.18steps/s, loss=(array(0.1787579, dtype=float32),)]     10%|█         | 3/30 [00:02<00:22,  1.18steps/s, loss=(array(0.17829368, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:24,  1.07steps/s, loss=(array(0.17829368, dtype=float32),)]     13%|█▎        | 4/30 [00:03<00:24,  1.07steps/s, loss=(array(0.17783226, dtype=float32),)]     17%|█▋        | 5/30 [00:04<00:22,  1.11steps/s, loss=(array(0.17783226, dtype=float32),)]     17%|█▋        | 5/30 [00:04<00:22,  1.11steps/s, loss=(array(0.17737731, dtype=float32),)]     20%|██        | 6/30 [00:05<00:21,  1.13steps/s, loss=(array(0.17737731, dtype=float32),)]     20%|██        | 6/30 [00:05<00:21,  1.13steps/s, loss=(array(0.17693272, dtype=float32),)]     23%|██▎       | 7/30 [00:06<00:20,  1.14steps/s, loss=(array(0.17693272, dtype=float32),)]     23%|██▎       | 7/30 [00:06<00:20,  1.14steps/s, loss=(array(0.17650229, dtype=float32),)]     27%|██▋       | 8/30 [00:07<00:19,  1.15steps/s, loss=(array(0.17650229, dtype=float32),)]     27%|██▋       | 8/30 [00:07<00:19,  1.15steps/s, loss=(array(0.1760895, dtype=float32),)]      30%|███       | 9/30 [00:07<00:18,  1.16steps/s, loss=(array(0.1760895, dtype=float32),)]     30%|███       | 9/30 [00:07<00:18,  1.16steps/s, loss=(array(0.17569728, dtype=float32),)]     33%|███▎      | 10/30 [00:08<00:17,  1.16steps/s, loss=(array(0.17569728, dtype=float32),)]     33%|███▎      | 10/30 [00:08<00:17,  1.16steps/s, loss=(array(0.17532746, dtype=float32),)]     37%|███▋      | 11/30 [00:09<00:16,  1.16steps/s, loss=(array(0.17532746, dtype=float32),)]     37%|███▋      | 11/30 [00:09<00:16,  1.16steps/s, loss=(array(0.17498085, dtype=float32),)]     40%|████      | 12/30 [00:10<00:15,  1.17steps/s, loss=(array(0.17498085, dtype=float32),)]     40%|████      | 12/30 [00:10<00:15,  1.17steps/s, loss=(array(0.17465699, dtype=float32),)]     43%|████▎     | 13/30 [00:11<00:15,  1.08steps/s, loss=(array(0.17465699, dtype=float32),)]     43%|████▎     | 13/30 [00:11<00:15,  1.08steps/s, loss=(array(0.17435403, dtype=float32),)]     47%|████▋     | 14/30 [00:12<00:14,  1.10steps/s, loss=(array(0.17435403, dtype=float32),)]     47%|████▋     | 14/30 [00:12<00:14,  1.10steps/s, loss=(array(0.17406932, dtype=float32),)]     50%|█████     | 15/30 [00:13<00:13,  1.12steps/s, loss=(array(0.17406932, dtype=float32),)]     50%|█████     | 15/30 [00:13<00:13,  1.12steps/s, loss=(array(0.17379919, dtype=float32),)]     53%|█████▎    | 16/30 [00:14<00:12,  1.14steps/s, loss=(array(0.17379919, dtype=float32),)]     53%|█████▎    | 16/30 [00:14<00:12,  1.14steps/s, loss=(array(0.17353997, dtype=float32),)]     57%|█████▋    | 17/30 [00:14<00:11,  1.15steps/s, loss=(array(0.17353997, dtype=float32),)]     57%|█████▋    | 17/30 [00:14<00:11,  1.15steps/s, loss=(array(0.17328829, dtype=float32),)]     60%|██████    | 18/30 [00:15<00:10,  1.16steps/s, loss=(array(0.17328829, dtype=float32),)]     60%|██████    | 18/30 [00:15<00:10,  1.16steps/s, loss=(array(0.17304134, dtype=float32),)]     63%|██████▎   | 19/30 [00:16<00:09,  1.17steps/s, loss=(array(0.17304134, dtype=float32),)]     63%|██████▎   | 19/30 [00:16<00:09,  1.17steps/s, loss=(array(0.172797, dtype=float32),)]       67%|██████▋   | 20/30 [00:17<00:08,  1.17steps/s, loss=(array(0.172797, dtype=float32),)]     67%|██████▋   | 20/30 [00:17<00:08,  1.17steps/s, loss=(array(0.17255388, dtype=float32),)]     70%|███████   | 21/30 [00:18<00:07,  1.17steps/s, loss=(array(0.17255388, dtype=float32),)]     70%|███████   | 21/30 [00:18<00:07,  1.17steps/s, loss=(array(0.17231119, dtype=float32),)]     73%|███████▎  | 22/30 [00:19<00:07,  1.09steps/s, loss=(array(0.17231119, dtype=float32),)]     73%|███████▎  | 22/30 [00:19<00:07,  1.09steps/s, loss=(array(0.17206855, dtype=float32),)]     77%|███████▋  | 23/30 [00:20<00:06,  1.11steps/s, loss=(array(0.17206855, dtype=float32),)]     77%|███████▋  | 23/30 [00:20<00:06,  1.11steps/s, loss=(array(0.17182617, dtype=float32),)]     80%|████████  | 24/30 [00:21<00:05,  1.13steps/s, loss=(array(0.17182617, dtype=float32),)]     80%|████████  | 24/30 [00:21<00:05,  1.13steps/s, loss=(array(0.17158455, dtype=float32),)]     83%|████████▎ | 25/30 [00:21<00:04,  1.15steps/s, loss=(array(0.17158455, dtype=float32),)]     83%|████████▎ | 25/30 [00:21<00:04,  1.15steps/s, loss=(array(0.17134427, dtype=float32),)]     87%|████████▋ | 26/30 [00:22<00:03,  1.16steps/s, loss=(array(0.17134427, dtype=float32),)]     87%|████████▋ | 26/30 [00:22<00:03,  1.16steps/s, loss=(array(0.17110583, dtype=float32),)]     90%|█████████ | 27/30 [00:23<00:02,  1.17steps/s, loss=(array(0.17110583, dtype=float32),)]     90%|█████████ | 27/30 [00:23<00:02,  1.17steps/s, loss=(array(0.17086981, dtype=float32),)]     93%|█████████▎| 28/30 [00:24<00:01,  1.17steps/s, loss=(array(0.17086981, dtype=float32),)]     93%|█████████▎| 28/30 [00:24<00:01,  1.17steps/s, loss=(array(0.1706362, dtype=float32),)]      97%|█████████▋| 29/30 [00:25<00:00,  1.18steps/s, loss=(array(0.1706362, dtype=float32),)]     97%|█████████▋| 29/30 [00:25<00:00,  1.18steps/s, loss=(array(0.17040512, dtype=float32),)]    100%|██████████| 30/30 [00:26<00:00,  1.18steps/s, loss=(array(0.17040512, dtype=float32),)]    100%|██████████| 30/30 [00:26<00:00,  1.15steps/s, loss=(array(0.17040512, dtype=float32),)]
+      3%|▎         | 1/30 [00:00<00:15,  1.88steps/s, loss=(array(0.74174887, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:15,  1.88steps/s, loss=(array(0.6624898, dtype=float32),)]       7%|▋         | 2/30 [00:00<00:13,  2.07steps/s, loss=(array(0.6624898, dtype=float32),)]      7%|▋         | 2/30 [00:00<00:13,  2.07steps/s, loss=(array(0.5745858, dtype=float32),)]     10%|█         | 3/30 [00:01<00:14,  1.86steps/s, loss=(array(0.5745858, dtype=float32),)]     10%|█         | 3/30 [00:01<00:14,  1.86steps/s, loss=(array(0.48269868, dtype=float32),)]     13%|█▎        | 4/30 [00:02<00:13,  1.99steps/s, loss=(array(0.48269868, dtype=float32),)]     13%|█▎        | 4/30 [00:02<00:13,  1.99steps/s, loss=(array(0.39541537, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.09steps/s, loss=(array(0.39541537, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.09steps/s, loss=(array(0.32777995, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.17steps/s, loss=(array(0.32777995, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.17steps/s, loss=(array(0.2930662, dtype=float32),)]      23%|██▎       | 7/30 [00:03<00:10,  2.21steps/s, loss=(array(0.2930662, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.21steps/s, loss=(array(0.2890394, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:09,  2.24steps/s, loss=(array(0.2890394, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:09,  2.24steps/s, loss=(array(0.3044332, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.26steps/s, loss=(array(0.3044332, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.26steps/s, loss=(array(0.3226806, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:08,  2.27steps/s, loss=(array(0.3226806, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:08,  2.27steps/s, loss=(array(0.33095255, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:08,  2.28steps/s, loss=(array(0.33095255, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:08,  2.28steps/s, loss=(array(0.32629323, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  1.94steps/s, loss=(array(0.32629323, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  1.94steps/s, loss=(array(0.3123067, dtype=float32),)]      43%|████▎     | 13/30 [00:06<00:08,  2.04steps/s, loss=(array(0.3123067, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.04steps/s, loss=(array(0.29476866, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.12steps/s, loss=(array(0.29476866, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.12steps/s, loss=(array(0.2790074, dtype=float32),)]      50%|█████     | 15/30 [00:07<00:06,  2.19steps/s, loss=(array(0.2790074, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:06,  2.19steps/s, loss=(array(0.26833394, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.22steps/s, loss=(array(0.26833394, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.22steps/s, loss=(array(0.2633488, dtype=float32),)]      57%|█████▋    | 17/30 [00:07<00:05,  2.26steps/s, loss=(array(0.2633488, dtype=float32),)]     57%|█████▋    | 17/30 [00:07<00:05,  2.26steps/s, loss=(array(0.2626493, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.25steps/s, loss=(array(0.2626493, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.25steps/s, loss=(array(0.2641289, dtype=float32),)]     63%|██████▎   | 19/30 [00:08<00:04,  2.27steps/s, loss=(array(0.2641289, dtype=float32),)]     63%|██████▎   | 19/30 [00:08<00:04,  2.27steps/s, loss=(array(0.26640078, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:04,  2.28steps/s, loss=(array(0.26640078, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:04,  2.28steps/s, loss=(array(0.26791817, dtype=float32),)]     70%|███████   | 21/30 [00:09<00:03,  2.27steps/s, loss=(array(0.26791817, dtype=float32),)]     70%|███████   | 21/30 [00:09<00:03,  2.27steps/s, loss=(array(0.2674212, dtype=float32),)]      73%|███████▎  | 22/30 [00:10<00:04,  1.95steps/s, loss=(array(0.2674212, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:04,  1.95steps/s, loss=(array(0.26476413, dtype=float32),)]     77%|███████▋  | 23/30 [00:10<00:03,  2.05steps/s, loss=(array(0.26476413, dtype=float32),)]     77%|███████▋  | 23/30 [00:10<00:03,  2.05steps/s, loss=(array(0.2606183, dtype=float32),)]      80%|████████  | 24/30 [00:11<00:02,  2.13steps/s, loss=(array(0.2606183, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.13steps/s, loss=(array(0.25595805, dtype=float32),)]     83%|████████▎ | 25/30 [00:11<00:02,  2.19steps/s, loss=(array(0.25595805, dtype=float32),)]     83%|████████▎ | 25/30 [00:11<00:02,  2.19steps/s, loss=(array(0.2515955, dtype=float32),)]      87%|████████▋ | 26/30 [00:12<00:01,  2.24steps/s, loss=(array(0.2515955, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.24steps/s, loss=(array(0.24800545, dtype=float32),)]     90%|█████████ | 27/30 [00:12<00:01,  2.27steps/s, loss=(array(0.24800545, dtype=float32),)]     90%|█████████ | 27/30 [00:12<00:01,  2.27steps/s, loss=(array(0.24536379, dtype=float32),)]     93%|█████████▎| 28/30 [00:12<00:00,  2.29steps/s, loss=(array(0.24536379, dtype=float32),)]     93%|█████████▎| 28/30 [00:12<00:00,  2.29steps/s, loss=(array(0.24350408, dtype=float32),)]     97%|█████████▋| 29/30 [00:13<00:00,  2.31steps/s, loss=(array(0.24350408, dtype=float32),)]     97%|█████████▋| 29/30 [00:13<00:00,  2.31steps/s, loss=(array(0.24218789, dtype=float32),)]    100%|██████████| 30/30 [00:13<00:00,  2.31steps/s, loss=(array(0.24218789, dtype=float32),)]    100%|██████████| 30/30 [00:13<00:00,  2.18steps/s, loss=(array(0.24218789, dtype=float32),)]
+      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.24114266, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:19,  1.46steps/s, loss=(array(0.24114266, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:19,  1.46steps/s, loss=(array(0.2403184, dtype=float32),)]       7%|▋         | 2/30 [00:01<00:15,  1.85steps/s, loss=(array(0.2403184, dtype=float32),)]      7%|▋         | 2/30 [00:01<00:15,  1.85steps/s, loss=(array(0.23923358, dtype=float32),)]     10%|█         | 3/30 [00:01<00:13,  1.96steps/s, loss=(array(0.23923358, dtype=float32),)]     10%|█         | 3/30 [00:01<00:13,  1.96steps/s, loss=(array(0.2377938, dtype=float32),)]      13%|█▎        | 4/30 [00:02<00:12,  2.03steps/s, loss=(array(0.2377938, dtype=float32),)]     13%|█▎        | 4/30 [00:02<00:12,  2.03steps/s, loss=(array(0.23597813, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:12,  2.08steps/s, loss=(array(0.23597813, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:12,  2.08steps/s, loss=(array(0.23384362, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.12steps/s, loss=(array(0.23384362, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.12steps/s, loss=(array(0.2315048, dtype=float32),)]      23%|██▎       | 7/30 [00:03<00:10,  2.14steps/s, loss=(array(0.2315048, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.14steps/s, loss=(array(0.22910872, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:10,  2.16steps/s, loss=(array(0.22910872, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:10,  2.16steps/s, loss=(array(0.22679193, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.16steps/s, loss=(array(0.22679193, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.16steps/s, loss=(array(0.22465384, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:09,  2.16steps/s, loss=(array(0.22465384, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:09,  2.16steps/s, loss=(array(0.22274303, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:10,  1.88steps/s, loss=(array(0.22274303, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:10,  1.88steps/s, loss=(array(0.22106211, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  1.95steps/s, loss=(array(0.22106211, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  1.95steps/s, loss=(array(0.21956852, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.01steps/s, loss=(array(0.21956852, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.01steps/s, loss=(array(0.21818691, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.05steps/s, loss=(array(0.21818691, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.05steps/s, loss=(array(0.21683839, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.09steps/s, loss=(array(0.21683839, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.09steps/s, loss=(array(0.21546698, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.10steps/s, loss=(array(0.21546698, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.10steps/s, loss=(array(0.21405327, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.14steps/s, loss=(array(0.21405327, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.14steps/s, loss=(array(0.21260957, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.16steps/s, loss=(array(0.21260957, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.16steps/s, loss=(array(0.2111696, dtype=float32),)]      63%|██████▎   | 19/30 [00:09<00:05,  2.17steps/s, loss=(array(0.2111696, dtype=float32),)]     63%|██████▎   | 19/30 [00:09<00:05,  2.17steps/s, loss=(array(0.20976941, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:05,  1.90steps/s, loss=(array(0.20976941, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:05,  1.90steps/s, loss=(array(0.20843427, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  1.98steps/s, loss=(array(0.20843427, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  1.98steps/s, loss=(array(0.20717356, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.03steps/s, loss=(array(0.20717356, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.03steps/s, loss=(array(0.20597988, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.07steps/s, loss=(array(0.20597988, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.07steps/s, loss=(array(0.20483182, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.20483182, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.20370455, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.13steps/s, loss=(array(0.20370455, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.13steps/s, loss=(array(0.20257634, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.15steps/s, loss=(array(0.20257634, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.15steps/s, loss=(array(0.20143612, dtype=float32),)]     90%|█████████ | 27/30 [00:13<00:01,  2.17steps/s, loss=(array(0.20143612, dtype=float32),)]     90%|█████████ | 27/30 [00:13<00:01,  2.17steps/s, loss=(array(0.20028496, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:00,  2.17steps/s, loss=(array(0.20028496, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:00,  2.17steps/s, loss=(array(0.19913319, dtype=float32),)]     97%|█████████▋| 29/30 [00:13<00:00,  2.18steps/s, loss=(array(0.19913319, dtype=float32),)]     97%|█████████▋| 29/30 [00:14<00:00,  2.18steps/s, loss=(array(0.1979938, dtype=float32),)]     100%|██████████| 30/30 [00:14<00:00,  1.85steps/s, loss=(array(0.1979938, dtype=float32),)]    100%|██████████| 30/30 [00:14<00:00,  2.04steps/s, loss=(array(0.1979938, dtype=float32),)]
+      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.1968756, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:13,  2.14steps/s, loss=(array(0.1968756, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:13,  2.14steps/s, loss=(array(0.19589812, dtype=float32),)]      7%|▋         | 2/30 [00:00<00:13,  2.14steps/s, loss=(array(0.19589812, dtype=float32),)]      7%|▋         | 2/30 [00:00<00:13,  2.14steps/s, loss=(array(0.19494635, dtype=float32),)]     10%|█         | 3/30 [00:01<00:12,  2.15steps/s, loss=(array(0.19494635, dtype=float32),)]     10%|█         | 3/30 [00:01<00:12,  2.15steps/s, loss=(array(0.19401228, dtype=float32),)]     13%|█▎        | 4/30 [00:01<00:12,  2.16steps/s, loss=(array(0.19401228, dtype=float32),)]     13%|█▎        | 4/30 [00:01<00:12,  2.16steps/s, loss=(array(0.19308996, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.16steps/s, loss=(array(0.19308996, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.16steps/s, loss=(array(0.19217736, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.16steps/s, loss=(array(0.19217736, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.16steps/s, loss=(array(0.19127743, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.15steps/s, loss=(array(0.19127743, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.15steps/s, loss=(array(0.19039711, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:10,  2.15steps/s, loss=(array(0.19039711, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:10,  2.15steps/s, loss=(array(0.18954474, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.16steps/s, loss=(array(0.18954474, dtype=float32),)]     30%|███       | 9/30 [00:04<00:09,  2.16steps/s, loss=(array(0.18872756, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:10,  1.87steps/s, loss=(array(0.18872756, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:10,  1.87steps/s, loss=(array(0.18794966, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:09,  1.95steps/s, loss=(array(0.18794966, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:09,  1.95steps/s, loss=(array(0.18721054, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  2.00steps/s, loss=(array(0.18721054, dtype=float32),)]     40%|████      | 12/30 [00:05<00:09,  2.00steps/s, loss=(array(0.18650621, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.05steps/s, loss=(array(0.18650621, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.05steps/s, loss=(array(0.18583114, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.08steps/s, loss=(array(0.18583114, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.08steps/s, loss=(array(0.18518019, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.11steps/s, loss=(array(0.18518019, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.11steps/s, loss=(array(0.18454999, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.13steps/s, loss=(array(0.18454999, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.13steps/s, loss=(array(0.18393883, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.15steps/s, loss=(array(0.18393883, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.15steps/s, loss=(array(0.18334684, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.15steps/s, loss=(array(0.18334684, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:05,  2.15steps/s, loss=(array(0.18277511, dtype=float32),)]     63%|██████▎   | 19/30 [00:09<00:05,  1.88steps/s, loss=(array(0.18277511, dtype=float32),)]     63%|██████▎   | 19/30 [00:09<00:05,  1.88steps/s, loss=(array(0.1822244, dtype=float32),)]      67%|██████▋   | 20/30 [00:09<00:05,  1.96steps/s, loss=(array(0.1822244, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:05,  1.96steps/s, loss=(array(0.1816939, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  2.01steps/s, loss=(array(0.1816939, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  2.01steps/s, loss=(array(0.18118192, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.05steps/s, loss=(array(0.18118192, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.05steps/s, loss=(array(0.18068543, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.08steps/s, loss=(array(0.18068543, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.08steps/s, loss=(array(0.18020141, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.18020141, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.17972763, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.10steps/s, loss=(array(0.17972763, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.10steps/s, loss=(array(0.17926294, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.11steps/s, loss=(array(0.17926294, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.11steps/s, loss=(array(0.17880729, dtype=float32),)]     90%|█████████ | 27/30 [00:12<00:01,  2.12steps/s, loss=(array(0.17880729, dtype=float32),)]     90%|█████████ | 27/30 [00:13<00:01,  2.12steps/s, loss=(array(0.17836162, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:00,  2.13steps/s, loss=(array(0.17836162, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:00,  2.13steps/s, loss=(array(0.17792685, dtype=float32),)]     97%|█████████▋| 29/30 [00:14<00:00,  1.87steps/s, loss=(array(0.17792685, dtype=float32),)]     97%|█████████▋| 29/30 [00:14<00:00,  1.87steps/s, loss=(array(0.1775034, dtype=float32),)]     100%|██████████| 30/30 [00:14<00:00,  1.95steps/s, loss=(array(0.1775034, dtype=float32),)]    100%|██████████| 30/30 [00:14<00:00,  2.05steps/s, loss=(array(0.1775034, dtype=float32),)]
+      0%|          | 0/30 [00:00<?, ?steps/s]      0%|          | 0/30 [00:00<?, ?steps/s, loss=(array(0.17709076, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:13,  2.14steps/s, loss=(array(0.17709076, dtype=float32),)]      3%|▎         | 1/30 [00:00<00:13,  2.14steps/s, loss=(array(0.1766837, dtype=float32),)]       7%|▋         | 2/30 [00:00<00:13,  2.14steps/s, loss=(array(0.1766837, dtype=float32),)]      7%|▋         | 2/30 [00:00<00:13,  2.14steps/s, loss=(array(0.17627215, dtype=float32),)]     10%|█         | 3/30 [00:01<00:12,  2.13steps/s, loss=(array(0.17627215, dtype=float32),)]     10%|█         | 3/30 [00:01<00:12,  2.13steps/s, loss=(array(0.17585817, dtype=float32),)]     13%|█▎        | 4/30 [00:01<00:12,  2.12steps/s, loss=(array(0.17585817, dtype=float32),)]     13%|█▎        | 4/30 [00:01<00:12,  2.12steps/s, loss=(array(0.17544465, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.14steps/s, loss=(array(0.17544465, dtype=float32),)]     17%|█▋        | 5/30 [00:02<00:11,  2.14steps/s, loss=(array(0.17503506, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.13steps/s, loss=(array(0.17503506, dtype=float32),)]     20%|██        | 6/30 [00:02<00:11,  2.13steps/s, loss=(array(0.17463292, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.13steps/s, loss=(array(0.17463292, dtype=float32),)]     23%|██▎       | 7/30 [00:03<00:10,  2.13steps/s, loss=(array(0.17424181, dtype=float32),)]     27%|██▋       | 8/30 [00:03<00:11,  1.83steps/s, loss=(array(0.17424181, dtype=float32),)]     27%|██▋       | 8/30 [00:04<00:11,  1.83steps/s, loss=(array(0.17386472, dtype=float32),)]     30%|███       | 9/30 [00:04<00:10,  1.92steps/s, loss=(array(0.17386472, dtype=float32),)]     30%|███       | 9/30 [00:04<00:10,  1.92steps/s, loss=(array(0.17350408, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:10,  1.98steps/s, loss=(array(0.17350408, dtype=float32),)]     33%|███▎      | 10/30 [00:04<00:10,  1.98steps/s, loss=(array(0.17316167, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:09,  2.02steps/s, loss=(array(0.17316167, dtype=float32),)]     37%|███▋      | 11/30 [00:05<00:09,  2.02steps/s, loss=(array(0.1728387, dtype=float32),)]      40%|████      | 12/30 [00:05<00:08,  2.06steps/s, loss=(array(0.1728387, dtype=float32),)]     40%|████      | 12/30 [00:05<00:08,  2.06steps/s, loss=(array(0.17253532, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.08steps/s, loss=(array(0.17253532, dtype=float32),)]     43%|████▎     | 13/30 [00:06<00:08,  2.08steps/s, loss=(array(0.1722506, dtype=float32),)]      47%|████▋     | 14/30 [00:06<00:07,  2.10steps/s, loss=(array(0.1722506, dtype=float32),)]     47%|████▋     | 14/30 [00:06<00:07,  2.10steps/s, loss=(array(0.1719825, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.11steps/s, loss=(array(0.1719825, dtype=float32),)]     50%|█████     | 15/30 [00:07<00:07,  2.11steps/s, loss=(array(0.17172804, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.13steps/s, loss=(array(0.17172804, dtype=float32),)]     53%|█████▎    | 16/30 [00:07<00:06,  2.13steps/s, loss=(array(0.17148352, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.12steps/s, loss=(array(0.17148352, dtype=float32),)]     57%|█████▋    | 17/30 [00:08<00:06,  2.12steps/s, loss=(array(0.17124557, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:06,  1.86steps/s, loss=(array(0.17124557, dtype=float32),)]     60%|██████    | 18/30 [00:08<00:06,  1.86steps/s, loss=(array(0.17101122, dtype=float32),)]     63%|██████▎   | 19/30 [00:09<00:05,  1.94steps/s, loss=(array(0.17101122, dtype=float32),)]     63%|██████▎   | 19/30 [00:09<00:05,  1.94steps/s, loss=(array(0.17077847, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:05,  1.99steps/s, loss=(array(0.17077847, dtype=float32),)]     67%|██████▋   | 20/30 [00:09<00:05,  1.99steps/s, loss=(array(0.17054611, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  2.03steps/s, loss=(array(0.17054611, dtype=float32),)]     70%|███████   | 21/30 [00:10<00:04,  2.03steps/s, loss=(array(0.17031366, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.05steps/s, loss=(array(0.17031366, dtype=float32),)]     73%|███████▎  | 22/30 [00:10<00:03,  2.05steps/s, loss=(array(0.17008108, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.06steps/s, loss=(array(0.17008108, dtype=float32),)]     77%|███████▋  | 23/30 [00:11<00:03,  2.06steps/s, loss=(array(0.16984895, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.16984895, dtype=float32),)]     80%|████████  | 24/30 [00:11<00:02,  2.10steps/s, loss=(array(0.16961786, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.15steps/s, loss=(array(0.16961786, dtype=float32),)]     83%|████████▎ | 25/30 [00:12<00:02,  2.15steps/s, loss=(array(0.16938862, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.18steps/s, loss=(array(0.16938862, dtype=float32),)]     87%|████████▋ | 26/30 [00:12<00:01,  2.18steps/s, loss=(array(0.16916189, dtype=float32),)]     90%|█████████ | 27/30 [00:13<00:01,  2.21steps/s, loss=(array(0.16916189, dtype=float32),)]     90%|█████████ | 27/30 [00:13<00:01,  2.21steps/s, loss=(array(0.16893798, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:01,  1.82steps/s, loss=(array(0.16893798, dtype=float32),)]     93%|█████████▎| 28/30 [00:13<00:01,  1.82steps/s, loss=(array(0.16871688, dtype=float32),)]     97%|█████████▋| 29/30 [00:14<00:00,  1.93steps/s, loss=(array(0.16871688, dtype=float32),)]     97%|█████████▋| 29/30 [00:14<00:00,  1.93steps/s, loss=(array(0.16849828, dtype=float32),)]    100%|██████████| 30/30 [00:14<00:00,  2.02steps/s, loss=(array(0.16849828, dtype=float32),)]    100%|██████████| 30/30 [00:14<00:00,  2.04steps/s, loss=(array(0.16849828, dtype=float32),)]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 290-294
+.. GENERATED FROM PYTHON SOURCE LINES 295-308
+
+.. code-block:: Python
+
+
+    # Make a GIF of all images.
+    imgs = [Image.open(img) for img in image_files]
+    imgs[0].save(
+        "mrinufft_learn_traj_multires.gif",
+        save_all=True,
+        append_images=imgs[1:],
+        optimize=False,
+        duration=2,
+        loop=0,
+    )
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 333-337
 
 .. image-sg:: /generated/autoexamples/images/mrinufft_learn_traj_multires.gif
    :alt: example learn_samples
    :srcset: /generated/autoexamples/images/mrinufft_learn_traj_multires.gif
    :class: sphx-glr-single-img
 
-.. GENERATED FROM PYTHON SOURCE LINES 296-298
+.. GENERATED FROM PYTHON SOURCE LINES 339-341
 
-Trained trajectory
-------------------
+Results
+-------
 
-.. GENERATED FROM PYTHON SOURCE LINES 298-311
+.. GENERATED FROM PYTHON SOURCE LINES 341-346
 
 .. code-block:: Python
 
+
     model.eval()
-    recon = model(mri_2D)
-    fig, axs = plt.subplots(2, 2, figsize=(10, 10))
-    plot_state(
-        axs,
-        mri_2D,
-        model.get_trajectory().detach().cpu().numpy(),
-        recon=recon,
-        control_points=None,
-        loss=losses,
-    )
+    final_recons = model(image)
+    final_traj = model.get_trajectory().detach().cpu().numpy()
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 347-352
+
+.. code-block:: Python
+
+
+    fig, axs = plt.subplots(1, 3, figsize=(9, 3))
+    plot_state(axs, image, final_traj, final_recons)
     plt.show()
 
 
 
 
 .. image-sg:: /generated/autoexamples/images/sphx_glr_example_learn_samples_multires_002.png
-   :alt: MR Image, Trajectory, Reconstruction, Loss
+   :alt: MR Image, Trajectory, Reconstruction
    :srcset: /generated/autoexamples/images/sphx_glr_example_learn_samples_multires_002.png
    :class: sphx-glr-single-img
 
@@ -441,29 +569,30 @@ Trained trajectory
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 312-318
+.. GENERATED FROM PYTHON SOURCE LINES 353-360
 
-.. note::
-  The above learned trajectory is not that good because:
-   - The trajectory is trained only for 5 iterations per decimation level, resulting in a suboptimal trajectory.
-   - In order to make the example CPU compliant, we had to resort to preventing density compensation, hence the reconstructor is not good.
+The learned trajectory above improves the reconstruction quality as compared to
+the initial trajectory shown above. Note of course that the reconstructed
+image is far from perfect because of the documentation rendering constraints.
+In order to improve the results one can start by training it for more than
+just 5 iterations per decimation level. Also density compensation should be used,
+even though it was avoided here for CPU compliance. Check out
+:ref:`sphx_glr_generated_autoexamples_GPU_example_learn_samples.py` to know more.
 
-Users are requested to checkout :ref:`sphx_glr_generated_autoexamples_GPU_example_learn_samples.py` for example with density compensation.
-
-.. GENERATED FROM PYTHON SOURCE LINES 320-335
+.. GENERATED FROM PYTHON SOURCE LINES 364-379
 
 References
 ==========
 
-.. [Proj] N. Chauffert, P. Weiss, J. Kahn and P. Ciuciu, "A Projection Algorithm for
+.. [Cha+16] N. Chauffert, P. Weiss, J. Kahn and P. Ciuciu, "A Projection Algorithm for
           Gradient Waveforms Design in Magnetic Resonance Imaging," in
           IEEE Transactions on Medical Imaging, vol. 35, no. 9, pp. 2026-2039, Sept. 2016,
           doi: 10.1109/TMI.2016.2544251.
-.. [Sparks] G. R. Chaithya, P. Weiss, G. Daval-Frérot, A. Massire, A. Vignaud and P. Ciuciu,
+.. [Cha+22] G. R. Chaithya, P. Weiss, G. Daval-Frérot, A. Massire, A. Vignaud and P. Ciuciu,
           "Optimizing Full 3D SPARKLING Trajectories for High-Resolution Magnetic
           Resonance Imaging," in IEEE Transactions on Medical Imaging, vol. 41, no. 8,
           pp. 2105-2117, Aug. 2022, doi: 10.1109/TMI.2022.3157269.
-.. [Projector] Chaithya GR, and Philippe Ciuciu. 2023. "Jointly Learning Non-Cartesian
+.. [GRC23] Chaithya GR, and Philippe Ciuciu. 2023. "Jointly Learning Non-Cartesian
           k-Space Trajectories and Reconstruction Networks for 2D and 3D MR Imaging
           through Projection" Bioengineering 10, no. 2: 158.
           https://doi.org/10.3390/bioengineering10020158
@@ -471,7 +600,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 40.301 seconds)
+   **Total running time of the script:** (1 minutes 4.041 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_learn_samples_multires.py:
