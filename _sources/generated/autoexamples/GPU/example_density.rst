@@ -103,7 +103,7 @@ Create sample data
     /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/finufft/_interfaces.py:329: UserWarning: Argument `data` does not satisfy the following requirement: C. Copying array (this may reduce performance)
       warnings.warn(f"Argument `{name}` does not satisfy the following requirement: {prop}. Copying array (this may reduce performance)")
 
-    <matplotlib.image.AxesImage object at 0x7d2b32972200>
+    <matplotlib.image.AxesImage object at 0x7a4fec666200>
 
 
 
@@ -331,7 +331,7 @@ Pipe's method is an iterative scheme, that use the interpolation and spreading k
 
  .. code-block:: none
 
-    [0.00156097 0.00726282 0.01470091 ... 0.5710101  0.46609035 0.6113126 ]
+    [0.00154944 0.00707109 0.01425768 ... 0.5689589  0.4683053  0.6065078 ]
 
 
 
@@ -339,7 +339,7 @@ Pipe's method is an iterative scheme, that use the interpolation and spreading k
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 4.152 seconds)
+   **Total running time of the script:** (0 minutes 4.106 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_GPU_example_density.py:
