@@ -39,6 +39,7 @@ MRINufftAutoGrad
       ~MRINufftAutoGrad.ipu
       ~MRINufftAutoGrad.load_state_dict
       ~MRINufftAutoGrad.modules
+      ~MRINufftAutoGrad.mtia
       ~MRINufftAutoGrad.named_buffers
       ~MRINufftAutoGrad.named_children
       ~MRINufftAutoGrad.named_modules
@@ -52,11 +53,14 @@ MRINufftAutoGrad
       ~MRINufftAutoGrad.register_full_backward_hook
       ~MRINufftAutoGrad.register_full_backward_pre_hook
       ~MRINufftAutoGrad.register_load_state_dict_post_hook
+      ~MRINufftAutoGrad.register_load_state_dict_pre_hook
       ~MRINufftAutoGrad.register_module
       ~MRINufftAutoGrad.register_parameter
+      ~MRINufftAutoGrad.register_state_dict_post_hook
       ~MRINufftAutoGrad.register_state_dict_pre_hook
       ~MRINufftAutoGrad.requires_grad_
       ~MRINufftAutoGrad.set_extra_state
+      ~MRINufftAutoGrad.set_submodule
       ~MRINufftAutoGrad.share_memory
       ~MRINufftAutoGrad.state_dict
       ~MRINufftAutoGrad.to

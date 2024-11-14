@@ -45,38 +45,6 @@ An animation to show 2D trajectory customization.
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /volatile/github-ci-mind-inria/action-runner/_work/_tool/Python/3.10.14/x64/lib/python3.10/site-packages/cupy/_environment.py:487: UserWarning: 
-    --------------------------------------------------------------------------------
-
-      CuPy may not function correctly because multiple CuPy packages are installed
-      in your environment:
-
-        cupy-cuda11x, cupy-cuda12x
-
-      Follow these steps to resolve this issue:
-
-        1. For all packages listed above, run the following command to remove all
-           existing CuPy installations:
-
-             $ pip uninstall <package_name>
-
-          If you previously installed CuPy via conda, also run the following:
-
-             $ conda uninstall cupy
-
-        2. Install the appropriate CuPy package.
-           Refer to the Installation Guide for detailed instructions.
-
-             https://docs.cupy.dev/en/stable/install.html
-
-    --------------------------------------------------------------------------------
-
-      warnings.warn(f'''
-
 
 
 
@@ -306,7 +274,7 @@ Animation rendering
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 40.964 seconds)
+   **Total running time of the script:** (2 minutes 13.315 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_example_gif_2D.py:

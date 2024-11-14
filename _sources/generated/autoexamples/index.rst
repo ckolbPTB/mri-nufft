@@ -153,6 +153,23 @@ This is a collection of examples showing how to use MRI-nufft to perform MR imag
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to setup a subspace NUFFT operator.">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/images/thumb/sphx_glr_example_subspace_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_example_subspace.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Subspace NUFFT Operator</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="An example to show how to customize trajectory displays.">
 
 .. only:: html
@@ -203,6 +220,7 @@ This is a collection of examples showing how to use MRI-nufft to perform MR imag
    /generated/autoexamples/example_readme
    /generated/autoexamples/example_offresonance
    /generated/autoexamples/example_stacked
+   /generated/autoexamples/example_subspace
    /generated/autoexamples/example_display_config
    /generated/autoexamples/example_trajectory_tools
 
@@ -302,6 +320,23 @@ This is a collection of examples showing features of mri-nufft, particularly tho
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Reconstruction with conjugate gradient</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This model is a simplified version of the U-Net architecture,  which is widely used for image segmentation tasks.   This is implemented in the proprietary FASTMRI package [fastmri]_.  ">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_fastMRI_UNet_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_GPU_example_fastMRI_UNet.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Simple UNet model.</div>
     </div>
 
 

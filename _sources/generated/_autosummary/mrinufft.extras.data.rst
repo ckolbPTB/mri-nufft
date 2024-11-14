@@ -15,8 +15,7 @@
       :toctree:
       :nosignatures:
    
-      make_b0map
-      make_t2smap
+      get_brainweb_map
    
    
 

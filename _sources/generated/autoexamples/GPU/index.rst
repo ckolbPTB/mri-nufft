@@ -102,6 +102,23 @@ This is a collection of examples showing features of mri-nufft, particularly tho
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This model is a simplified version of the U-Net architecture,  which is widely used for image segmentation tasks.   This is implemented in the proprietary FASTMRI package [fastmri]_.  ">
+
+.. only:: html
+
+  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_fastMRI_UNet_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_generated_autoexamples_GPU_example_fastMRI_UNet.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Simple UNet model.</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -117,4 +134,5 @@ This is a collection of examples showing features of mri-nufft, particularly tho
    /generated/autoexamples/GPU/example_learn_samples_multicoil
    /generated/autoexamples/GPU/example_learn_straight_line_readouts
    /generated/autoexamples/GPU/example_cg
+   /generated/autoexamples/GPU/example_fastMRI_UNet
 

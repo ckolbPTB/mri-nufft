@@ -26,7 +26,9 @@
    :recursive:
 
    data
+   field_map
    gradient
+   sim
    smaps
    utils
 

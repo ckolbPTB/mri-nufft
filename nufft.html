@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -36,13 +38,14 @@
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -53,9 +56,10 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The trajectory binary file specification" href="trajectory_gradspec.html" />
-    <link rel="prev" title="Reconstruction with conjugate gradient" href="generated/autoexamples/GPU/example_cg.html" />
+    <link rel="prev" title="Simple UNet model." href="generated/autoexamples/GPU/example_fastMRI_UNet.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -71,19 +75,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -91,7 +84,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -99,8 +91,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -116,7 +108,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -146,21 +139,17 @@
     
     
     <img src="_static/mri-nufft.png" class="logo__image only-light" alt="MRI-nufft Documentation - Home"/>
-    <script>document.write(`<img src="_static/mri-nufft.png" class="logo__image only-dark" alt="MRI-nufft Documentation - Home"/>`);</script>
+    <img src="_static/mri-nufft.png" class="logo__image only-dark pst-js-only" alt="MRI-nufft Documentation - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -184,6 +173,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_readme.html">Minimal example script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_offresonance.html">Off-resonance corrected NUFFT operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_stacked.html">Stacked NUFFT operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_subspace.html">Subspace NUFFT Operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_display_config.html">Trajectory display configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/autoexamples/example_trajectory_tools.html">Trajectory tools</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/autoexamples/GPU/index.html">GPU Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -192,6 +182,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_learn_samples_multicoil.html">Learn Sampling pattern for multi-coil MRI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_learn_straight_line_readouts.html">Learn Straight line readout pattern</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_cg.html">Reconstruction with conjugate gradient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/autoexamples/GPU/example_fastMRI_UNet.html">Simple UNet model.</a></li>
 </ul>
 </details></li>
 </ul>
@@ -292,6 +283,10 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.stacked.traj3d2stacked.html">traj3d2stacked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.stacked.MRIStackedNUFFT.html">MRIStackedNUFFT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.stacked.MRIStackedNUFFTGPU.html">MRIStackedNUFFTGPU</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.subspace.html"><code class="docutils literal notranslate"><span class="pre">operators.subspace</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.operators.subspace.MRISubspace.html">MRISubspace</a></li>
 </ul>
 </details></li>
 </ul>
@@ -436,12 +431,20 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.html"><code class="docutils literal notranslate"><span class="pre">mrinufft.extras</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.data.html"><code class="docutils literal notranslate"><span class="pre">extras.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.data.make_b0map.html">make_b0map</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.data.make_t2smap.html">make_t2smap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.data.get_brainweb_map.html">get_brainweb_map</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.field_map.html"><code class="docutils literal notranslate"><span class="pre">extras.field_map</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.field_map.make_b0map.html">make_b0map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.field_map.make_t2smap.html">make_t2smap</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.gradient.html"><code class="docutils literal notranslate"><span class="pre">extras.gradient</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.gradient.cg.html">cg</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.sim.html"><code class="docutils literal notranslate"><span class="pre">extras.sim</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.sim.fse_simulation.html">fse_simulation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/_autosummary/mrinufft.extras.smaps.html"><code class="docutils literal notranslate"><span class="pre">extras.smaps</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -646,24 +649,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -692,6 +687,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-of-the-acquisition-model">Extension of the Acquisition model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-imaging-model">Parallel Imaging Model</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#off-resonance-correction-model">Off-resonance correction model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subspace-projection-model">Subspace Projection Model</a></li>
 </ul>
 </li>
 </ul>
@@ -718,7 +714,7 @@ document.write(`
 <h2>The Non-Uniform Discrete Fourier Transform<a class="headerlink" href="#the-non-uniform-discrete-fourier-transform" title="Link to this heading">#</a></h2>
 <p>The Non-Uniform Discrete Fourier Transform (NUDFT) is a generalization of the Discrete Fourier Transform (DFT) to non-uniform sampling.</p>
 <p>For a signal <span class="math notranslate nohighlight">\(x\)</span> sampled at location <span class="math notranslate nohighlight">\(p_0, p_1, \ldots, p_{N-1}\)</span> we want to get the frequency points (non uniformly spaced) at <span class="math notranslate nohighlight">\(\nu_0, \nu_1, \ldots, \nu_{M-1}\)</span></p>
-<p>The 1D-NUDFT <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is defined as:</p>
+<p>The 1D-NUDFT <a class="footnote-reference brackets" href="#id5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is defined as:</p>
 <div class="math notranslate nohighlight">
 \[X_k = \sum_{n=0}^{N-1} x(p_n) e^{ -2\imath \pi p_n \nu_k}\]</div>
 <p>where <span class="math notranslate nohighlight">\(X_k\)</span> is the frequency point at <span class="math notranslate nohighlight">\(\nu_k\)</span>.</p>
@@ -755,8 +751,8 @@ This is stated using the operator notation:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{y} = \mathcal{F}_\Omega (\boldsymbol{x}) + \boldsymbol{n}\]</div>
 <p>As the sampling locations <span class="math notranslate nohighlight">\(\Omega\)</span> are non-uniform and the image locations <span class="math notranslate nohighlight">\(\boldsymbol{u}_j\)</span> are uniform, <span class="math notranslate nohighlight">\(\mathcal{F}_\Omega\)</span> is a NUDFT operator, and the equation above describe a Type 2 NUDFT. Similarly the adjoint operator is:</p>
-<div class="pst-scrollable-table-container"><table class="table" id="id7">
-<caption><span class="caption-text">Correspondance Table between NUFFT and MRI acquisition model.</span><a class="headerlink" href="#id7" title="Link to this table">#</a></caption>
+<div class="pst-scrollable-table-container"><table class="table" id="id9">
+<caption><span class="caption-text">Correspondance Table between NUFFT and MRI acquisition model.</span><a class="headerlink" href="#id9" title="Link to this table">#</a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 25.0%" />
@@ -820,21 +816,61 @@ solving this problem is <strong>not</strong> addressed here, but you can check <
 <div class="math notranslate nohighlight">
 \[x(\boldsymbol{u_n}) = \sum_{m}^M y(t_m) e^{2\imath\pi \boldsymbol{u} \cdot \boldsymbol{\nu_i}} e^{i\Delta\omega(\boldsymbol{u_n}) t_m}\]</div>
 <p>With these mixed-domain field pertubations, the Fourier model does not hold anymore and the FFT algorithm cannot be used any longer.
-The main approach (initially proposed by Noll et al. <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) is to approximate the mixed-domain exponential term by splitting it into single-domain weights <span class="math notranslate nohighlight">\(b_{m, \ell}\)</span> and <span class="math notranslate nohighlight">\(c_{\ell, n}\)</span>:</p>
+The main approach (initially proposed by Noll et al. <a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>) is to approximate the mixed-domain exponential term by splitting it into single-domain weights <span class="math notranslate nohighlight">\(b_{m, \ell}\)</span> and <span class="math notranslate nohighlight">\(c_{\ell, n}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[e^{i\Delta\omega(\boldsymbol{u_n}) t_m} = \sum_{\ell=1}^L b_{m, \ell}\, c_{\ell, n}\]</div>
 <p>Yielding the following model, where <span class="math notranslate nohighlight">\(L \ll M, N\)</span> regular Fourier transforms are performed to approximate the non-Fourier transform.</p>
 <div class="math notranslate nohighlight">
 \[x(\boldsymbol{u_n}) = \sum_{\ell=1}^L c_{\ell, n} \sum_{m}^M y(t_m) b_{m, \ell} e^{2\imath\pi \boldsymbol{u} \cdot \boldsymbol{\nu_i}}\]</div>
-<p>The coefficients <span class="math notranslate nohighlight">\(B=(b_{m, \ell}) \in \mathbb{C}^{M\times L}\)</span> and <span class="math notranslate nohighlight">\(C=(c_\ell, n) \in \mathbb{C}^{L\times N}\)</span> can be (optimally) estimated for any given <span class="math notranslate nohighlight">\(L\)</span> by solving the following matrix factorisation problem <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>:</p>
+<p>The coefficients <span class="math notranslate nohighlight">\(B=(b_{m, \ell}) \in \mathbb{C}^{M\times L}\)</span> and <span class="math notranslate nohighlight">\(C=(c_\ell, n) \in \mathbb{C}^{L\times N}\)</span> can be (optimally) estimated for any given <span class="math notranslate nohighlight">\(L\)</span> by solving the following matrix factorisation problem <a class="footnote-reference brackets" href="#id7" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>:</p>
 <div class="math notranslate nohighlight">
 \[\hat{B}, \hat{C} = \arg\min_{B,C} \| E- BC\|_{fro}^2\]</div>
 <p>Where <span class="math notranslate nohighlight">\(E_mn = e^i\Delta\omega_0(u_n)t_m\)</span>.</p>
 </section>
+<section id="subspace-projection-model">
+<span id="nufft-algo"></span><h4>Subspace Projection Model<a class="headerlink" href="#subspace-projection-model" title="Link to this heading">#</a></h4>
+<p>In several MRI applications, such as dynamic or quantitative MRI, a single acquisition provides a stack of two- or three-dimensional images, each representing a single time frame (for dynamic MRI) or a single contrast (for quantitative MRI).
+To achieve a clinically feasible scan time, each frame or contrast is acquired with a different aggressively undersampled k-space trajectory. In this context, the single-coil acquisition model becomes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\tilde{\boldsymbol{y}} = \begin{bmatrix}
+   \mathcal{F}_\Omega_1 &amp; 0 &amp; \cdots &amp; 0 \\
+   0 &amp; \mathcal{F}_\Omega_2 &amp; \cdots &amp; 0 \\
+   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+   0 &amp; 0 &amp; \cdots &amp; \mathcal{F}_\Omega_T
+\end{bmatrix}
+\boldsymbol{x} + \boldsymbol{n}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{F}_\Omega_1, \dots, \mathcal{F}_\Omega_T\)</span> are the Fourier operators corresponding to each individual frame. Some applications (e.g., MR Fingerprinting <a class="footnote-reference brackets" href="#id7" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>) may consists of
+thousands of total frames <span class="math notranslate nohighlight">\(T\)</span>, leading to repeated Fourier Transform operations and high computational burden. However, the 1D signal series arising from similar voxels, e.g., with similar
+relaxation properties, are typically highly correlated. For this reason, the image series can be represented as:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{x} = \Phi\Phi^H \boldsymbol{x}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi\)</span> is an orthonormal basis spanning a low dimensional subspace whose rank <span class="math notranslate nohighlight">\(K \ll T\)</span> which can be obtained performing a Singular Value Decomposition of a low resolution fully sampled
+training dataset or an ensemble of simulated Bloch responses. The signal model can be then written as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\tilde{\boldsymbol{y}} = \begin{bmatrix}
+   \mathcal{F}_\Omega_1 &amp; 0 &amp; \cdots &amp; 0 \\
+   0 &amp; \mathcal{F}_\Omega_2 &amp; \cdots &amp; 0 \\
+   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+   0 &amp; 0 &amp; \cdots &amp; \mathcal{F}_\Omega_T
+\end{bmatrix}
+\Phi \Phi^H \boldsymbol{x} + \boldsymbol{n} =
+ \begin{bmatrix}
+   \mathcal{F}_\Omega_1 &amp; 0 &amp; \cdots &amp; 0 \\
+   0 &amp; \mathcal{F}_\Omega_2 &amp; \cdots &amp; 0 \\
+   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+   0 &amp; 0 &amp; \cdots &amp; \mathcal{F}_\Omega_T
+\end{bmatrix}
+\Phi \boldsymbol{\alpha} + \boldsymbol{n}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\alpha} = \Phi^H \boldsymbol{x}\)</span> are the spatial coefficients representing the image series. Since the elements of <span class="math notranslate nohighlight">\(\Phi^H\)</span> do not depend on the specific k-space frequency points,
+the projection operator <span class="math notranslate nohighlight">\(\boldsymbol{\Phi}\)</span> commutes with the Fourier transform, and the signal equation finally becomes:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{\boldsymbol{y}} = \Phi \mathcal{F}_Omega(\boldsymbol{\alpha}) + \boldsymbol{n}\]</div>
+<p>that is, computation now involves <span class="math notranslate nohighlight">\(K \ll T\)</span> Fourier Transform operations, each with the same sampling trajectory, which can be computed by levaraging efficient NUFFT implementations for conventional static MRI.</p>
+</section>
 </section>
 </section>
 <section id="the-non-uniform-fast-fourier-transform">
-<span id="nufft-algo"></span><h2>The Non Uniform Fast Fourier Transform<a class="headerlink" href="#the-non-uniform-fast-fourier-transform" title="Link to this heading">#</a></h2>
+<h2>The Non Uniform Fast Fourier Transform<a class="headerlink" href="#the-non-uniform-fast-fourier-transform" title="Link to this heading">#</a></h2>
 <p>In order to lower the computational cost of the Non-Uniform Fourier Transform, the main idea is to move back to a regular grid where an FFT would be performed (going from a typical <span class="math notranslate nohighlight">\(O(MN)\)</span> complexity to <cite>O(Mlog(N))</cite>). Thus, the main steps of the <em>Non-Uniform Fast Fourier Transform</em> are for the type 1:</p>
 <ol class="arabic simple">
 <li><p>Spreading/Interpolation of the non-uniform points to an oversampled Cartesian grid (typically with twice the resolution of the final image)</p></li>
@@ -863,17 +899,27 @@ The main approach (initially proposed by Noll et al. <a class="footnote-referenc
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id4" role="doc-footnote">
+<aside class="footnote brackets" id="id5" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://en.m.wikipedia.org/wiki/Non-uniform_discrete_Fourier_transform">https://en.m.wikipedia.org/wiki/Non-uniform_discrete_Fourier_transform</a></p>
 </aside>
-<aside class="footnote brackets" id="id5" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>Noll, D. C., Meyer, C. H., Pauly, J. M., Nishimura, D. G., Macovski, A., “A homogeneity correction method for magnetic resonance imaging with time-varying gradients”, IEEE Transaction on Medical Imaging (1991), pp. 629-637</p>
-</aside>
 <aside class="footnote brackets" id="id6" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Noll, D. C., Meyer, C. H., Pauly, J. M., Nishimura, D. G., Macovski, A., “A homogeneity correction method for magnetic resonance imaging with time-varying gradients”, IEEE Transaction on Medical Imaging (1991), pp. 629-637.</p>
+</aside>
+<aside class="footnote brackets" id="id7" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
 <p>Fessler, J. A., Lee, S., Olafsson, V. T., Shi, H. R., Noll, D. C., “Toeplitz-based iterative image reconstruction for MRI with correction for magnetic field inhomogeneity”,  IEEE Transactions on Signal Processing 53.9 (2005), pp. 3393–3402.</p>
+</aside>
+<aside class="footnote brackets" id="id8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="4">
+<li><ol class="upperalpha simple" start="6">
+<li><p>McGivney et al., “SVD Compression for Magnetic Resonance Fingerprinting in the Time Domain,” IEEE Transactions on Medical Imaging (2014), pp. 2311-2322.</p></li>
+</ol>
+</li>
+</ol>
 </aside>
 </aside>
 </section>
@@ -891,12 +937,12 @@ The main approach (initially proposed by Noll et al. <a class="footnote-referenc
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="generated/autoexamples/GPU/example_cg.html"
+       href="generated/autoexamples/GPU/example_fastMRI_UNet.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reconstruction with conjugate gradient</p>
+        <p class="prev-next-title">Simple UNet model.</p>
       </div>
     </a>
     <a class="right-next"
@@ -915,7 +961,8 @@ The main approach (initially proposed by Noll et al. <a class="footnote-referenc
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -929,6 +976,7 @@ The main approach (initially proposed by Noll et al. <a class="footnote-referenc
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-of-the-acquisition-model">Extension of the Acquisition model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-imaging-model">Parallel Imaging Model</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#off-resonance-correction-model">Off-resonance correction model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subspace-projection-model">Subspace Projection Model</a></li>
 </ul>
 </li>
 </ul>
@@ -985,8 +1033,8 @@ By MRI-NUFFT Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
