@@ -45,20 +45,17 @@ the field of medical imaging using machine learning techniques.
 
     \mathbf{\hat{x}} = \mathrm{arg} \min_{\mathbf{x}} || \mathcal{U}_\mathbf{\theta}(\mathbf{y}) - \mathbf{x} ||_2^2
 
-where:
-- \( \mathbf{\hat{x}} \) is the reconstructed MRI image,
-- \( \mathbf{x} \) is the ground truth image,
-- \( \mathbf{y} \) is the input MRI image (e.g., k-space data),
-- \( \mathcal{U}_\mathbf{\theta} \) is the U-Net model parameterized by \( \theta \).
+where :math:`\mathbf{\hat{x}}` is the reconstructed MRI image, :math:`\mathbf{x}` is the ground truth image, 
+:math:`\mathbf{y}` is the input MRI image (e.g., k-space data), and :math:`\mathcal{U}_\mathbf{\theta}` is the U-Net model parameterized by :math:`\theta`.
 
 .. warning::
     We train on a single image here. In practice, this should be done on a database like fastMRI [fastmri]_.
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-42
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
 
 Imports
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-59
+.. GENERATED FROM PYTHON SOURCE LINES 39-56
 
 .. code-block:: Python
 
@@ -86,11 +83,11 @@ Imports
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-61
+.. GENERATED FROM PYTHON SOURCE LINES 57-58
 
 Setup a simple class for the U-Net model
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-84
+.. GENERATED FROM PYTHON SOURCE LINES 58-81
 
 .. code-block:: Python
 
@@ -124,11 +121,11 @@ Setup a simple class for the U-Net model
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
+.. GENERATED FROM PYTHON SOURCE LINES 82-83
 
 Utility function to plot the state of the model
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-121
+.. GENERATED FROM PYTHON SOURCE LINES 83-118
 
 .. code-block:: Python
 
@@ -174,11 +171,11 @@ Utility function to plot the state of the model
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 122-123
+.. GENERATED FROM PYTHON SOURCE LINES 119-120
 
 Setup Inputs (models, trajectory and image)
 
-.. GENERATED FROM PYTHON SOURCE LINES 123-127
+.. GENERATED FROM PYTHON SOURCE LINES 120-124
 
 .. code-block:: Python
 
@@ -348,11 +345,11 @@ Setup Inputs (models, trajectory and image)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 128-129
+.. GENERATED FROM PYTHON SOURCE LINES 125-126
 
 Get the image on which we will train our U-Net Model
 
-.. GENERATED FROM PYTHON SOURCE LINES 129-142
+.. GENERATED FROM PYTHON SOURCE LINES 126-139
 
 .. code-block:: Python
 
@@ -382,27 +379,27 @@ Get the image on which we will train our U-Net Model
 
  .. code-block:: none
 
-    /volatile/github-ci-mind-inria/gpu_runner/_work/mri-nufft/mri-nufft/examples/GPU/example_fastMRI_UNet.py:129: UserWarning: Casting complex values to real discards the imaginary part (Triggered internally at ../aten/src/ATen/native/Copy.cpp:308.)
+    /volatile/github-ci-mind-inria/gpu_runner/_work/mri-nufft/mri-nufft/examples/GPU/example_fastMRI_UNet.py:126: UserWarning: Casting complex values to real discards the imaginary part (Triggered internally at ../aten/src/ATen/native/Copy.cpp:308.)
       mri_2D = torch.Tensor(np.flipud(bwdl.get_mri(4, "T1")[80, ...]).astype(np.complex64))[
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 143-144
+.. GENERATED FROM PYTHON SOURCE LINES 140-141
 
 Start training loop
 
-.. GENERATED FROM PYTHON SOURCE LINES 144-187
+.. GENERATED FROM PYTHON SOURCE LINES 141-187
 
 .. code-block:: Python
 
-    epoch = 100
+    num_epochs = 2
     optimizer = torch.optim.RAdam(model.parameters(), lr=1e-3)
     losses = []  # Store the loss values and create an animation
     image_files = []  # Store the images to create a gif
     model.train()
 
-    with tqdm(range(epoch), unit="steps") as tqdms:
+    with tqdm(range(num_epochs), unit="steps") as tqdms:
         for i in tqdms:
             out = model(kspace_mri_2D)  # Forward pass
 
@@ -440,6 +437,9 @@ Start training loop
         loop=0,
     )
 
+    # sphinx_gallery_thumbnail_path = 'generated/autoexamples/GPU/images/mrinufft_learn_unet.gif'
+
+
 
 
 
@@ -447,16 +447,23 @@ Start training loop
 
  .. code-block:: none
 
-      0%|          | 0/100 [00:00<?, ?steps/s]      0%|          | 0/100 [00:00<?, ?steps/s, loss=1.09]      1%|          | 1/100 [00:01<01:56,  1.18s/steps, loss=1.09]      1%|          | 1/100 [00:01<01:56,  1.18s/steps, loss=0.984]      2%|▏         | 2/100 [00:02<01:47,  1.10s/steps, loss=0.984]      2%|▏         | 2/100 [00:02<01:47,  1.10s/steps, loss=0.874]      3%|▎         | 3/100 [00:03<01:48,  1.11s/steps, loss=0.874]      3%|▎         | 3/100 [00:03<01:48,  1.11s/steps, loss=0.775]      4%|▍         | 4/100 [00:04<01:45,  1.10s/steps, loss=0.775]      4%|▍         | 4/100 [00:04<01:45,  1.10s/steps, loss=0.698]      5%|▌         | 5/100 [00:05<01:44,  1.10s/steps, loss=0.698]      5%|▌         | 5/100 [00:05<01:44,  1.10s/steps, loss=0.642]      6%|▌         | 6/100 [00:06<01:41,  1.08s/steps, loss=0.642]      6%|▌         | 6/100 [00:06<01:41,  1.08s/steps, loss=0.6]        7%|▋         | 7/100 [00:07<01:36,  1.03s/steps, loss=0.6]      7%|▋         | 7/100 [00:07<01:36,  1.03s/steps, loss=0.56]      8%|▊         | 8/100 [00:08<01:32,  1.01s/steps, loss=0.56]      8%|▊         | 8/100 [00:08<01:32,  1.01s/steps, loss=0.527]      9%|▉         | 9/100 [00:09<01:32,  1.02s/steps, loss=0.527]      9%|▉         | 9/100 [00:09<01:32,  1.02s/steps, loss=0.501]     10%|█         | 10/100 [00:10<01:29,  1.00steps/s, loss=0.501]     10%|█         | 10/100 [00:10<01:29,  1.00steps/s, loss=0.48]      11%|█         | 11/100 [00:11<01:29,  1.01s/steps, loss=0.48]     11%|█         | 11/100 [00:11<01:29,  1.01s/steps, loss=0.464]     12%|█▏        | 12/100 [00:12<01:31,  1.04s/steps, loss=0.464]     12%|█▏        | 12/100 [00:12<01:31,  1.04s/steps, loss=0.449]     13%|█▎        | 13/100 [00:13<01:39,  1.14s/steps, loss=0.449]     13%|█▎        | 13/100 [00:14<01:39,  1.14s/steps, loss=0.437]     14%|█▍        | 14/100 [00:15<01:36,  1.12s/steps, loss=0.437]     14%|█▍        | 14/100 [00:15<01:36,  1.12s/steps, loss=0.424]     15%|█▌        | 15/100 [00:16<01:32,  1.09s/steps, loss=0.424]     15%|█▌        | 15/100 [00:16<01:32,  1.09s/steps, loss=0.412]     16%|█▌        | 16/100 [00:17<01:30,  1.08s/steps, loss=0.412]     16%|█▌        | 16/100 [00:17<01:30,  1.08s/steps, loss=0.398]     17%|█▋        | 17/100 [00:18<01:27,  1.06s/steps, loss=0.398]     17%|█▋        | 17/100 [00:18<01:27,  1.06s/steps, loss=0.384]     18%|█▊        | 18/100 [00:19<01:27,  1.06s/steps, loss=0.384]     18%|█▊        | 18/100 [00:19<01:27,  1.06s/steps, loss=0.369]     19%|█▉        | 19/100 [00:20<01:25,  1.05s/steps, loss=0.369]     19%|█▉        | 19/100 [00:20<01:25,  1.05s/steps, loss=0.353]     20%|██        | 20/100 [00:21<01:24,  1.06s/steps, loss=0.353]     20%|██        | 20/100 [00:21<01:24,  1.06s/steps, loss=0.338]     21%|██        | 21/100 [00:22<01:23,  1.06s/steps, loss=0.338]     21%|██        | 21/100 [00:22<01:23,  1.06s/steps, loss=0.324]     22%|██▏       | 22/100 [00:23<01:29,  1.15s/steps, loss=0.324]     22%|██▏       | 22/100 [00:23<01:29,  1.15s/steps, loss=0.31]      23%|██▎       | 23/100 [00:24<01:26,  1.13s/steps, loss=0.31]     23%|██▎       | 23/100 [00:24<01:26,  1.13s/steps, loss=0.296]     24%|██▍       | 24/100 [00:25<01:25,  1.12s/steps, loss=0.296]     24%|██▍       | 24/100 [00:26<01:25,  1.12s/steps, loss=0.284]     25%|██▌       | 25/100 [00:27<01:24,  1.13s/steps, loss=0.284]     25%|██▌       | 25/100 [00:27<01:24,  1.13s/steps, loss=0.271]     26%|██▌       | 26/100 [00:28<01:22,  1.11s/steps, loss=0.271]     26%|██▌       | 26/100 [00:28<01:22,  1.11s/steps, loss=0.26]      27%|██▋       | 27/100 [00:29<01:19,  1.09s/steps, loss=0.26]     27%|██▋       | 27/100 [00:29<01:19,  1.09s/steps, loss=0.249]     28%|██▊       | 28/100 [00:30<01:17,  1.08s/steps, loss=0.249]     28%|██▊       | 28/100 [00:30<01:17,  1.08s/steps, loss=0.238]     29%|██▉       | 29/100 [00:31<01:14,  1.04s/steps, loss=0.238]     29%|██▉       | 29/100 [00:31<01:14,  1.04s/steps, loss=0.228]     30%|███       | 30/100 [00:32<01:12,  1.04s/steps, loss=0.228]     30%|███       | 30/100 [00:32<01:12,  1.04s/steps, loss=0.218]     31%|███       | 31/100 [00:33<01:10,  1.03s/steps, loss=0.218]     31%|███       | 31/100 [00:33<01:10,  1.03s/steps, loss=0.21]      32%|███▏      | 32/100 [00:34<01:15,  1.11s/steps, loss=0.21]     32%|███▏      | 32/100 [00:34<01:15,  1.11s/steps, loss=0.201]     33%|███▎      | 33/100 [00:35<01:12,  1.08s/steps, loss=0.201]     33%|███▎      | 33/100 [00:35<01:12,  1.08s/steps, loss=0.193]     34%|███▍      | 34/100 [00:36<01:10,  1.07s/steps, loss=0.193]     34%|███▍      | 34/100 [00:36<01:10,  1.07s/steps, loss=0.186]     35%|███▌      | 35/100 [00:37<01:09,  1.06s/steps, loss=0.186]     35%|███▌      | 35/100 [00:37<01:09,  1.06s/steps, loss=0.178]     36%|███▌      | 36/100 [00:38<01:08,  1.06s/steps, loss=0.178]     36%|███▌      | 36/100 [00:38<01:08,  1.06s/steps, loss=0.172]     37%|███▋      | 37/100 [00:39<01:07,  1.07s/steps, loss=0.172]     37%|███▋      | 37/100 [00:39<01:07,  1.07s/steps, loss=0.165]     38%|███▊      | 38/100 [00:40<01:05,  1.06s/steps, loss=0.165]     38%|███▊      | 38/100 [00:40<01:05,  1.06s/steps, loss=0.159]     39%|███▉      | 39/100 [00:41<01:05,  1.07s/steps, loss=0.159]     39%|███▉      | 39/100 [00:42<01:05,  1.07s/steps, loss=0.153]     40%|████      | 40/100 [00:42<01:03,  1.06s/steps, loss=0.153]     40%|████      | 40/100 [00:43<01:03,  1.06s/steps, loss=0.147]     41%|████      | 41/100 [00:43<01:02,  1.06s/steps, loss=0.147]     41%|████      | 41/100 [00:44<01:02,  1.06s/steps, loss=0.142]     42%|████▏     | 42/100 [00:45<01:07,  1.16s/steps, loss=0.142]     42%|████▏     | 42/100 [00:45<01:07,  1.16s/steps, loss=0.137]     43%|████▎     | 43/100 [00:46<01:03,  1.12s/steps, loss=0.137]     43%|████▎     | 43/100 [00:46<01:03,  1.12s/steps, loss=0.133]     44%|████▍     | 44/100 [00:47<01:01,  1.09s/steps, loss=0.133]     44%|████▍     | 44/100 [00:47<01:01,  1.09s/steps, loss=0.13]      45%|████▌     | 45/100 [00:48<00:58,  1.07s/steps, loss=0.13]     45%|████▌     | 45/100 [00:48<00:58,  1.07s/steps, loss=0.125]     46%|████▌     | 46/100 [00:49<00:57,  1.07s/steps, loss=0.125]     46%|████▌     | 46/100 [00:49<00:57,  1.07s/steps, loss=0.121]     47%|████▋     | 47/100 [00:50<00:57,  1.09s/steps, loss=0.121]     47%|████▋     | 47/100 [00:50<00:57,  1.09s/steps, loss=0.117]     48%|████▊     | 48/100 [00:51<00:58,  1.13s/steps, loss=0.117]     48%|████▊     | 48/100 [00:52<00:58,  1.13s/steps, loss=0.112]     49%|████▉     | 49/100 [00:52<00:56,  1.11s/steps, loss=0.112]     49%|████▉     | 49/100 [00:53<00:56,  1.11s/steps, loss=0.109]     50%|█████     | 50/100 [00:53<00:54,  1.08s/steps, loss=0.109]     50%|█████     | 50/100 [00:54<00:54,  1.08s/steps, loss=0.106]     51%|█████     | 51/100 [00:54<00:51,  1.04s/steps, loss=0.106]     51%|█████     | 51/100 [00:55<00:51,  1.04s/steps, loss=0.102]     52%|█████▏    | 52/100 [00:56<00:55,  1.16s/steps, loss=0.102]     52%|█████▏    | 52/100 [00:56<00:55,  1.16s/steps, loss=0.0985]     53%|█████▎    | 53/100 [00:57<00:53,  1.13s/steps, loss=0.0985]     53%|█████▎    | 53/100 [00:57<00:53,  1.13s/steps, loss=0.0987]     54%|█████▍    | 54/100 [00:58<00:51,  1.11s/steps, loss=0.0987]     54%|█████▍    | 54/100 [00:58<00:51,  1.11s/steps, loss=0.103]      55%|█████▌    | 55/100 [00:59<00:50,  1.13s/steps, loss=0.103]     55%|█████▌    | 55/100 [00:59<00:50,  1.13s/steps, loss=0.0984]     56%|█████▌    | 56/100 [01:00<00:51,  1.17s/steps, loss=0.0984]     56%|█████▌    | 56/100 [01:01<00:51,  1.17s/steps, loss=0.0903]     57%|█████▋    | 57/100 [01:01<00:48,  1.13s/steps, loss=0.0903]     57%|█████▋    | 57/100 [01:02<00:48,  1.13s/steps, loss=0.0883]     58%|█████▊    | 58/100 [01:03<00:47,  1.14s/steps, loss=0.0883]     58%|█████▊    | 58/100 [01:03<00:47,  1.14s/steps, loss=0.0896]     59%|█████▉    | 59/100 [01:04<00:46,  1.12s/steps, loss=0.0896]     59%|█████▉    | 59/100 [01:04<00:46,  1.12s/steps, loss=0.085]      60%|██████    | 60/100 [01:05<00:44,  1.11s/steps, loss=0.085]     60%|██████    | 60/100 [01:05<00:44,  1.11s/steps, loss=0.082]     61%|██████    | 61/100 [01:06<00:42,  1.08s/steps, loss=0.082]     61%|██████    | 61/100 [01:06<00:42,  1.08s/steps, loss=0.0805]     62%|██████▏   | 62/100 [01:07<00:46,  1.22s/steps, loss=0.0805]     62%|██████▏   | 62/100 [01:08<00:46,  1.22s/steps, loss=0.077]      63%|██████▎   | 63/100 [01:08<00:43,  1.17s/steps, loss=0.077]     63%|██████▎   | 63/100 [01:09<00:43,  1.17s/steps, loss=0.0746]     64%|██████▍   | 64/100 [01:09<00:40,  1.13s/steps, loss=0.0746]     64%|██████▍   | 64/100 [01:10<00:40,  1.13s/steps, loss=0.0736]     65%|██████▌   | 65/100 [01:10<00:36,  1.06s/steps, loss=0.0736]     65%|██████▌   | 65/100 [01:10<00:36,  1.06s/steps, loss=0.0754]     66%|██████▌   | 66/100 [01:11<00:34,  1.01s/steps, loss=0.0754]     66%|██████▌   | 66/100 [01:11<00:34,  1.01s/steps, loss=0.0767]     67%|██████▋   | 67/100 [01:12<00:31,  1.03steps/s, loss=0.0767]     67%|██████▋   | 67/100 [01:12<00:31,  1.03steps/s, loss=0.0739]     68%|██████▊   | 68/100 [01:13<00:29,  1.07steps/s, loss=0.0739]     68%|██████▊   | 68/100 [01:13<00:29,  1.07steps/s, loss=0.0689]     69%|██████▉   | 69/100 [01:14<00:28,  1.10steps/s, loss=0.0689]     69%|██████▉   | 69/100 [01:14<00:28,  1.10steps/s, loss=0.0653]     70%|███████   | 70/100 [01:15<00:26,  1.13steps/s, loss=0.0653]     70%|███████   | 70/100 [01:15<00:26,  1.13steps/s, loss=0.0633]     71%|███████   | 71/100 [01:15<00:25,  1.15steps/s, loss=0.0633]     71%|███████   | 71/100 [01:16<00:25,  1.15steps/s, loss=0.0634]     72%|███████▏  | 72/100 [01:17<00:26,  1.06steps/s, loss=0.0634]     72%|███████▏  | 72/100 [01:17<00:26,  1.06steps/s, loss=0.0668]     73%|███████▎  | 73/100 [01:17<00:24,  1.11steps/s, loss=0.0668]     73%|███████▎  | 73/100 [01:17<00:24,  1.11steps/s, loss=0.0679]     74%|███████▍  | 74/100 [01:18<00:22,  1.16steps/s, loss=0.0679]     74%|███████▍  | 74/100 [01:18<00:22,  1.16steps/s, loss=0.0648]     75%|███████▌  | 75/100 [01:19<00:21,  1.18steps/s, loss=0.0648]     75%|███████▌  | 75/100 [01:19<00:21,  1.18steps/s, loss=0.0599]     76%|███████▌  | 76/100 [01:20<00:20,  1.19steps/s, loss=0.0599]     76%|███████▌  | 76/100 [01:20<00:20,  1.19steps/s, loss=0.0574]     77%|███████▋  | 77/100 [01:21<00:19,  1.21steps/s, loss=0.0574]     77%|███████▋  | 77/100 [01:21<00:19,  1.21steps/s, loss=0.0578]     78%|███████▊  | 78/100 [01:21<00:18,  1.21steps/s, loss=0.0578]     78%|███████▊  | 78/100 [01:22<00:18,  1.21steps/s, loss=0.0603]     79%|███████▉  | 79/100 [01:22<00:17,  1.23steps/s, loss=0.0603]     79%|███████▉  | 79/100 [01:22<00:17,  1.23steps/s, loss=0.063]      80%|████████  | 80/100 [01:23<00:16,  1.24steps/s, loss=0.063]     80%|████████  | 80/100 [01:23<00:16,  1.24steps/s, loss=0.0586]     81%|████████  | 81/100 [01:24<00:15,  1.24steps/s, loss=0.0586]     81%|████████  | 81/100 [01:24<00:15,  1.24steps/s, loss=0.0536]     82%|████████▏ | 82/100 [01:25<00:15,  1.14steps/s, loss=0.0536]     82%|████████▏ | 82/100 [01:25<00:15,  1.14steps/s, loss=0.0513]     83%|████████▎ | 83/100 [01:26<00:14,  1.15steps/s, loss=0.0513]     83%|████████▎ | 83/100 [01:26<00:14,  1.15steps/s, loss=0.0519]     84%|████████▍ | 84/100 [01:27<00:13,  1.15steps/s, loss=0.0519]     84%|████████▍ | 84/100 [01:27<00:13,  1.15steps/s, loss=0.0551]     85%|████████▌ | 85/100 [01:27<00:12,  1.19steps/s, loss=0.0551]     85%|████████▌ | 85/100 [01:27<00:12,  1.19steps/s, loss=0.0569]     86%|████████▌ | 86/100 [01:28<00:11,  1.20steps/s, loss=0.0569]     86%|████████▌ | 86/100 [01:28<00:11,  1.20steps/s, loss=0.0519]     87%|████████▋ | 87/100 [01:29<00:10,  1.22steps/s, loss=0.0519]     87%|████████▋ | 87/100 [01:29<00:10,  1.22steps/s, loss=0.0506]     88%|████████▊ | 88/100 [01:30<00:09,  1.22steps/s, loss=0.0506]     88%|████████▊ | 88/100 [01:30<00:09,  1.22steps/s, loss=0.0526]     89%|████████▉ | 89/100 [01:31<00:08,  1.22steps/s, loss=0.0526]     89%|████████▉ | 89/100 [01:31<00:08,  1.22steps/s, loss=0.0496]     90%|█████████ | 90/100 [01:31<00:08,  1.23steps/s, loss=0.0496]     90%|█████████ | 90/100 [01:31<00:08,  1.23steps/s, loss=0.05]       91%|█████████ | 91/100 [01:32<00:07,  1.23steps/s, loss=0.05]     91%|█████████ | 91/100 [01:32<00:07,  1.23steps/s, loss=0.0479]     92%|█████████▏| 92/100 [01:33<00:07,  1.12steps/s, loss=0.0479]     92%|█████████▏| 92/100 [01:33<00:07,  1.12steps/s, loss=0.0459]     93%|█████████▎| 93/100 [01:34<00:06,  1.15steps/s, loss=0.0459]     93%|█████████▎| 93/100 [01:34<00:06,  1.15steps/s, loss=0.0471]     94%|█████████▍| 94/100 [01:35<00:05,  1.16steps/s, loss=0.0471]     94%|█████████▍| 94/100 [01:35<00:05,  1.16steps/s, loss=0.0497]     95%|█████████▌| 95/100 [01:36<00:04,  1.18steps/s, loss=0.0497]     95%|█████████▌| 95/100 [01:36<00:04,  1.18steps/s, loss=0.0542]     96%|█████████▌| 96/100 [01:37<00:03,  1.20steps/s, loss=0.0542]     96%|█████████▌| 96/100 [01:37<00:03,  1.20steps/s, loss=0.0507]     97%|█████████▋| 97/100 [01:37<00:02,  1.22steps/s, loss=0.0507]     97%|█████████▋| 97/100 [01:37<00:02,  1.22steps/s, loss=0.046]      98%|█████████▊| 98/100 [01:38<00:01,  1.22steps/s, loss=0.046]     98%|█████████▊| 98/100 [01:38<00:01,  1.22steps/s, loss=0.0435]     99%|█████████▉| 99/100 [01:39<00:00,  1.22steps/s, loss=0.0435]     99%|█████████▉| 99/100 [01:39<00:00,  1.22steps/s, loss=0.0407]    100%|██████████| 100/100 [01:40<00:00,  1.22steps/s, loss=0.0407]    100%|██████████| 100/100 [01:40<00:00,  1.00s/steps, loss=0.0407]
+      0%|          | 0/2 [00:00<?, ?steps/s]      0%|          | 0/2 [00:00<?, ?steps/s, loss=1.06]     50%|█████     | 1/2 [00:00<00:00,  1.00steps/s, loss=1.06]     50%|█████     | 1/2 [00:01<00:00,  1.00steps/s, loss=0.991]    100%|██████████| 2/2 [00:01<00:00,  1.10steps/s, loss=0.991]    100%|██████████| 2/2 [00:01<00:00,  1.09steps/s, loss=0.991]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 211-212
+.. GENERATED FROM PYTHON SOURCE LINES 212-216
+
+.. image-sg:: /generated/autoexamples/GPU/images/mrinufft_learn_unet.gif
+   :alt: example learn_samples
+   :srcset: /generated/autoexamples/GPU/images/mrinufft_learn_unet.gif
+   :class: sphx-glr-single-img
+
+.. GENERATED FROM PYTHON SOURCE LINES 218-219
 
 Reconstruction from partially trained U-Net model
 
-.. GENERATED FROM PYTHON SOURCE LINES 212-218
+.. GENERATED FROM PYTHON SOURCE LINES 219-225
 
 .. code-block:: Python
 
@@ -478,7 +485,7 @@ Reconstruction from partially trained U-Net model
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 219-227
+.. GENERATED FROM PYTHON SOURCE LINES 226-234
 
 References
 ==========
@@ -492,7 +499,7 @@ References
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (1 minutes 46.922 seconds)
+   **Total running time of the script:** (0 minutes 4.741 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_GPU_example_fastMRI_UNet.py:

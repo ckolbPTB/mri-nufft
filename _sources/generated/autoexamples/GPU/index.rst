@@ -108,7 +108,7 @@ This is a collection of examples showing features of mri-nufft, particularly tho
 
 .. only:: html
 
-  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_fastMRI_UNet_thumb.png
+  .. image:: /generated/autoexamples/GPU/images/thumb/sphx_glr_example_fastMRI_UNet_thumb.gif
     :alt:
 
   :ref:`sphx_glr_generated_autoexamples_GPU_example_fastMRI_UNet.py`
