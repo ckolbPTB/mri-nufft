@@ -42,11 +42,18 @@ References
         - https://en.wikipedia.org/wiki/Conjugate_gradient_method
         - https://en.wikipedia.org/wiki/Momentum
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-29
+.. GENERATED FROM PYTHON SOURCE LINES 28-32
+
+.. colab-link::
+   :needs_gpu: 1
+
+   !pip install mri-nufft[gpunufft] scikit-image
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
 
 Imports
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-36
+.. GENERATED FROM PYTHON SOURCE LINES 35-42
 
 .. code-block:: Python
 
@@ -64,11 +71,11 @@ Imports
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-38
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
 
 Setup Inputs
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-42
+.. GENERATED FROM PYTHON SOURCE LINES 44-48
 
 .. code-block:: Python
 
@@ -83,11 +90,11 @@ Setup Inputs
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 49-50
 
 Setup the NUFFT operator
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-54
+.. GENERATED FROM PYTHON SOURCE LINES 50-60
 
 .. code-block:: Python
 
@@ -108,11 +115,11 @@ Setup the NUFFT operator
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-56
+.. GENERATED FROM PYTHON SOURCE LINES 61-62
 
 Reconstruct the image using the CG method
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-59
+.. GENERATED FROM PYTHON SOURCE LINES 62-65
 
 .. code-block:: Python
 
@@ -126,11 +133,11 @@ Reconstruct the image using the CG method
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-61
+.. GENERATED FROM PYTHON SOURCE LINES 66-67
 
 Display the results
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-75
+.. GENERATED FROM PYTHON SOURCE LINES 67-81
 
 .. code-block:: Python
 
@@ -163,7 +170,7 @@ Display the results
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.690 seconds)
+   **Total running time of the script:** (0 minutes 1.518 seconds)
 
 
 .. _sphx_glr_download_generated_autoexamples_GPU_example_cg.py:
